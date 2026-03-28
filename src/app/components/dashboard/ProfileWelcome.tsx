@@ -24,6 +24,7 @@ const ProfileWelcome = () => {
             alt="support-img"
             width={145}
             height={95}
+            style={{ height: 'auto', width: 'auto' }}
           />
         </div>
       </div>

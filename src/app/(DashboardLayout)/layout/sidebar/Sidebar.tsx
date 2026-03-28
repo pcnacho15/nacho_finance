@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import SidebarContent from './sidebaritems'
 import SimpleBar from 'simplebar-react'
 import { Icon } from '@iconify/react'
@@ -103,9 +104,14 @@ const renderSidebarItems = (
 const SidebarLayout = ({ onClose }: { onClose?: () => void }) => {
   const pathname = usePathname()
   const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Only allow "light" or "dark" for AMSidebar
-  const sidebarMode = theme === 'light' || theme === 'dark' ? theme : undefined
+  const sidebarMode = mounted && (theme === 'light' || theme === 'dark') ? theme : undefined
 
   return (
     <AMSidebar
@@ -157,6 +163,7 @@ const SidebarLayout = ({ onClose }: { onClose?: () => void }) => {
                   alt='rocket'
                   width={100}
                   height={100}
+                  style={{ height: 'auto', width: 'auto' }}
                 />
               </div>
             </div>
