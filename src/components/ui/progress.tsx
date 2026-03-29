@@ -8,13 +8,13 @@ import { cn } from '@/lib/utils';
 const progressIndicatorVariants = cva('h-full w-full flex-1 transition-all', {
   variants: {
     variant: {
-      default: 'bg-primary',
-      primary: 'bg-primary',
-      secondary: 'bg-secondary',
-      success: 'bg-success',
-      error: 'bg-error',
-      warning: 'bg-warning',
-      info: 'bg-info',
+      default: 'bg-foreground',
+      primary: 'bg-foreground',
+      secondary: 'bg-muted-foreground',
+      success: 'bg-muted',
+      error: 'bg-foreground',
+      warning: 'bg-muted-foreground',
+      info: 'bg-muted-foreground',
     },
   },
   defaultVariants: {

@@ -13,9 +13,9 @@ const page = () => {
   return (
     <>
       <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-12">
+        {/* <div className="col-span-12">
           <ProfileWelcome/>
-        </div>
+        </div> */}
         <div className="col-span-12">
           <TopCards />
         </div>

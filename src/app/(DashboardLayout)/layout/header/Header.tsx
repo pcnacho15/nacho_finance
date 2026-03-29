@@ -44,17 +44,15 @@ const Header = () => {
     <>
       <header
         className={`sticky top-0 z-20 ${
-          isSticky ? "bg-background shadow-md fixed w-full" : "bg-transparent"
+          isSticky ? "bg-background shadow-md fixed w-full" : "bg-background"
         }`}
       >
         <nav
-          className={`rounded-none py-4 sm:ps-6 max-w-full! sm:pe-10 dark:bg-dark flex justify-between items-center px-6`}
+          className={`rounded-none py-4 max-w-full  dark:bg-dark flex items-center px-5`}
         >
-          <div className="flex items-center h-10 xl:hidden">
+          <div className="flex items-center w-64 h-10 xl:hidden">
             <FullLogo />
           </div>
-
-          
 
           <div className="flex items-center justify-between w-full">
             <div className="hidden xl:flex items-center gap-2">
@@ -65,19 +63,27 @@ const Header = () => {
             <div className="flex w-full justify-end items-end">
               <div className="flex gap-0 items-center">
                 <div
-                  className="hover:text-primary px-15 group focus:ring-0 rounded-full flex justify-center items-center cursor-pointer text-gray relative"
+                  className="hover:text-foreground px-15 group focus:ring-0 rounded-full flex justify-center items-center cursor-pointer text-gray relative"
                   onClick={toggleMode}
                 >
-                  <span className="flex items-center justify-center relative after:absolute after:w-10 after:h-10 after:rounded-full after:-top-1/2 group-hover:after:bg-lightprimary">
+                  <span className="flex items-center justify-center relative after:absolute after:w-10 after:h-10 after:rounded-full after:-top-1/2 group-hover:after:bg-muted">
                     {!mounted ? (
-                      <Icon icon="tabler:moon" width="20" className="text-foreground dark:text-muted-foreground group-hover:text-primary" />
+                      <Icon
+                        icon="tabler:moon"
+                        width="20"
+                        className="text-foreground dark:text-muted-foreground group-hover:text-foreground"
+                      />
                     ) : theme === "light" ? (
-                      <Icon icon="tabler:moon" width="20" className="text-foreground dark:text-muted-foreground group-hover:text-primary" />
+                      <Icon
+                        icon="tabler:moon"
+                        width="20"
+                        className="text-foreground dark:text-muted-foreground group-hover:text-foreground"
+                      />
                     ) : (
                       <Icon
                         icon="solar:sun-bold-duotone"
                         width="20"
-                        className="text-foreground dark:text-muted-foreground group-hover:text-primary"
+                        className="text-foreground dark:text-muted-foreground group-hover:text-foreground"
                       />
                     )}
                   </span>
@@ -96,8 +102,14 @@ const Header = () => {
         </nav>
       </header>
 
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent side="left" className="w-64 p-0">
+      <Sheet
+        open={isOpen}
+        onOpenChange={setIsOpen}
+      >
+        <SheetContent
+          side="left"
+          className="w-64 p-0"
+        >
           <VisuallyHidden>
             <SheetTitle>sidebar</SheetTitle>
           </VisuallyHidden>

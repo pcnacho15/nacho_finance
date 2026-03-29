@@ -10,7 +10,7 @@ const chartData: ApexOptions = {
     series: [
         {
             name: 'monthly earnings',
-            color: "var(--color-secondary)",
+            color: "var(--color-foreground)",
             data: [25, 66, 20, 40, 19, 58, 20],
         },
     ],
@@ -67,7 +67,7 @@ const MonthlyEarning = () => {
                 <div className="px-6 pt-6">
                     <div className="flex items-center justify-between mb-2">
                         <h5 className="card-title mb-0">Monthly Earnings</h5>
-                        <div className="text-white bg-secondary rounded-full h-11 w-11 flex items-center justify-center">
+                        <div className="text-foreground bg-muted dark:bg-muted-foreground dark:text-background rounded-full h-11 w-11 flex items-center justify-center">
                             <Icon icon='tabler:currency-dollar' className="text-xl" />
                         </div>
                     </div>
@@ -75,8 +75,8 @@ const MonthlyEarning = () => {
                         <div className="lg:col-span-8 md:col-span-8  col-span-8">
                             <h4 className="text-xl mb-3">$6,820</h4>
                             <div className="flex items-center gap-2">
-                                <span className="rounded-full p-1 bg-lighterror dark:bg-darkerror flex items-center justify-center ">
-                                    <Icon icon='tabler:arrow-down-right' className="text-error" />
+                                <span className="rounded-full p-1 bg-muted flex items-center justify-center ">
+                                    <Icon icon='tabler:arrow-down-right' className="text-foreground" />
                                 </span>
                                 <p className="text-muted-foreground  mb-0">+9%</p>
                                 <p className="text-muted-foreground mb-0 ">last year</p>

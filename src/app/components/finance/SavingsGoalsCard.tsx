@@ -16,7 +16,7 @@ const SavingsGoalsCard: React.FC = () => {
     <CardBox>
       <div className="flex items-center justify-between mb-6">
         <h5 className="card-title">Metas de Ahorro</h5>
-        <a href="/finance/savings" className="text-sm text-primary hover:underline">
+        <a href="/finance/savings" className="text-sm text-foreground hover:underline">
           Ver todas
         </a>
       </div>
@@ -25,7 +25,7 @@ const SavingsGoalsCard: React.FC = () => {
         <div className="text-center py-8 text-muted-foreground">
           <Icon icon="solar:piggy-bank-linear" className="text-4xl mb-2 mx-auto opacity-50" />
           <p>No hay metas de ahorro activas</p>
-          <a href="/finance/savings" className="text-sm text-primary hover:underline mt-2 inline-block">
+          <a href="/finance/savings" className="text-sm text-foreground hover:underline mt-2 inline-block">
             Crear una meta
           </a>
         </div>

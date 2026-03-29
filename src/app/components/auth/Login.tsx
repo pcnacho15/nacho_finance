@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input'
 export const Login = () => {
   return (
     <>
-      <div className='h-screen w-full flex justify-center items-center bg-lightprimary'>
+      <div className='h-screen w-full flex justify-center items-center bg-muted'>
         <div className='md:min-w-[450px] min-w-max'>
           <CardBox>
             <div className='flex justify-center mb-4'>
@@ -50,14 +50,14 @@ export const Login = () => {
               <div className='flex items-center gap-2'>
                 <Checkbox id='remember' checked />
                 <Label
-                  className='text-link font-normal text-sm'
+                  className='text-muted-foreground font-normal text-sm'
                   htmlFor='remember'>
                   Remember this device
                 </Label>
               </div>
               <Link
                 href='#'
-                className='text-sm font-medium text-primary hover:text-primaryemphasis'>
+                className='text-sm font-medium text-foreground hover:text-muted-foreground'>
                 Forgot Password ?
               </Link>
             </div>
@@ -70,7 +70,7 @@ export const Login = () => {
               </p>
               <Link
                 href='/auth/register'
-                className='text-sm font-medium text-primary hover:text-primaryemphasis'>
+                className='text-sm font-medium text-foreground hover:text-muted-foreground'>
                 Create an account
               </Link>
             </div>

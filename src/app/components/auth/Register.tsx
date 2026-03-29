@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 export const Register = () => {
   return (
     <>
-      <div className='h-screen w-full flex justify-center items-center bg-lightprimary'>
+      <div className='h-screen w-full flex justify-center items-center bg-muted'>
         <div className='md:min-w-[450px] min-w-max'>
           <CardBox>
             <div className='flex justify-center mb-4'>
@@ -67,7 +67,7 @@ export const Register = () => {
               </p>
               <Link
                 href='/auth/login'
-                className='text-sm font-medium text-primary hover:text-primaryemphasis'>
+                className='text-sm font-medium text-foreground hover:text-muted-foreground'>
                 Sign In
               </Link>
             </div>

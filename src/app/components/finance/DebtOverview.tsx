@@ -19,21 +19,21 @@ const DebtOverview: React.FC = () => {
     <CardBox>
       <div className="flex items-center justify-between mb-6">
         <h5 className="card-title">Resumen de Deudas</h5>
-        <a href="/finance/debts" className="text-sm text-primary hover:underline">
+        <a href="/finance/debts" className="text-sm text-foreground hover:underline">
           Gestionar
         </a>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="p-4 rounded-xl bg-error/5 text-center">
+        <div className="p-4 rounded-xl bg-muted text-center">
           <p className="text-sm text-muted-foreground mb-1">Total Pendiente</p>
-          <p className="text-xl font-bold text-error">
+          <p className="text-xl font-bold text-foreground">
             ${totalDebt.toLocaleString()}
           </p>
         </div>
-        <div className="p-4 rounded-xl bg-success/5 text-center">
+        <div className="p-4 rounded-xl bg-muted/50 text-center">
           <p className="text-sm text-muted-foreground mb-1">Total Pagado</p>
-          <p className="text-xl font-bold text-success">
+          <p className="text-xl font-bold text-foreground">
             ${totalPaid.toLocaleString()}
           </p>
         </div>
@@ -62,7 +62,7 @@ const DebtOverview: React.FC = () => {
 
       {activeDebts.length === 0 ? (
         <div className="text-center py-4 text-muted-foreground">
-          <Icon icon="solar:check-circle-bold" className="text-3xl mb-2 mx-auto text-success" />
+          <Icon icon="solar:check-circle-bold" className="text-3xl mb-2 mx-auto text-foreground" />
           <p>¡No tienes deudas activas!</p>
         </div>
       ) : (

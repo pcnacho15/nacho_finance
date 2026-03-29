@@ -148,23 +148,14 @@ const SidebarLayout = ({ onClose }: { onClose?: () => void }) => {
 
           {/* Promo Section */}
           <div className='mt-9  overflow-hidden'>
-            <div className='flex w-full bg-lightprimary rounded-lg p-6'>
+            <div className='flex w-full bg-muted rounded-lg p-6 border border-border'>
               <div className='lg:w-1/2 w-full'>
-                <h5 className='text-base text-sidebar-foreground'>
-                  Lleva tus finanzas a otro nivel
+                <h5 className='text-base text-sidebar-foreground dark:text-sidebar-foreground font-medium'>
+                  Controla tus finanzas
                 </h5>
-                <Button className='whitespace-nowrap mt-2 text-[13px]'>
-                  Plan Premium
+                <Button variant='outline' className='whitespace-nowrap mt-2 text-[13px] border-border'>
+                  Ver más
                 </Button>
-              </div>
-              <div className='lg:w-1/2 w-full -mt-4 ml-[26px] scale-[1.2] shrink-0'>
-                <Image
-                  src={'/images/backgrounds/rocket.png'}
-                  alt='rocket'
-                  width={100}
-                  height={100}
-                  style={{ height: 'auto', width: 'auto' }}
-                />
               </div>
             </div>
           </div>

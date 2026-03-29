@@ -8,7 +8,7 @@ export const RecentTransaction = () => {
       time: "09:30 am",
       desc: "Payment received from John Doe of $385.90",
       isSale: false,
-      borderColor: "border-primary",
+      borderColor: "border-foreground",
       isLastItem: false,
     },
     {
@@ -16,7 +16,7 @@ export const RecentTransaction = () => {
       time: "10:00 am",
       desc: "New sale recorded",
       isSale: true,
-      borderColor: "border-info",
+      borderColor: "border-muted-foreground",
       isLastItem: false,
     },
     {
@@ -24,7 +24,7 @@ export const RecentTransaction = () => {
       time: "12:00 am",
       desc: "Payment was made of $64.95 to Michael",
       isSale: false,
-      borderColor: "border-success",
+      borderColor: "border-muted",
       isLastItem: false,
     },
     {
@@ -32,7 +32,7 @@ export const RecentTransaction = () => {
       time: "09:30 am",
       desc: "New sale recorded",
       isSale: true,
-      borderColor: "border-warning",
+      borderColor: "border-muted-foreground",
       isLastItem: false,
     },
     {
@@ -40,7 +40,7 @@ export const RecentTransaction = () => {
       time: "09:30 am",
       desc: "New sale recorded",
       isSale: true,
-      borderColor: "border-error",
+      borderColor: "border-border",
       isLastItem: false,
     },
     {
@@ -48,7 +48,7 @@ export const RecentTransaction = () => {
       time: "12:00 am",
       desc: "Payment Done",
       isSale: false,
-      borderColor: "border-success",
+      borderColor: "border-muted",
       isLastItem: true,
     },
   ];
@@ -86,7 +86,7 @@ export const RecentTransaction = () => {
                 ) : (
                   <div>
                     <h6>New sale recorded </h6>
-                    <Link href="#" className="text-primary">
+                    <Link href="#" className="text-foreground underline">
                       #ML-3467
                     </Link>
                   </div>

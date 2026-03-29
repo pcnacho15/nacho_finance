@@ -36,7 +36,7 @@ const RecentTransactions: React.FC = () => {
     <CardBox>
       <div className="flex items-center justify-between mb-6">
         <h5 className="card-title">Transacciones Recientes</h5>
-        <a href="/finance/transactions" className="text-sm text-primary hover:underline">
+        <a href="/finance/transactions" className="text-sm text-foreground hover:underline">
           Ver todas
         </a>
       </div>

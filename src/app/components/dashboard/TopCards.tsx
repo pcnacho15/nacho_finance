@@ -14,8 +14,8 @@ const TopCardInfo = [
     title: "Notes",
     desc: "4+",
     img: "/images/svgs/icon-connect.svg",
-    bgcolor: "bg-info/10 dark:bg-info/10",
-    textclr: "text-info dark:text-info",
+    bgcolor: "bg-muted dark:bg-muted",
+    textclr: "text-foreground dark:text-foreground",
     url: "/apps/notes"
   },
   {
@@ -23,8 +23,8 @@ const TopCardInfo = [
     title: "Icons",
     desc: "+1K",
     img: "/images/svgs/icon-speech-bubble.svg",
-    bgcolor: "bg-success/10 dark:bg-success/10",
-    textclr: "text-success dark:text-success",
+    bgcolor: "bg-muted dark:bg-muted",
+    textclr: "text-foreground dark:text-foreground",
     url: "/icons/iconify"
   },
   {
@@ -32,8 +32,8 @@ const TopCardInfo = [
     title: "Blogs",
     desc: "10+",
     img: "/images/svgs/icon-favorites.svg",
-    bgcolor: "bg-error/10 dark:bg-error/10",
-    textclr: "text-error dark:text-error",
+    bgcolor: "bg-muted dark:bg-muted",
+    textclr: "text-foreground dark:text-foreground",
     url: "/apps/blog/post"
   },
   {
@@ -41,8 +41,8 @@ const TopCardInfo = [
     title: "Tickets",
     desc: "8+",
     img: "/images/svgs/icon-mailbox.svg",
-    bgcolor: "bg-secondary/10 dark:bg-secondary/10",
-    textclr: "text-primary dark:text-primary",
+    bgcolor: "bg-muted dark:bg-muted",
+    textclr: "text-foreground dark:text-foreground",
     url: "/apps/tickets"
   },
   {
@@ -50,8 +50,8 @@ const TopCardInfo = [
     title: "Products",
     desc: "$96k",
     img: "/images/svgs/icon-briefcase.svg",
-    bgcolor: "bg-warning/10 dark:bg-warning/10",
-    textclr: "text-warning dark:text-warning",
+    bgcolor: "bg-muted dark:bg-muted",
+    textclr: "text-foreground dark:text-foreground",
     url: "#product"
 
   },
@@ -60,8 +60,8 @@ const TopCardInfo = [
     title: "Employees",
     desc: "96",
     img: "/images/svgs/icon-user-male.svg",
-    bgcolor: "bg-primary/10 dark:bg-lightprimary",
-    textclr: "text-primary dark:text-primary",
+    bgcolor: "bg-muted dark:bg-muted",
+    textclr: "text-foreground dark:text-foreground",
     url: "/utilities/table"
   },
   {
@@ -69,8 +69,8 @@ const TopCardInfo = [
     title: "Blogs",
     desc: "696",
     img: "/images/svgs/icon-favorites.svg",
-    bgcolor: "bg-lighterror dark:bg-lighterror",
-    textclr: "text-error dark:text-error",
+    bgcolor: "bg-muted dark:bg-muted",
+    textclr: "text-foreground dark:text-foreground",
     url: "/apps/blog/post"
   },
 ]

@@ -9,45 +9,45 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-white hover:bg-primaryemphasis',
+        default: 'bg-foreground text-background hover:bg-foreground/90',
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'border border-primary text-primary bg-transparent hover:bg-primary hover:text-white',
+          'border border-foreground text-foreground bg-transparent hover:bg-foreground hover:text-background',
         outlinesecondary:
-          'border border-secondary text-secondary bg-transparent hover:bg-secondary hover:text-white',
+          'border border-muted-foreground text-muted-foreground bg-transparent hover:bg-muted-foreground hover:text-background',
         outlinesuccess:
-          'border border-success bg-transparent hover:bg-success text-success hover:text-white',
+          'border border-muted text-muted bg-transparent hover:bg-muted text-muted-foreground hover:text-background',
         outlinewarning:
-          'border border-warning bg-transparent hover:bg-warning text-warning hover:text-white',
+          'border border-muted-foreground text-muted-foreground bg-transparent hover:bg-muted-foreground hover:text-background',
         outlineinfo:
-          'border border-info bg-transparent hover:bg-info text-info hover:text-white',
+          'border border-muted-foreground text-muted-foreground bg-transparent hover:bg-muted-foreground hover:text-background',
         outlineerror:
-          'border border-error bg-transparent hover:bg-error text-error hover:text-white',
-        secondary: 'bg-secondary text-white hover:bg-secondaryemphasis',
-        success: 'bg-success text-white hover:bg-successemphasis',
-        warning: 'bg-warning text-white hover:bg-warningemphasis',
-        info: 'bg-info text-white hover:bg-infoemphasis',
-        error: 'bg-error text-white hover:bg-erroremphasis',
+          'border border-foreground text-foreground bg-transparent hover:bg-foreground hover:text-background',
+        secondary: 'bg-muted-foreground text-background hover:bg-muted-foreground/90',
+        success: 'bg-muted text-muted-foreground hover:bg-muted-foreground hover:text-background',
+        warning: 'bg-muted-foreground text-background hover:bg-muted-foreground/90',
+        info: 'bg-muted-foreground text-background hover:bg-muted-foreground/90',
+        error: 'bg-foreground text-background hover:bg-foreground/90',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        ghostprimary: 'hover:bg-lightprimary hover:text-primary text-primary',
+        ghostprimary: 'hover:bg-muted hover:text-foreground text-foreground',
         ghostsecondary:
-          'hover:bg-lightsecondary hover:text-secondary text-secondary',
-        ghostsuccess: 'hover:bg-lightsuccess hover:text-success text-success',
-        ghostwarning: 'hover:bg-lightwarning hover:text-warning text-warning',
-        ghosterror: 'hover:bg-lighterror hover:text-error text-error',
-        ghostinfo: 'hover:bg-lightinfo hover:text-info text-info',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'hover:bg-muted hover:text-muted-foreground text-muted-foreground',
+        ghostsuccess: 'hover:bg-muted text-muted-foreground',
+        ghostwarning: 'hover:bg-muted text-muted-foreground',
+        ghosterror: 'hover:bg-muted text-foreground',
+        ghostinfo: 'hover:bg-muted text-muted-foreground',
+        link: 'text-foreground underline-offset-4 hover:underline',
         lightprimary:
-          'bg-lightprimary text-primary hover:bg-primary hover:text-white',
+          'bg-muted text-foreground hover:bg-foreground hover:text-background',
         lightsecondary:
-          'bg-lightsecondary text-secondary hover:bg-secondary hover:text-white',
+          'bg-muted text-muted-foreground hover:bg-muted-foreground hover:text-background',
         lightsuccess:
-          'bg-lightsuccess text-success hover:bg-success hover:text-white',
+          'bg-muted text-muted-foreground hover:bg-muted-foreground hover:text-background',
         lightwarning:
-          'bg-lightwarning text-warning hover:bg-warning hover:text-white',
-        lightinfo: 'bg-lightinfo text-info hover:bg-info hover:text-white',
-        lighterror: 'bg-lighterror text-error hover:bg-error hover:text-white',
+          'bg-muted text-muted-foreground hover:bg-muted-foreground hover:text-background',
+        lightinfo: 'bg-muted text-muted-foreground hover:bg-muted-foreground hover:text-background',
+        lighterror: 'bg-muted text-foreground hover:bg-foreground hover:text-background',
       },
       size: {
         default: 'h-10 px-5 py-2',

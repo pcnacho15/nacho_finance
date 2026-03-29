@@ -8,7 +8,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html,
+html[data-scroll-behavior="smooth"],
 main {
   scroll-behavior: smooth;
 }
@@ -17,7 +17,7 @@ main {
 
   --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
   --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  --shadow-md: 0 1px 4px rgba(133, 146, 173, 0.2);
+  --shadow-md: 0 1px 4px rgba(0, 0, 0, 0.1);
   --shadow-btn-shadow: 0 9px 17.5px rgba(0, 0, 0, 0.05);
 
   --radius-sm: 4px;
@@ -32,7 +32,13 @@ main {
   --padding-15: 15px;
   --padding-30: 30px;
 
-  --margin-30: 30px;  
+  --margin-30: 30px;
+
+  /* Dashboard accent colors */
+  --color-dashboard-accent-1: var(--dashboard-accent-1);
+  --color-dashboard-accent-2: var(--dashboard-accent-2);
+  --color-dashboard-accent-3: var(--dashboard-accent-3);
+  --color-dashboard-accent-4: var(--dashboard-accent-4);
 }
 
 @theme inline {
@@ -55,6 +61,7 @@ main {
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -72,7 +79,7 @@ main {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* custom colors */
+  /* custom colors - Grayscale */
   --color-cyan-500: var(--primary);
   --color-cyan-600: var(--primary);
   --color-cyan-700: var(--primary);
@@ -95,126 +102,145 @@ main {
   --color-erroremphasis: var(--error-emphasis);
   --color-successemphasis: var(--success-emphasis);
   --color-infoemphasis: var(--info-emphasis);
+
+  /* Dashboard accent colors */
+  --color-dashboard-accent-1: var(--dashboard-accent-1);
+  --color-dashboard-accent-2: var(--dashboard-accent-2);
+  --color-dashboard-accent-3: var(--dashboard-accent-3);
+  --color-dashboard-accent-4: var(--dashboard-accent-4);
 }
 
 :root {
   --radius: 10px;
-  --background: var(--muted);
-  --foreground: var(--dark);
-  --card: var(--white);
-  --card-foreground: var(--link);
-  --popover: var(--white);
-  --popover-foreground: var(--link);
-  --primary: #5d87ff;
-  --primary-foreground: var(--white);
-  --secondary: #49beff;
-  --secondary-foreground: var(--white);
+  --background: #fafafa;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #ffffff;
+  --secondary: #404040;
+  --secondary-foreground: #ffffff;
   --muted: #f5f5f5;
-  --muted-foreground: #5a6a85bf;
-  --accent: var(--lightprimary);
-  --accent-foreground: var(--primary);
-  --destructive: var(--error);
-  --destructive-foreground: var(--white);
-  --border: #dfe5ef;
-  --input: #e5e7eb;
-  --ring: var(--lightprimary);
-  --chart-1: var(--primary);
-  --chart-2: var(--secondary);
-  --chart-3: var(--success);
-  --chart-4: var(--warning);
-  --chart-5: var(--error);
-  --sidebar: var(--white);
-  --sidebar-foreground: #2a3547;
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--lightprimary);
-  --sidebar-accent-foreground: var(--primary);
-  --sidebar-border: var(--border);
-  --sidebar-ring: #a1a1a1;
+  --muted-foreground: #737373;
+  --accent: #e5e5e5;
+  --accent-foreground: #171717;
+  --destructive: #171717;
+  --destructive-foreground: #ffffff;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #171717;
+  --chart-1: #171717;
+  --chart-2: #404040;
+  --chart-3: #737373;
+  --chart-4: #a3a3a3;
+  --chart-5: #d4d4d4;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #171717;
+  --sidebar-primary: #171717;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e5e5e5;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #a3a3a3;
 
-  /* CUSTOM COLORS */
-  --info: #8754ec;
-  --success: #13deb9;
-  --warning: #f6b51e;
-  --error: #ef4444;
+  /* CUSTOM COLORS - Grayscale */
+  --info: #525252;
+  --success: #404040;
+  --warning: #737373;
+  --error: #171717;
   --white: #ffffff;
   --dark: #171717;
-  --bodytext: #5a6a85bf;
+  --bodytext: #525252;
 
-  /* Light Variants */
-  --lightprimary: color-mix(in oklab, var(--primary) 12%, transparent);
-  --lightsecondary: color-mix(in oklab, var(--secondary) 12%, transparent);
-  --lightsuccess: color-mix(in oklab, var(--success) 12%, transparent);
-  --lightwarning: color-mix(in oklab, var(--warning) 12%, transparent);
-  --lighterror: color-mix(in oklab, var(--error) 12%, transparent);
-  --lightinfo: color-mix(in oklab, var(--info) 12%, transparent);
+  /* Light Variants - Grayscale */
+  --lightprimary: #f5f5f5;
+  --lightsecondary: #e5e5e5;
+  --lightsuccess: #f0f0f0;
+  --lightwarning: #fafafa;
+  --lighterror: #f5f5f5;
+  --lightinfo: #fafafa;
 
-  /* Emphasis Variants */
-  --primary-emphasis: color-mix(in oklab, var(--primary) 80%, black);
-  --secondary-emphasis: color-mix(in oklab, var(--secondary) 80%, black);
-  --success-emphasis: color-mix(in oklab, var(--success) 80%, black);
-  --warning-emphasis: color-mix(in oklab, var(--warning) 80%, black);
-  --error-emphasis: color-mix(in oklab, var(--error) 80%, black);
-  --info-emphasis: color-mix(in oklab, var(--info) 80%, black);  
+  /* Emphasis Variants - Grayscale */
+  --primary-emphasis: #000000;
+  --secondary-emphasis: #525252;
+  --success-emphasis: #404040;
+  --warning-emphasis: #737373;
+  --error-emphasis: #000000;
+  --info-emphasis: #525252;
+  
+  /* Dashboard accent colors (minimal color for charts/highlights only) */
+  --dashboard-accent-1: #171717;
+  --dashboard-accent-2: #525252;
+  --dashboard-accent-3: #737373;
+  --dashboard-accent-4: #a3a3a3;
 }
 
 .dark {
-  --background: var(--dark);
-  --foreground: var(--white);
-  --card: #191c1d;
-  --card-foreground: var(--white);
-  --popover: #333f55;
-  --popover-foreground: var(--white);
-  --primary: #5d87ff;
-  --primary-foreground: var(--white);
-  --secondary: #49beff;
-  --secondary-foreground: var(--white);
-  --muted: #2a3851;
-  --muted-foreground: #7c8fac;
-  --accent: var(--accent);
-  --accent-foreground: var(--accent-foreground);
-  --destructive: var(--error);
-  --border: #ffffff1a;
-  --input: var(--border);
-  --ring: var(--lightprimary);
-  --chart-1: var(--primary);
-  --chart-2: var(--secondary);
-  --chart-3: var(--success);
-  --chart-4: var(--warning);
-  --chart-5: var(--error);
-  --sidebar: var(--dark);
-  --sidebar-foreground: #7c8fac;
-  --sidebar-primary: var(--sidebar-primary);
-  --sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --sidebar-accent: var(--sidebar-accent);
-  --sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --sidebar-border: var(--sidebar-border);
-  --sidebar-ring: var(--sidebar-ring);
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: #171717;
+  --card-foreground: #ffffff;
+  --popover: #171717;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #171717;
+  --secondary: #a3a3a3;
+  --secondary-foreground: #171717;
+  --muted: #262626;
+  --muted-foreground: #a3a3a3;
+  --accent: #262626;
+  --accent-foreground: #ffffff;
+  --destructive: #ffffff;
+  --destructive-foreground: #171717;
+  --border: #262626;
+  --input: #262626;
+  --ring: #ffffff;
+  --chart-1: #ffffff;
+  --chart-2: #a3a3a3;
+  --chart-3: #737373;
+  --chart-4: #525252;
+  --chart-5: #404040;
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #171717;
+  --sidebar-accent: #262626;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #262626;
+  --sidebar-ring: #525252;
 
-  /* CUSTOM COLORS */
-  --info: #8754ec;
-  --success: #13deb9;
-  --warning: #f6b51e;
-  --error: #ef4444;
+  /* CUSTOM COLORS - Dark Grayscale */
+  --info: #a3a3a3;
+  --success: #737373;
+  --warning: #525252;
+  --error: #ffffff;
   --white: #ffffff;
   --dark: #0a0a0a;
-  --bodytext: #5a6a85bf;
+  --bodytext: #a3a3a3;
 
-  /* Light Variants */
-  --lightprimary: color-mix(in oklab, var(--primary) 20%, transparent);
-  --lightsecondary: color-mix(in oklab, var(--secondary) 20%, transparent);
-  --lightsuccess: color-mix(in oklab, var(--success) 20%, transparent);
-  --lightwarning: color-mix(in oklab, var(--warning) 20%, transparent);
-  --lighterror: color-mix(in oklab, var(--error) 20%, transparent);
-  --lightinfo: color-mix(in oklab, var(--info) 20%, transparent);
+  /* Light Variants - Dark */
+  --lightprimary: #262626;
+  --lightsecondary: #333333;
+  --lightsuccess: #1f1f1f;
+  --lightwarning: #1a1a1a;
+  --lighterror: #262626;
+  --lightinfo: #1a1a1a;
 
-  /* Emphasis Variants */
-  --primary-emphasis: color-mix(in oklab, var(--primary) 80%, black);
-  --secondary-emphasis: color-mix(in oklab, var(--secondary) 80%, black);
-  --success-emphasis: color-mix(in oklab, var(--success) 80%, black);
-  --warning-emphasis: color-mix(in oklab, var(--warning) 80%, black);
-  --error-emphasis: color-mix(in oklab, var(--error) 80%, black);
-  --info-emphasis: color-mix(in oklab, var(--info) 80%, black);
+  /* Emphasis Variants - Dark */
+  --primary-emphasis: #ffffff;
+  --secondary-emphasis: #a3a3a3;
+  --success-emphasis: #737373;
+  --warning-emphasis: #525252;
+  --error-emphasis: #ffffff;
+  --info-emphasis: #a3a3a3;
+
+  /* Dashboard accent colors - Dark mode (subtle grays) */
+  --dashboard-accent-1: #ffffff;
+  --dashboard-accent-2: #a3a3a3;
+  --dashboard-accent-3: #737373;
+  --dashboard-accent-4: #525252;
 }
 
 @layer base {

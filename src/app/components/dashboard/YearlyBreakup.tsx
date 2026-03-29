@@ -40,7 +40,7 @@ const chartData: ApexOptions = {
     legend: {
         show: false,
     },
-    colors: ["var(--color-primary)", "var(--color-lightprimary)", "var(--color-secondary)"],
+    colors: ["var(--color-foreground)", "var(--color-muted)", "var(--color-muted-foreground)"],
 
 
     tooltip: {
@@ -64,8 +64,8 @@ const YearlyBreakup = () => {
                             <h5 className="card-title mb-4 lg:whitespace-nowrap">Yearly Breakup</h5>
                             <h4 className="text-xl mb-2">$36,358</h4>
                             <div className="flex items-center mb-3 gap-2">
-                                <span className="rounded-full p-1 bg-lightsuccess dark:bg-darksuccess flex items-center justify-center ">
-                                    <Icon icon="tabler:arrow-up-left" className="text-success" />
+                                <span className="rounded-full p-1 bg-muted flex items-center justify-center ">
+                                    <Icon icon="tabler:arrow-up-left" className="text-foreground" />
                                 </span>
                                 <p className="text-muted-foreground mb-0">+9%</p>
                                 <p className="text-muted-foreground mb-0 ">last year</p>
@@ -73,15 +73,15 @@ const YearlyBreakup = () => {
                         </div>
                         <div className="flex flex-wrap gap-4 items-center mt-4">
                             <div className="flex items-center">
-                                <Icon icon="tabler:point-filled" className="text-primary text-xl me-1" />
+                                <Icon icon="tabler:point-filled" className="text-foreground text-xl me-1" />
                                 <span className="text-xs text-muted-foreground">2023</span>
                             </div>
                             <div className="flex items-center">
-                                <Icon icon="tabler:point-filled" className="text-secondary text-xl me-1" />
+                                <Icon icon="tabler:point-filled" className="text-muted-foreground text-xl me-1" />
                                 <span className="text-xs text-muted-foreground">2024</span>
                             </div>
                             <div className="flex items-center">
-                                <Icon icon="tabler:point-filled" className="text-lightprimary text-xl me-1" />
+                                <Icon icon="tabler:point-filled" className="text-muted text-xl me-1" />
                                 <span className="text-xs text-muted-foreground">2025</span>
                             </div>
                         </div>

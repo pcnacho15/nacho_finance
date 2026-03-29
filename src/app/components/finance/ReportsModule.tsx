@@ -66,38 +66,38 @@ const ReportsModule: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <CardBox className="bg-gradient-to-br from-success/10 to-success/5">
+        <CardBox className="bg-gradient-to-br from-muted to-muted/50">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Ingresos Totales</p>
-              <p className="text-2xl font-bold text-success">${totalIncome.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-foreground">${totalIncome.toLocaleString()}</p>
             </div>
-            <div className="p-3 bg-success/20 rounded-full">
-              <Icon icon="solar:money-bag-bold" className="text-2xl text-success" />
+            <div className="p-3 bg-muted-foreground/20 rounded-full">
+              <Icon icon="solar:money-bag-bold" className="text-2xl text-foreground" />
             </div>
           </div>
         </CardBox>
-        <CardBox className="bg-gradient-to-br from-error/10 to-error/5">
+        <CardBox className="bg-gradient-to-br from-muted to-muted/50">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Gastos Totales</p>
-              <p className="text-2xl font-bold text-error">${totalExpenses.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-muted-foreground">${totalExpenses.toLocaleString()}</p>
             </div>
-            <div className="p-3 bg-error/20 rounded-full">
-              <Icon icon="solar:shopping-cart-bold" className="text-2xl text-error" />
+            <div className="p-3 bg-muted/20 rounded-full">
+              <Icon icon="solar:shopping-cart-bold" className="text-2xl text-muted-foreground" />
             </div>
           </div>
         </CardBox>
-        <CardBox className={`bg-gradient-to-br ${balance >= 0 ? 'from-primary/10 to-primary/5' : 'from-warning/10 to-warning/5'}`}>
+        <CardBox className={`bg-gradient-to-br ${balance >= 0 ? 'from-muted to-muted/50' : 'from-muted-foreground/10 to-muted-foreground/5'}`}>
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Balance General</p>
-              <p className={`text-2xl font-bold ${balance >= 0 ? 'text-success' : 'text-error'}`}>
+              <p className={`text-2xl font-bold ${balance >= 0 ? 'text-foreground' : 'text-muted-foreground'}`}>
                 ${balance.toLocaleString()}
               </p>
             </div>
-            <div className={`p-3 ${balance >= 0 ? 'bg-primary/20' : 'bg-warning/20'} rounded-full`}>
-              <Icon icon="solar:wallet-money-bold" className={`text-2xl ${balance >= 0 ? 'text-primary' : 'text-warning'}`} />
+            <div className={`p-3 ${balance >= 0 ? 'bg-foreground/20' : 'bg-muted-foreground/20'} rounded-full`}>
+              <Icon icon="solar:wallet-money-bold" className={`text-2xl ${balance >= 0 ? 'text-foreground' : 'text-muted-foreground'}`} />
             </div>
           </div>
         </CardBox>

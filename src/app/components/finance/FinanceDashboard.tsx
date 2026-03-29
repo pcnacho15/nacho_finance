@@ -21,7 +21,7 @@ const FinanceDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* <BreadcrumbComp title="Dashboard de Finanzas" items={BCrumb} /> */}
-      <ProfileWelcome />
+      {/* <ProfileWelcome /> */}
 
       <FinanceStatsCards />
 

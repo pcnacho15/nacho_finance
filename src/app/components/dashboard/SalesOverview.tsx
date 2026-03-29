@@ -55,7 +55,7 @@ const baseChartOptions: ApexOptions = {
     width: "100%",
     offsetX: -20,
   },
-  colors: ["var(--color-primary)", "var(--color-secondary)"],
+  colors: ["var(--color-foreground)", "var(--color-muted-foreground)"],
   plotOptions: {
     bar: {
       horizontal: false,
