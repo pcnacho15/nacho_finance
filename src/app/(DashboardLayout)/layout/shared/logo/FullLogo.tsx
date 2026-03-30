@@ -21,7 +21,7 @@ const FullLogo = () => {
         height={36}
         className="rtl:scale-x-[-1]"
         loading="eager"
-        style={{ width: 'auto', height: 'auto' }}
+        // style={{ width: 'auto', height: 'auto' }}
       />
     );
   }
@@ -35,7 +35,7 @@ const FullLogo = () => {
         height={36}
         className="block dark:hidden rtl:scale-x-[-1]"
         loading="eager"
-        style={{ width: 'auto', height: 'auto' }}
+        // style={{ width: 'auto', height: 'auto' }}
       />
       <Image
         src="/images/logos/light-logo.svg"
@@ -44,7 +44,7 @@ const FullLogo = () => {
         height={36}
         className="hidden dark:block rtl:scale-x-[-1]"
         loading="eager"
-        style={{ width: 'auto', height: 'auto' }}
+        // style={{ width: 'auto', height: 'auto' }}
       />
     </>
   );

@@ -1,9 +1,9 @@
-@import 'tailwindcss';
-@import './app.css';
-@import './layouts/container.css' layer(utilities);
-@import './layouts/sidebar.css' layer(utilities);
-@import './layouts/header.css' layer(utilities);
-@import './override/reboot.css' layer(utilities);
+@import "tailwindcss";
+@import "./app.css";
+@import "./layouts/container.css" layer(utilities);
+@import "./layouts/sidebar.css" layer(utilities);
+@import "./layouts/header.css" layer(utilities);
+@import "./override/reboot.css" layer(utilities);
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -14,7 +14,6 @@ main {
 }
 
 @theme {
-
   --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
   --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   --shadow-md: 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -83,7 +82,9 @@ main {
   --color-cyan-500: var(--primary);
   --color-cyan-600: var(--primary);
   --color-cyan-700: var(--primary);
-  
+
+  --color-chart-primary: var(--chart-primary);
+  --color-chart-secondary: var(--chart-secondary);
   --color-info: var(--info);
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -119,6 +120,8 @@ main {
   --popover: #ffffff;
   --popover-foreground: #171717;
   --primary: #171717;
+  --chart-primary: #66a1b8;
+  --chart-secondary: #6b6cb6;
   --primary-foreground: #ffffff;
   --secondary: #404040;
   --secondary-foreground: #ffffff;
@@ -169,7 +172,7 @@ main {
   --warning-emphasis: #737373;
   --error-emphasis: #000000;
   --info-emphasis: #525252;
-  
+
   /* Dashboard accent colors (minimal color for charts/highlights only) */
   --dashboard-accent-1: #171717;
   --dashboard-accent-2: #525252;
@@ -307,7 +310,6 @@ main {
     @apply text-sm overflow-x-hidden;
   }
 
-
   /*heading text color*/
   h1,
   h2,
@@ -330,10 +332,9 @@ main {
     @apply flex items-center gap-4 p-3;
   }
 
-  .sales-overview select{
+  .sales-overview select {
     @apply pr-9!;
   }
-
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {

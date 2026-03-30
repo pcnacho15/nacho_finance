@@ -24,7 +24,7 @@ const IncomeExpenseChart: React.FC = () => {
       height: 320,
       sparkline: { enabled: false },
     },
-    colors: ["var(--color-primary)", "var(--color-secondary)"],
+    colors: ["var(--color-chart-primary)", "var(--color-chart-secondary)"],
     fill: {
       type: "gradient",
       gradient: {

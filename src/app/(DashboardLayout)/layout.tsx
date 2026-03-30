@@ -1,7 +1,8 @@
 'use client'
 
+import { SidebarProvider } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/AppSidebar"
 import Header from './layout/header/Header'
-import Sidebar from './layout/sidebar/Sidebar'
 
 export default function Layout({
   children,
@@ -9,21 +10,16 @@ export default function Layout({
   children: React.ReactNode
 }>) {
   return (
-    <div className='flex w-full min-h-screen'>
-      <div className='page-wrapper flex w-full'>
-        {/* Sidebar - Desktop */}
-        <div className='xl:block hidden'>
-          <Sidebar />
-        </div>
-        <div className='body-wrapper w-full bg-background'>
-          {/* Top Header */}
+    <SidebarProvider>
+      <div className="flex w-full min-h-screen">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col min-h-screen">
           <Header />
-          {/* Body Content */}
-          <div className={`container mx-auto px-6 py-30`}>{children}</div>
-          
+          <div className="container mx-auto px-6 py-30 flex-1">
+            {children}
+          </div>
         </div>
       </div>
-     
-    </div>
+    </SidebarProvider>
   )
 }

@@ -57,18 +57,6 @@ const BreadcrumbComp = ({ items = [], title }: BreadCrumbType) => {
             })}
           </ol>
         </div>
-
-        <div className="col-span-2 flex justify-center -mb-7 max-h-[120px] max-w-[140px]">
-          <div className="hidden sm:block absolute right-7 bottom-0">
-            <Image
-              src="/images/backgrounds/welcome-bg2.png"
-              alt="support-img"
-              width={145}
-              height={95}
-              style={{ height: 'auto', width: 'auto' }}
-            />
-          </div>
-        </div>
       </div>
     </CardBox>
   );
