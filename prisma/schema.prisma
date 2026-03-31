@@ -1,0 +1,129 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../node_modules/.prisma/client"
+  noEngine      = true
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  type        String   @default("expense")
+  color       String
+  icon        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  incomes   Income[]
+  expenses  Expense[]
+  budgets   Budget[]
+}
+
+model Income {
+  id            String   @id @default(cuid())
+  amount        Float
+  description   String
+  categoryId    String
+  categoryName  String
+  categoryColor String
+  date          DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  category Category @relation(fields: [categoryId], references: [id])
+}
+
+model Expense {
+  id               String   @id @default(cuid())
+  amount           Float
+  description      String
+  categoryId       String
+  categoryName     String
+  categoryColor    String
+  date             DateTime
+  isRecurring      Boolean  @default(false)
+  recurringFrequency String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  category Category @relation(fields: [categoryId], references: [id])
+}
+
+model Debt {
+  id            String   @id @default(cuid())
+  name          String
+  type          String   @default("loan")
+  creditor      String
+  originalAmount Float
+  currentAmount Float
+  paidAmount    Float    @default(0)
+  interestRate  Float
+  monthlyPayment Float
+  startDate     DateTime
+  dueDate       DateTime
+  status        String   @default("active")
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  payments DebtPayment[]
+}
+
+model DebtPayment {
+  id        String   @id @default(cuid())
+  debtId    String
+  amount    Float
+  date      DateTime
+  notes     String?
+  createdAt DateTime @default(now())
+
+  debt Debt @relation(fields: [debtId], references: [id], onDelete: Cascade)
+}
+
+model SavingsGoal {
+  id           String   @id @default(cuid())
+  name         String
+  targetAmount Float
+  currentAmount Float   @default(0)
+  targetDate   DateTime
+  status       String   @default("in_progress")
+  icon         String
+  color        String
+  description  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  contributions SavingsContribution[]
+}
+
+model SavingsContribution {
+  id        String   @id @default(cuid())
+  goalId    String
+  amount    Float
+  date      DateTime
+  notes     String?
+  createdAt DateTime @default(now())
+
+  goal SavingsGoal @relation(fields: [goalId], references: [id], onDelete: Cascade)
+}
+
+model Budget {
+  id            String   @id @default(cuid())
+  categoryId    String
+  categoryName  String
+  categoryColor String
+  amount        Float
+  spent         Float    @default(0)
+  period        String   @default("monthly")
+  startDate     DateTime
+  endDate       DateTime
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  category Category @relation(fields: [categoryId], references: [id])
+}

@@ -29,7 +29,7 @@ const Notifications = () => {
           <span className='relative after:absolute after:w-10 after:h-10 after:rounded-full after:-top-1/2 hover:after:bg-muted rounded-full flex justify-center items-center cursor-pointer'>
             <Icon icon='tabler:bell-ringing' height={20} className="text-foreground dark:text-muted-foreground group-hover:text-foreground z-10" />
           </span>
-          <span className='rounded-full absolute -inset-e-[6px] -top-[5px] text-[10px] h-2 w-2 bg-primary flex justify-center items-center'></span>
+          <span className='rounded-full absolute left-4 -top-[6px] text-[10px] h-2 w-2 bg-primary flex justify-center items-center'></span>
         </div>
       </div>
     )
@@ -47,7 +47,7 @@ const Notifications = () => {
                 className="text-foreground dark:text-muted-foreground group-hover:text-foreground z-10"
               />
             </span>
-            <span className="rounded-full absolute  -inset-e-[6px] -top-[5px] text-[10px] h-2 w-2 bg-[#49beff] flex justify-center items-center"></span>
+            <span className="rounded-full absolute  left-4 -top-[6px] text-[10px] h-2 w-2 bg-[#49beff] flex justify-center items-center"></span>
           </div>
         </DropdownMenuTrigger>
 
