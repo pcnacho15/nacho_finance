@@ -10,24 +10,25 @@ import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 
 const ReportsModule: React.FC = () => {
-  const { incomes, expenses, categories, getMonthlyData } = useFinance();
+  const { incomes, expenses, getMonthlyData } = useFinance();
   const [selectedPeriod, setSelectedPeriod] = useState<string>('6m');
 
   const monthlyData = getMonthlyData();
-  const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
-  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+  const totalIncome = incomes.reduce((sum, i) => sum + Number(i.amount), 0);
+  const totalExpenses = expenses.reduce((sum, e) => sum + Number(e.amount), 0);
   const balance = totalIncome - totalExpenses;
 
   const expensesByCategory = expenses.reduce((acc, expense) => {
+    const amount = Number(expense.amount);
     const existing = acc.find(item => item.categoryId === expense.categoryId);
     if (existing) {
-      existing.total += expense.amount;
+      existing.total += amount;
     } else {
       acc.push({
         categoryId: expense.categoryId,
-        categoryName: expense.categoryName,
-        categoryColor: expense.categoryColor,
-        total: expense.amount,
+        categoryName: expense.category?.name ?? 'Sin categoría',
+        categoryColor: expense.category?.color ?? '#6b7280',
+        total: amount,
       });
     }
     return acc;
@@ -195,15 +196,15 @@ const ReportsModule: React.FC = () => {
                   {recentIncomes.map((income) => (
                     <div key={income.id} className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: `${income.categoryColor}20` }}>
-                          <Icon icon="solar:arrow-right-up-bold" style={{ color: income.categoryColor }} />
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: `${income.category?.color ?? '#6b7280'}20` }}>
+                          <Icon icon="solar:arrow-right-up-bold" style={{ color: income.category?.color ?? '#6b7280' }} />
                         </div>
                         <div>
                           <p className="font-medium text-sm">{income.description}</p>
                           <p className="text-xs text-muted-foreground">{format(new Date(income.date), 'dd MMM yyyy')}</p>
                         </div>
                       </div>
-                      <span className="font-semibold text-success">+${income.amount.toLocaleString()}</span>
+                      <span className="font-semibold text-success">+${Number(income.amount).toLocaleString()}</span>
                     </div>
                   ))}
                 </div>
@@ -222,15 +223,15 @@ const ReportsModule: React.FC = () => {
                   {recentExpenses.map((expense) => (
                     <div key={expense.id} className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: `${expense.categoryColor}20` }}>
-                          <Icon icon="solar:arrow-right-down-bold" style={{ color: expense.categoryColor }} />
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: `${expense.category?.color ?? '#6b7280'}20` }}>
+                          <Icon icon="solar:arrow-right-down-bold" style={{ color: expense.category?.color ?? '#6b7280' }} />
                         </div>
                         <div>
                           <p className="font-medium text-sm">{expense.description}</p>
                           <p className="text-xs text-muted-foreground">{format(new Date(expense.date), 'dd MMM yyyy')}</p>
                         </div>
                       </div>
-                      <span className="font-semibold text-error">-${expense.amount.toLocaleString()}</span>
+                      <span className="font-semibold text-error">-${Number(expense.amount).toLocaleString()}</span>
                     </div>
                   ))}
                 </div>

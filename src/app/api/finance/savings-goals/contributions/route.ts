@@ -1,57 +1,56 @@
-import { NextResponse } from 'next/server';
+import { Prisma } from '@/generated/prisma/client';
 import { prisma } from '@/lib/prisma';
+import { handleError, json, parseJson, requireId, requireUser } from '@/lib/api-utils';
+import { savingsContributionSchema } from '@/lib/finance-schemas';
 
 export async function POST(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, savingsContributionSchema);
+  if ('error' in parsed) return parsed.error;
+  const { goalId, amount, notes } = parsed.data;
+
   try {
-    const body = await request.json();
-    const { goalId, amount, notes } = body;
-
-    const contribution = await prisma.savingsContribution.create({
-      data: {
-        goalId,
-        amount: Number(amount),
-        date: new Date(),
-        notes,
-      },
-    });
-
-    const goal = await prisma.savingsGoal.findUnique({
-      where: { id: goalId },
-    });
-
-    if (goal) {
-      const newCurrentAmount = goal.currentAmount + Number(amount);
-      const newStatus = newCurrentAmount >= goal.targetAmount ? 'completed' : goal.status;
-
-      await prisma.savingsGoal.update({
+    const contribution = await prisma.$transaction(async (tx) => {
+      const goal = await tx.savingsGoal.findFirst({
+        where: { id: goalId, userId: user.userId },
+      });
+      if (!goal) throw new Error('NOT_FOUND');
+      const amountDec = new Prisma.Decimal(amount);
+      const newCurrent = goal.currentAmount.plus(amountDec);
+      const created = await tx.savingsContribution.create({
+        data: { goalId, amount: amountDec, date: new Date(), notes: notes ?? null },
+      });
+      await tx.savingsGoal.update({
         where: { id: goalId },
         data: {
-          currentAmount: newCurrentAmount,
-          status: newStatus,
+          currentAmount: newCurrent,
+          status: newCurrent.gte(goal.targetAmount) ? 'completed' : goal.status,
         },
       });
-    }
-
-    return NextResponse.json(contribution);
+      return created;
+    });
+    return json(contribution, { status: 201 });
   } catch (error) {
-    console.error('Error creating contribution:', error);
-    return NextResponse.json({ error: 'Error creating contribution' }, { status: 500 });
+    if (error instanceof Error && error.message === 'NOT_FOUND') {
+      return json({ error: 'Meta no encontrada' }, { status: 404 });
+    }
+    return handleError('POST /api/finance/savings-goals/contributions', error);
   }
 }
 
 export async function DELETE(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const result = requireId(request);
+  if ('error' in result) return result.error;
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    if (!id) {
-      return NextResponse.json({ error: 'Contribution ID required' }, { status: 400 });
-    }
-    await prisma.savingsContribution.delete({
-      where: { id },
+    const deleted = await prisma.savingsContribution.deleteMany({
+      where: { id: result.id, goal: { userId: user.userId } },
     });
-    return NextResponse.json({ success: true });
+    if (deleted.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    return json({ success: true });
   } catch (error) {
-    console.error('Error deleting contribution:', error);
-    return NextResponse.json({ error: 'Error deleting contribution' }, { status: 500 });
+    return handleError('DELETE /api/finance/savings-goals/contributions', error);
   }
 }

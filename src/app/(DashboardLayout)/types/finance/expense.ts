@@ -1,15 +1,16 @@
+import type { Category } from './category';
+
 export interface Expense {
   id: string;
   amount: number;
   description: string;
   categoryId: string;
-  categoryName: string;
-  categoryColor: string;
-  date: Date;
+  category?: Category;
+  date: Date | string;
   isRecurring: boolean;
-  recurringFrequency?: 'daily' | 'weekly' | 'monthly' | 'yearly';
-  createdAt: Date;
-  updatedAt: Date;
+  recurringFrequency?: 'daily' | 'weekly' | 'monthly' | 'yearly' | null;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface ExpenseFormData {

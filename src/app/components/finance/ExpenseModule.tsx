@@ -51,12 +51,12 @@ const ExpenseModule: React.FC = () => {
     const expense = expenses.find(e => e.id === id);
     if (expense) {
       setFormData({
-        amount: expense.amount,
+        amount: Number(expense.amount),
         description: expense.description,
         categoryId: expense.categoryId,
         date: new Date(expense.date),
         isRecurring: expense.isRecurring,
-        recurringFrequency: expense.recurringFrequency,
+        recurringFrequency: expense.recurringFrequency ?? undefined,
       });
       setEditingId(id);
       setIsDialogOpen(true);
@@ -69,8 +69,8 @@ const ExpenseModule: React.FC = () => {
     }
   };
 
-  const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const recurringTotal = expenses.filter(e => e.isRecurring).reduce((sum, e) => sum + e.amount, 0);
+  const totalExpense = expenses.reduce((sum, e) => sum + Number(e.amount), 0);
+  const recurringTotal = expenses.filter(e => e.isRecurring).reduce((sum, e) => sum + Number(e.amount), 0);
 
   return (
     <div className="space-y-6">
@@ -117,8 +117,8 @@ const ExpenseModule: React.FC = () => {
                 <TableRow key={expense.id}>
                   <TableCell className="font-medium">{expense.description}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" style={{ borderColor: expense.categoryColor, color: expense.categoryColor }}>
-                      {expense.categoryName}
+                    <Badge variant="outline" style={{ borderColor: expense.category?.color, color: expense.category?.color }}>
+                      {expense.category?.name ?? 'Sin categoría'}
                     </Badge>
                   </TableCell>
                   <TableCell>{format(new Date(expense.date), 'dd MMM yyyy')}</TableCell>
@@ -130,7 +130,7 @@ const ExpenseModule: React.FC = () => {
                     )}
                   </TableCell>
                   <TableCell className="text-right font-semibold text-error">
-                    -${expense.amount.toLocaleString()}
+                    -${Number(expense.amount).toLocaleString()}
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">

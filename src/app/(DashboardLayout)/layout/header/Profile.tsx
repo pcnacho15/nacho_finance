@@ -1,11 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import { useSession, signOut } from 'next-auth/react'
 import { Icon } from '@iconify/react'
-import * as profileData from './data'
-import SimpleBar from 'simplebar-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -13,92 +9,71 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu'
+import { useAuthDialog } from '@/app/components/auth/AuthDialogProvider'
 
 const Profile = () => {
-  const [mounted, setMounted] = useState(false)
+  const { data: session, status } = useSession()
+  const { open } = useAuthDialog()
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
+  if (status === 'loading') {
     return (
-      <div className="relative group/menu shrink-0">
-        <span className="hover:text-primary hover:bg-lightprimary rounded-full flex justify-center items-center cursor-pointer group-hover/menu:bg-lightprimary group-hover/menu:text-primary">
-          {/* <Image
-            src='/images/profile/user-1.jpg'
-            alt='logo'
-            height={35}
-            width={35}
-            className='rounded-full'
-          /> */}
-          <Icon
-            icon="tabler:user-circle"
-            width="24"
-            height="24"
-          />
-        </span>
-      </div>
-    );
+      <div className="size-9 rounded-full bg-muted animate-pulse" />
+    )
   }
 
+  if (!session?.user) {
+    return (
+      <Button size="sm" variant="default" onClick={() => open('login')}>
+        Iniciar sesión
+      </Button>
+    )
+  }
+
+  const name = session.user.name ?? session.user.email ?? 'Usuario'
+  const initial = name.charAt(0).toUpperCase()
+
   return (
-    <div className="relative group/menu shrink-0">
+    <div className="relative shrink-0">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <span className="hover:text-primary hover:bg-lightprimary rounded-full flex justify-center items-center cursor-pointer group-hover/menu:bg-lightprimary group-hover/menu:text-primary">
-            <Icon
-              icon="tabler:user-circle"
-              width="24"
-              height="24"
-            />
-          </span>
+          <button
+            type="button"
+            className="size-9 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center font-medium text-sm"
+            aria-label="Menú de usuario"
+          >
+            {session.user.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={session.user.image}
+                alt={name}
+                className="size-9 rounded-full object-cover"
+              />
+            ) : (
+              initial
+            )}
+          </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent
-          align="end"
-          className="w-screen sm:w-[200px] pb-4 pt-2 rounded-sm"
-        >
-          <SimpleBar>
-            {profileData.profileDD.map((item, index) => (
-              <DropdownMenuItem
-                key={index}
-                asChild
-              >
-                <Link
-                  href={item.url}
-                  className="px-4 py-2 flex justify-between items-center group/link w-full hover:bg-lightprimary hover:text-primary"
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <Icon
-                      icon={item.icon}
-                      className="text-lg text-muted-foreground group-hover/link:text-primary"
-                    />
-                    <h5 className="mb-0 text-sm text-muted-foreground group-hover/link:text-primary">
-                      {item.title}
-                    </h5>
-                  </div>
-                </Link>
-              </DropdownMenuItem>
-            ))}
-          </SimpleBar>
-
-          <DropdownMenuSeparator className="my-2" />
-
-          <div className="px-4">
-            <Button
-              variant="outline"
-              asChild
-              className="w-full rounded-md"
-            >
-              <Link href="/auth/login">Logout</Link>
-            </Button>
-          </div>
+        <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuLabel className="font-normal">
+            <div className="flex flex-col">
+              <span className="text-sm font-medium">{name}</span>
+              {session.user.email && (
+                <span className="text-xs text-muted-foreground">{session.user.email}</span>
+              )}
+            </div>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onSelect={() => signOut({ redirectTo: '/' })} className="gap-2">
+            <Icon icon="tabler:logout" className="size-4" />
+            Cerrar sesión
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }
 
 export default Profile

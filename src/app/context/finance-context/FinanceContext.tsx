@@ -1,15 +1,57 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { 
-  Category, CategoryFormData, DEFAULT_INCOME_CATEGORIES, DEFAULT_EXPENSE_CATEGORIES,
-  Income, IncomeFormData, 
-  Expense, ExpenseFormData,
-  Debt, DebtFormData, DebtPayment,
-  SavingsGoal, SavingsGoalFormData, SavingsContribution,
-  Budget, BudgetFormData
-} from '@/app/(DashboardLayout)/types/finance';
+import React, { createContext, useCallback, useContext, useEffect, useMemo } from 'react';
+import useSWR, { useSWRConfig } from 'swr';
+import { toast } from 'sonner';
 import { format } from 'date-fns';
+import {
+  Budget,
+  BudgetFormData,
+  Category,
+  CategoryFormData,
+  Debt,
+  DebtFormData,
+  Expense,
+  ExpenseFormData,
+  Income,
+  IncomeFormData,
+  SavingsGoal,
+  SavingsGoalFormData,
+} from '@/app/(DashboardLayout)/types/finance';
+
+const ENDPOINTS = {
+  categories: '/api/finance/categories',
+  incomes: '/api/finance/incomes',
+  expenses: '/api/finance/expenses',
+  debts: '/api/finance/debts',
+  savingsGoals: '/api/finance/savings-goals',
+  budgets: '/api/finance/budgets',
+  init: '/api/finance/init',
+  debtPayments: '/api/finance/debts/payments',
+  savingsContributions: '/api/finance/savings-goals/contributions',
+} as const;
+
+async function fetcher<T>(url: string): Promise<T> {
+  const res = await fetch(url);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body?.error || `Error ${res.status}`);
+  }
+  return res.json();
+}
+
+async function send<T>(method: 'POST' | 'PUT' | 'DELETE', url: string, body?: unknown): Promise<T> {
+  const res = await fetch(url, {
+    method,
+    headers: body !== undefined ? { 'Content-Type': 'application/json' } : undefined,
+    body: body !== undefined ? JSON.stringify(body) : undefined,
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data?.error || `Error ${res.status}`);
+  }
+  return res.json();
+}
 
 interface FinanceContextType {
   categories: Category[];
@@ -18,36 +60,36 @@ interface FinanceContextType {
   debts: Debt[];
   savingsGoals: SavingsGoal[];
   budgets: Budget[];
-  
-  addCategory: (data: CategoryFormData) => void;
-  updateCategory: (id: string, data: CategoryFormData) => void;
-  deleteCategory: (id: string) => void;
-  
-  addIncome: (data: IncomeFormData) => void;
-  updateIncome: (id: string, data: IncomeFormData) => void;
-  deleteIncome: (id: string) => void;
-  
-  addExpense: (data: ExpenseFormData) => void;
-  updateExpense: (id: string, data: ExpenseFormData) => void;
-  deleteExpense: (id: string) => void;
-  
-  addDebt: (data: DebtFormData) => void;
-  updateDebt: (id: string, data: DebtFormData) => void;
-  deleteDebt: (id: string) => void;
-  addDebtPayment: (debtId: string, amount: number, notes?: string) => void;
-  
-  addSavingsGoal: (data: SavingsGoalFormData) => void;
-  updateSavingsGoal: (id: string, data: Partial<SavingsGoalFormData>) => void;
-  deleteSavingsGoal: (id: string) => void;
-  addSavingsContribution: (goalId: string, amount: number, notes?: string) => void;
-  
-  addBudget: (data: BudgetFormData) => void;
-  updateBudget: (id: string, data: Partial<BudgetFormData>) => void;
-  deleteBudget: (id: string) => void;
-  
+
+  isLoading: boolean;
+
+  addCategory: (data: CategoryFormData) => Promise<void>;
+  updateCategory: (id: string, data: CategoryFormData) => Promise<void>;
+  deleteCategory: (id: string) => Promise<void>;
+
+  addIncome: (data: IncomeFormData) => Promise<void>;
+  updateIncome: (id: string, data: IncomeFormData) => Promise<void>;
+  deleteIncome: (id: string) => Promise<void>;
+
+  addExpense: (data: ExpenseFormData) => Promise<void>;
+  updateExpense: (id: string, data: ExpenseFormData) => Promise<void>;
+  deleteExpense: (id: string) => Promise<void>;
+
+  addDebt: (data: DebtFormData) => Promise<void>;
+  updateDebt: (id: string, data: DebtFormData) => Promise<void>;
+  deleteDebt: (id: string) => Promise<void>;
+  addDebtPayment: (debtId: string, amount: number, notes?: string) => Promise<void>;
+
+  addSavingsGoal: (data: SavingsGoalFormData) => Promise<void>;
+  updateSavingsGoal: (id: string, data: Partial<SavingsGoalFormData>) => Promise<void>;
+  deleteSavingsGoal: (id: string) => Promise<void>;
+  addSavingsContribution: (goalId: string, amount: number, notes?: string) => Promise<void>;
+
+  addBudget: (data: BudgetFormData) => Promise<void>;
+  updateBudget: (id: string, data: Partial<BudgetFormData>) => Promise<void>;
+  deleteBudget: (id: string) => Promise<void>;
+
   getCategoryById: (id: string) => Category | undefined;
-  getIncomesByMonth: (month: Date) => Income[];
-  getExpensesByMonth: (month: Date) => Expense[];
   getTotalIncome: () => number;
   getTotalExpenses: () => number;
   getBalance: () => number;
@@ -56,374 +98,310 @@ interface FinanceContextType {
 
 const FinanceContext = createContext<FinanceContextType | undefined>(undefined);
 
-const generateId = () => Math.random().toString(36).substring(2, 15);
-
 export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [incomes, setIncomes] = useState<Income[]>([]);
-  const [expenses, setExpenses] = useState<Expense[]>([]);
-  const [debts, setDebts] = useState<Debt[]>([]);
-  const [savingsGoals, setSavingsGoals] = useState<SavingsGoal[]>([]);
-  const [budgets, setBudgets] = useState<Budget[]>([]);
+  const { mutate } = useSWRConfig();
+
+  const categoriesSwr = useSWR<Category[]>(ENDPOINTS.categories, fetcher);
+  const incomesSwr = useSWR<Income[]>(ENDPOINTS.incomes, fetcher);
+  const expensesSwr = useSWR<Expense[]>(ENDPOINTS.expenses, fetcher);
+  const debtsSwr = useSWR<Debt[]>(ENDPOINTS.debts, fetcher);
+  const savingsSwr = useSWR<SavingsGoal[]>(ENDPOINTS.savingsGoals, fetcher);
+  const budgetsSwr = useSWR<Budget[]>(ENDPOINTS.budgets, fetcher);
+
+  const categories = useMemo(() => categoriesSwr.data ?? [], [categoriesSwr.data]);
+  const incomes = useMemo(() => incomesSwr.data ?? [], [incomesSwr.data]);
+  const expenses = useMemo(() => expensesSwr.data ?? [], [expensesSwr.data]);
+  const debts = useMemo(() => debtsSwr.data ?? [], [debtsSwr.data]);
+  const savingsGoals = useMemo(() => savingsSwr.data ?? [], [savingsSwr.data]);
+  const budgets = useMemo(() => budgetsSwr.data ?? [], [budgetsSwr.data]);
 
   useEffect(() => {
-    const savedCategories = localStorage.getItem('finance_categories');
-    const savedIncomes = localStorage.getItem('finance_incomes');
-    const savedExpenses = localStorage.getItem('finance_expenses');
-    const savedDebts = localStorage.getItem('finance_debts');
-    const savedSavings = localStorage.getItem('finance_savings');
-    const savedBudgets = localStorage.getItem('finance_budgets');
-
-    if (!savedCategories) {
-      const initialCategories: Category[] = [
-        ...DEFAULT_INCOME_CATEGORIES.map((c, i) => ({
-          ...c,
-          id: generateId(),
-          createdAt: new Date(),
-        })),
-        ...DEFAULT_EXPENSE_CATEGORIES.map((c, i) => ({
-          ...c,
-          id: generateId() + i,
-          createdAt: new Date(),
-        })),
-      ];
-      setCategories(initialCategories);
-      localStorage.setItem('finance_categories', JSON.stringify(initialCategories));
-    } else {
-      setCategories(JSON.parse(savedCategories));
+    if (categoriesSwr.data && categoriesSwr.data.length === 0) {
+      fetch(ENDPOINTS.init)
+        .then(() => mutate(ENDPOINTS.categories))
+        .catch(() => undefined);
     }
+  }, [categoriesSwr.data, mutate]);
 
-    if (savedIncomes) setIncomes(JSON.parse(savedIncomes));
-    if (savedExpenses) setExpenses(JSON.parse(savedExpenses));
-    if (savedDebts) setDebts(JSON.parse(savedDebts));
-    if (savedSavings) setSavingsGoals(JSON.parse(savedSavings));
-    if (savedBudgets) setBudgets(JSON.parse(savedBudgets));
-  }, []);
+  const runMutation = useCallback(
+    async (fn: () => Promise<unknown>, successMsg: string, keys: string[]) => {
+      try {
+        await fn();
+        await Promise.all(keys.map((k) => mutate(k)));
+        toast.success(successMsg);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Error inesperado';
+        toast.error(msg);
+        throw err;
+      }
+    },
+    [mutate],
+  );
 
-  useEffect(() => {
-    localStorage.setItem('finance_categories', JSON.stringify(categories));
-    localStorage.setItem('finance_incomes', JSON.stringify(incomes));
-    localStorage.setItem('finance_expenses', JSON.stringify(expenses));
-    localStorage.setItem('finance_debts', JSON.stringify(debts));
-    localStorage.setItem('finance_savings', JSON.stringify(savingsGoals));
-    localStorage.setItem('finance_budgets', JSON.stringify(budgets));
-  }, [categories, incomes, expenses, debts, savingsGoals, budgets]);
+  const addCategory = useCallback(
+    (data: CategoryFormData) =>
+      runMutation(() => send('POST', ENDPOINTS.categories, data), 'Categoría creada', [
+        ENDPOINTS.categories,
+      ]),
+    [runMutation],
+  );
 
-  const getCategoryById = useCallback((id: string) => {
-    return categories.find(c => c.id === id);
-  }, [categories]);
+  const updateCategory = useCallback(
+    (id: string, data: CategoryFormData) =>
+      runMutation(
+        () => send('PUT', ENDPOINTS.categories, { id, ...data }),
+        'Categoría actualizada',
+        [ENDPOINTS.categories, ENDPOINTS.incomes, ENDPOINTS.expenses, ENDPOINTS.budgets],
+      ),
+    [runMutation],
+  );
 
-  const addCategory = useCallback((data: CategoryFormData) => {
-    const newCategory: Category = {
-      ...data,
-      id: generateId(),
-      createdAt: new Date(),
-    };
-    setCategories(prev => [...prev, newCategory]);
-  }, []);
+  const deleteCategory = useCallback(
+    (id: string) =>
+      runMutation(
+        () => send('DELETE', `${ENDPOINTS.categories}?id=${id}`),
+        'Categoría eliminada',
+        [ENDPOINTS.categories],
+      ),
+    [runMutation],
+  );
 
-  const updateCategory = useCallback((id: string, data: CategoryFormData) => {
-    setCategories(prev => prev.map(c => c.id === id ? { ...c, ...data } : c));
-  }, []);
+  const addIncome = useCallback(
+    (data: IncomeFormData) =>
+      runMutation(() => send('POST', ENDPOINTS.incomes, data), 'Ingreso registrado', [
+        ENDPOINTS.incomes,
+      ]),
+    [runMutation],
+  );
 
-  const deleteCategory = useCallback((id: string) => {
-    setCategories(prev => prev.filter(c => c.id !== id));
-  }, []);
+  const updateIncome = useCallback(
+    (id: string, data: IncomeFormData) =>
+      runMutation(
+        () => send('PUT', ENDPOINTS.incomes, { id, ...data }),
+        'Ingreso actualizado',
+        [ENDPOINTS.incomes],
+      ),
+    [runMutation],
+  );
 
-  const addIncome = useCallback((data: IncomeFormData) => {
-    const category = getCategoryById(data.categoryId);
-    if (!category) return;
-    
-    const newIncome: Income = {
-      ...data,
-      id: generateId(),
-      categoryName: category.name,
-      categoryColor: category.color,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setIncomes(prev => [...prev, newIncome]);
-  }, [getCategoryById]);
+  const deleteIncome = useCallback(
+    (id: string) =>
+      runMutation(() => send('DELETE', `${ENDPOINTS.incomes}?id=${id}`), 'Ingreso eliminado', [
+        ENDPOINTS.incomes,
+      ]),
+    [runMutation],
+  );
 
-  const updateIncome = useCallback((id: string, data: IncomeFormData) => {
-    const category = getCategoryById(data.categoryId);
-    if (!category) return;
-    
-    setIncomes(prev => prev.map(i => i.id === id ? {
-      ...i,
-      ...data,
-      categoryName: category.name,
-      categoryColor: category.color,
-      updatedAt: new Date(),
-    } : i));
-  }, [getCategoryById]);
+  const addExpense = useCallback(
+    (data: ExpenseFormData) =>
+      runMutation(() => send('POST', ENDPOINTS.expenses, data), 'Gasto registrado', [
+        ENDPOINTS.expenses,
+      ]),
+    [runMutation],
+  );
 
-  const deleteIncome = useCallback((id: string) => {
-    setIncomes(prev => prev.filter(i => i.id !== id));
-  }, []);
+  const updateExpense = useCallback(
+    (id: string, data: ExpenseFormData) =>
+      runMutation(
+        () => send('PUT', ENDPOINTS.expenses, { id, ...data }),
+        'Gasto actualizado',
+        [ENDPOINTS.expenses],
+      ),
+    [runMutation],
+  );
 
-  const addExpense = useCallback((data: ExpenseFormData) => {
-    const category = getCategoryById(data.categoryId);
-    if (!category) return;
-    
-    const newExpense: Expense = {
-      ...data,
-      id: generateId(),
-      categoryName: category.name,
-      categoryColor: category.color,
-      isRecurring: data.isRecurring || false,
-      recurringFrequency: data.recurringFrequency,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setExpenses(prev => [...prev, newExpense]);
-  }, [getCategoryById]);
+  const deleteExpense = useCallback(
+    (id: string) =>
+      runMutation(() => send('DELETE', `${ENDPOINTS.expenses}?id=${id}`), 'Gasto eliminado', [
+        ENDPOINTS.expenses,
+      ]),
+    [runMutation],
+  );
 
-  const updateExpense = useCallback((id: string, data: ExpenseFormData) => {
-    const category = getCategoryById(data.categoryId);
-    if (!category) return;
-    
-    setExpenses(prev => prev.map(e => e.id === id ? {
-      ...e,
-      ...data,
-      categoryName: category.name,
-      categoryColor: category.color,
-      updatedAt: new Date(),
-    } : e));
-  }, [getCategoryById]);
+  const addDebt = useCallback(
+    (data: DebtFormData) =>
+      runMutation(() => send('POST', ENDPOINTS.debts, data), 'Deuda registrada', [ENDPOINTS.debts]),
+    [runMutation],
+  );
 
-  const deleteExpense = useCallback((id: string) => {
-    setExpenses(prev => prev.filter(e => e.id !== id));
-  }, []);
+  const updateDebt = useCallback(
+    (id: string, data: DebtFormData) =>
+      runMutation(
+        () => send('PUT', ENDPOINTS.debts, { id, ...data }),
+        'Deuda actualizada',
+        [ENDPOINTS.debts],
+      ),
+    [runMutation],
+  );
 
-  const addDebt = useCallback((data: DebtFormData) => {
-    const newDebt: Debt = {
-      ...data,
-      id: generateId(),
-      paidAmount: 0,
-      status: 'active',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setDebts(prev => [...prev, newDebt]);
-  }, []);
+  const deleteDebt = useCallback(
+    (id: string) =>
+      runMutation(() => send('DELETE', `${ENDPOINTS.debts}?id=${id}`), 'Deuda eliminada', [
+        ENDPOINTS.debts,
+      ]),
+    [runMutation],
+  );
 
-  const updateDebt = useCallback((id: string, data: DebtFormData) => {
-    setDebts(prev => prev.map(d => d.id === id ? {
-      ...d,
-      ...data,
-      updatedAt: new Date(),
-    } : d));
-  }, []);
+  const addDebtPayment = useCallback(
+    (debtId: string, amount: number, notes?: string) =>
+      runMutation(
+        () => send('POST', ENDPOINTS.debtPayments, { debtId, amount, notes }),
+        'Pago registrado',
+        [ENDPOINTS.debts],
+      ),
+    [runMutation],
+  );
 
-  const deleteDebt = useCallback((id: string) => {
-    setDebts(prev => prev.filter(d => d.id !== id));
-  }, []);
+  const addSavingsGoal = useCallback(
+    (data: SavingsGoalFormData) =>
+      runMutation(() => send('POST', ENDPOINTS.savingsGoals, data), 'Meta creada', [
+        ENDPOINTS.savingsGoals,
+      ]),
+    [runMutation],
+  );
 
-  const addDebtPayment = useCallback((debtId: string, amount: number, notes?: string) => {
-    setDebts(prev => prev.map(d => {
-      if (d.id !== debtId) return d;
-      const newPaidAmount = d.paidAmount + amount;
-      const newCurrentAmount = d.currentAmount - amount;
-      return {
-        ...d,
-        paidAmount: newPaidAmount,
-        currentAmount: Math.max(0, newCurrentAmount),
-        status: newCurrentAmount <= 0 ? 'paid' : d.status,
-        updatedAt: new Date(),
-      };
-    }));
+  const updateSavingsGoal = useCallback(
+    (id: string, data: Partial<SavingsGoalFormData>) =>
+      runMutation(
+        () => send('PUT', ENDPOINTS.savingsGoals, { id, ...data }),
+        'Meta actualizada',
+        [ENDPOINTS.savingsGoals],
+      ),
+    [runMutation],
+  );
 
-    const payment: DebtPayment = {
-      id: generateId(),
-      debtId,
-      amount,
-      date: new Date(),
-      notes,
-      createdAt: new Date(),
-    };
-  }, []);
+  const deleteSavingsGoal = useCallback(
+    (id: string) =>
+      runMutation(
+        () => send('DELETE', `${ENDPOINTS.savingsGoals}?id=${id}`),
+        'Meta eliminada',
+        [ENDPOINTS.savingsGoals],
+      ),
+    [runMutation],
+  );
 
-  const addSavingsGoal = useCallback((data: SavingsGoalFormData) => {
-    const newGoal: SavingsGoal = {
-      ...data,
-      id: generateId(),
-      currentAmount: 0,
-      status: 'in_progress',
-      contributions: [],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setSavingsGoals(prev => [...prev, newGoal]);
-  }, []);
+  const addSavingsContribution = useCallback(
+    (goalId: string, amount: number, notes?: string) =>
+      runMutation(
+        () => send('POST', ENDPOINTS.savingsContributions, { goalId, amount, notes }),
+        'Aportación registrada',
+        [ENDPOINTS.savingsGoals],
+      ),
+    [runMutation],
+  );
 
-  const updateSavingsGoal = useCallback((id: string, data: Partial<SavingsGoalFormData>) => {
-    setSavingsGoals(prev => prev.map(g => g.id === id ? {
-      ...g,
-      ...data,
-      updatedAt: new Date(),
-    } : g));
-  }, []);
+  const addBudget = useCallback(
+    (data: BudgetFormData) =>
+      runMutation(() => send('POST', ENDPOINTS.budgets, data), 'Presupuesto creado', [
+        ENDPOINTS.budgets,
+      ]),
+    [runMutation],
+  );
 
-  const deleteSavingsGoal = useCallback((id: string) => {
-    setSavingsGoals(prev => prev.filter(g => g.id !== id));
-  }, []);
+  const updateBudget = useCallback(
+    (id: string, data: Partial<BudgetFormData>) =>
+      runMutation(
+        () => send('PUT', ENDPOINTS.budgets, { id, ...data }),
+        'Presupuesto actualizado',
+        [ENDPOINTS.budgets],
+      ),
+    [runMutation],
+  );
 
-  const addSavingsContribution = useCallback((goalId: string, amount: number, notes?: string) => {
-    setSavingsGoals(prev => prev.map(g => {
-      if (g.id !== goalId) return g;
-      const contribution: SavingsContribution = {
-        id: generateId(),
-        goalId,
-        amount,
-        date: new Date(),
-        notes,
-        createdAt: new Date(),
-      };
-      return {
-        ...g,
-        currentAmount: g.currentAmount + amount,
-        status: g.currentAmount + amount >= g.targetAmount ? 'completed' : g.status,
-        contributions: [...g.contributions, contribution],
-        updatedAt: new Date(),
-      };
-    }));
-  }, []);
+  const deleteBudget = useCallback(
+    (id: string) =>
+      runMutation(() => send('DELETE', `${ENDPOINTS.budgets}?id=${id}`), 'Presupuesto eliminado', [
+        ENDPOINTS.budgets,
+      ]),
+    [runMutation],
+  );
 
-  const addBudget = useCallback((data: BudgetFormData) => {
-    const category = getCategoryById(data.categoryId);
-    if (!category) return;
-    
-    const endDate = new Date(data.startDate);
-    if (data.period === 'weekly') endDate.setDate(endDate.getDate() + 7);
-    else if (data.period === 'monthly') endDate.setMonth(endDate.getMonth() + 1);
-    else endDate.setFullYear(endDate.getFullYear() + 1);
-    
-    const newBudget: Budget = {
-      ...data,
-      id: generateId(),
-      categoryName: category.name,
-      categoryColor: category.color,
-      endDate,
-      spent: 0,
-      isActive: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setBudgets(prev => [...prev, newBudget]);
-  }, [getCategoryById]);
+  const getCategoryById = useCallback(
+    (id: string) => categories.find((c) => c.id === id),
+    [categories],
+  );
 
-  const updateBudget = useCallback((id: string, data: Partial<BudgetFormData>) => {
-    setBudgets(prev => prev.map(b => b.id === id ? {
-      ...b,
-      ...data,
-      updatedAt: new Date(),
-    } : b));
-  }, []);
+  const getTotalIncome = useCallback(
+    () => incomes.reduce((sum, i) => sum + Number(i.amount), 0),
+    [incomes],
+  );
 
-  const deleteBudget = useCallback((id: string) => {
-    setBudgets(prev => prev.filter(b => b.id !== id));
-  }, []);
+  const getTotalExpenses = useCallback(
+    () => expenses.reduce((sum, e) => sum + Number(e.amount), 0),
+    [expenses],
+  );
 
-  const getIncomesByMonth = useCallback((month: Date) => {
-    return incomes.filter(i => {
-      const incomeDate = new Date(i.date);
-      return incomeDate.getMonth() === month.getMonth() && incomeDate.getFullYear() === month.getFullYear();
-    });
-  }, [incomes]);
-
-  const getExpensesByMonth = useCallback((month: Date) => {
-    return expenses.filter(e => {
-      const expenseDate = new Date(e.date);
-      return expenseDate.getMonth() === month.getMonth() && expenseDate.getFullYear() === month.getFullYear();
-    });
-  }, [expenses]);
-
-  const getTotalIncome = useCallback(() => {
-    return incomes.reduce((sum, i) => sum + i.amount, 0);
-  }, [incomes]);
-
-  const getTotalExpenses = useCallback(() => {
-    return expenses.reduce((sum, e) => sum + e.amount, 0);
-  }, [expenses]);
-
-  const getBalance = useCallback(() => {
-    return getTotalIncome() - getTotalExpenses();
-  }, [getTotalIncome, getTotalExpenses]);
+  const getBalance = useCallback(
+    () => getTotalIncome() - getTotalExpenses(),
+    [getTotalIncome, getTotalExpenses],
+  );
 
   const getMonthlyData = useCallback(() => {
-    const months: { month: string; income: number; expenses: number }[] = [];
+    const data: Record<string, { income: number; expenses: number }> = {};
     const now = new Date();
-    
     for (let i = 5; i >= 0; i--) {
-      const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      const monthName = format(date, 'MMM');
-      
-      const monthIncomes = incomes
-        .filter(inc => {
-          const d = new Date(inc.date);
-          return d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear();
-        })
-        .reduce((sum, inc) => sum + inc.amount, 0);
-      
-      const monthExpenses = expenses
-        .filter(exp => {
-          const d = new Date(exp.date);
-          return d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear();
-        })
-        .reduce((sum, exp) => sum + exp.amount, 0);
-      
-      months.push({ month: monthName, income: monthIncomes, expenses: monthExpenses });
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      data[format(d, 'MMM')] = { income: 0, expenses: 0 };
     }
-    
-    return months;
+    for (const i of incomes) {
+      const key = format(new Date(i.date), 'MMM');
+      if (data[key]) data[key].income += Number(i.amount);
+    }
+    for (const e of expenses) {
+      const key = format(new Date(e.date), 'MMM');
+      if (data[key]) data[key].expenses += Number(e.amount);
+    }
+    return Object.entries(data).map(([month, v]) => ({ month, ...v }));
   }, [incomes, expenses]);
 
-  return (
-    <FinanceContext.Provider value={{
-      categories,
-      incomes,
-      expenses,
-      debts,
-      savingsGoals,
-      budgets,
-      addCategory,
-      updateCategory,
-      deleteCategory,
-      addIncome,
-      updateIncome,
-      deleteIncome,
-      addExpense,
-      updateExpense,
-      deleteExpense,
-      addDebt,
-      updateDebt,
-      deleteDebt,
-      addDebtPayment,
-      addSavingsGoal,
-      updateSavingsGoal,
-      deleteSavingsGoal,
-      addSavingsContribution,
-      addBudget,
-      updateBudget,
-      deleteBudget,
-      getCategoryById,
-      getIncomesByMonth,
-      getExpensesByMonth,
-      getTotalIncome,
-      getTotalExpenses,
-      getBalance,
-      getMonthlyData,
-    }}>
-      {children}
-    </FinanceContext.Provider>
-  );
+  const isLoading =
+    categoriesSwr.isLoading ||
+    incomesSwr.isLoading ||
+    expensesSwr.isLoading ||
+    debtsSwr.isLoading ||
+    savingsSwr.isLoading ||
+    budgetsSwr.isLoading;
+
+  const value: FinanceContextType = {
+    categories,
+    incomes,
+    expenses,
+    debts,
+    savingsGoals,
+    budgets,
+    isLoading,
+    addCategory,
+    updateCategory,
+    deleteCategory,
+    addIncome,
+    updateIncome,
+    deleteIncome,
+    addExpense,
+    updateExpense,
+    deleteExpense,
+    addDebt,
+    updateDebt,
+    deleteDebt,
+    addDebtPayment,
+    addSavingsGoal,
+    updateSavingsGoal,
+    deleteSavingsGoal,
+    addSavingsContribution,
+    addBudget,
+    updateBudget,
+    deleteBudget,
+    getCategoryById,
+    getTotalIncome,
+    getTotalExpenses,
+    getBalance,
+    getMonthlyData,
+  };
+
+  return <FinanceContext.Provider value={value}>{children}</FinanceContext.Provider>;
 };
 
-export const useFinance = () => {
-  const context = useContext(FinanceContext);
-  if (!context) {
-    throw new Error('useFinance must be used within a FinanceProvider');
-  }
-  return context;
+export const useFinance = (): FinanceContextType => {
+  const ctx = useContext(FinanceContext);
+  if (!ctx) throw new Error('useFinance debe usarse dentro de FinanceProvider');
+  return ctx;
 };

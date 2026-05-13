@@ -1,72 +1,76 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { handleError, json, parseJson, requireId, requireUser } from '@/lib/api-utils';
+import { expenseCreateSchema, expenseUpdateSchema } from '@/lib/finance-schemas';
 
 export async function GET() {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
   try {
     const expenses = await prisma.expense.findMany({
+      where: { userId: user.userId },
+      include: { category: true },
       orderBy: { date: 'desc' },
     });
-    return NextResponse.json(expenses);
+    return json(expenses);
   } catch (error) {
-    console.error('Error fetching expenses:', error);
-    return NextResponse.json({ error: 'Error fetching expenses' }, { status: 500 });
+    return handleError('GET /api/finance/expenses', error);
   }
 }
 
 export async function POST(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, expenseCreateSchema);
+  if ('error' in parsed) return parsed.error;
   try {
-    const body = await request.json();
-    const expense = await prisma.expense.create({
-      data: {
-        amount: Number(body.amount),
-        description: body.description,
-        categoryId: body.categoryId,
-        categoryName: body.categoryName,
-        categoryColor: body.categoryColor,
-        date: new Date(body.date),
-        isRecurring: body.isRecurring || false,
-        recurringFrequency: body.recurringFrequency,
-      },
+    const category = await prisma.category.findFirst({
+      where: { id: parsed.data.categoryId, userId: user.userId },
     });
-    return NextResponse.json(expense);
+    if (!category) return json({ error: 'Categoría inválida' }, { status: 400 });
+    const expense = await prisma.expense.create({
+      data: { ...parsed.data, userId: user.userId },
+      include: { category: true },
+    });
+    return json(expense, { status: 201 });
   } catch (error) {
-    console.error('Error creating expense:', error);
-    return NextResponse.json({ error: 'Error creating expense' }, { status: 500 });
+    return handleError('POST /api/finance/expenses', error);
   }
 }
 
 export async function PUT(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, expenseUpdateSchema);
+  if ('error' in parsed) return parsed.error;
+  const { id, ...data } = parsed.data;
   try {
-    const body = await request.json();
-    const { id, ...data } = body;
-    const expense = await prisma.expense.update({
-      where: { id },
-      data: {
-        ...data,
-        amount: Number(data.amount),
-        date: new Date(data.date),
-      },
+    const result = await prisma.expense.updateMany({
+      where: { id, userId: user.userId },
+      data,
     });
-    return NextResponse.json(expense);
+    if (result.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    const expense = await prisma.expense.findUnique({
+      where: { id },
+      include: { category: true },
+    });
+    return json(expense);
   } catch (error) {
-    console.error('Error updating expense:', error);
-    return NextResponse.json({ error: 'Error updating expense' }, { status: 500 });
+    return handleError('PUT /api/finance/expenses', error);
   }
 }
 
 export async function DELETE(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const result = requireId(request);
+  if ('error' in result) return result.error;
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    if (!id) {
-      return NextResponse.json({ error: 'Expense ID required' }, { status: 400 });
-    }
-    await prisma.expense.delete({
-      where: { id },
+    const deleted = await prisma.expense.deleteMany({
+      where: { id: result.id, userId: user.userId },
     });
-    return NextResponse.json({ success: true });
+    if (deleted.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    return json({ success: true });
   } catch (error) {
-    console.error('Error deleting expense:', error);
-    return NextResponse.json({ error: 'Error deleting expense' }, { status: 500 });
+    return handleError('DELETE /api/finance/expenses', error);
   }
 }

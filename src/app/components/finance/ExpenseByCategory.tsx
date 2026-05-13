@@ -10,19 +10,20 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const ExpenseByCategory: React.FC = () => {
-  const { expenses, categories } = useFinance();
+  const { expenses } = useFinance();
 
   const expensesByCategory = expenses.reduce((acc, expense) => {
+    const amount = Number(expense.amount);
     const existing = acc.find(item => item.categoryId === expense.categoryId);
     if (existing) {
-      existing.total += expense.amount;
+      existing.total += amount;
       existing.count += 1;
     } else {
       acc.push({
         categoryId: expense.categoryId,
-        categoryName: expense.categoryName,
-        categoryColor: expense.categoryColor,
-        total: expense.amount,
+        categoryName: expense.category?.name ?? 'Sin categoría',
+        categoryColor: expense.category?.color ?? '#6b7280',
+        total: amount,
         count: 1,
       });
     }

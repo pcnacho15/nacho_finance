@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { handleError, json, requireUser } from '@/lib/api-utils';
 
 const DEFAULT_INCOME_CATEGORIES = [
   { name: 'Salario', type: 'income', color: '#22c55e', icon: 'solar:money-bag-bold' },
@@ -25,21 +25,22 @@ const DEFAULT_EXPENSE_CATEGORIES = [
 ];
 
 export async function GET() {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
   try {
-    const existingCategories = await prisma.category.findMany();
-    
-    if (existingCategories.length === 0) {
-      const allCategories = [...DEFAULT_INCOME_CATEGORIES, ...DEFAULT_EXPENSE_CATEGORIES];
+    const existing = await prisma.category.findMany({ where: { userId: user.userId } });
+    if (existing.length === 0) {
       await prisma.category.createMany({
-        data: allCategories,
+        data: [...DEFAULT_INCOME_CATEGORIES, ...DEFAULT_EXPENSE_CATEGORIES].map((c) => ({
+          ...c,
+          userId: user.userId,
+        })),
       });
-      const categories = await prisma.category.findMany();
-      return NextResponse.json({ initialized: true, categories });
+      const categories = await prisma.category.findMany({ where: { userId: user.userId } });
+      return json({ initialized: true, categories });
     }
-    
-    return NextResponse.json({ initialized: false, categories: existingCategories });
+    return json({ initialized: false, categories: existing });
   } catch (error) {
-    console.error('Error initializing categories:', error);
-    return NextResponse.json({ error: 'Error initializing categories' }, { status: 500 });
+    return handleError('GET /api/finance/init', error);
   }
 }

@@ -1,16 +1,17 @@
+import type { Category } from './category';
+
 export interface Budget {
   id: string;
   categoryId: string;
-  categoryName: string;
-  categoryColor: string;
+  category?: Category;
   amount: number;
   spent: number;
   period: 'weekly' | 'monthly' | 'yearly';
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | string;
+  endDate: Date | string;
   isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface BudgetFormData {

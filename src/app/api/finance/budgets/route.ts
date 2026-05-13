@@ -1,75 +1,76 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { handleError, json, parseJson, requireId, requireUser } from '@/lib/api-utils';
+import { budgetCreateSchema, budgetUpdateSchema } from '@/lib/finance-schemas';
 
 export async function GET() {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
   try {
     const budgets = await prisma.budget.findMany({
+      where: { userId: user.userId },
+      include: { category: true },
       orderBy: { createdAt: 'desc' },
     });
-    return NextResponse.json(budgets);
+    return json(budgets);
   } catch (error) {
-    console.error('Error fetching budgets:', error);
-    return NextResponse.json({ error: 'Error fetching budgets' }, { status: 500 });
+    return handleError('GET /api/finance/budgets', error);
   }
 }
 
 export async function POST(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, budgetCreateSchema);
+  if ('error' in parsed) return parsed.error;
   try {
-    const body = await request.json();
-    const budget = await prisma.budget.create({
-      data: {
-        categoryId: body.categoryId,
-        categoryName: body.categoryName,
-        categoryColor: body.categoryColor,
-        amount: Number(body.amount),
-        spent: 0,
-        period: body.period,
-        startDate: new Date(body.startDate),
-        endDate: new Date(body.endDate),
-        isActive: true,
-      },
+    const category = await prisma.category.findFirst({
+      where: { id: parsed.data.categoryId, userId: user.userId },
     });
-    return NextResponse.json(budget);
+    if (!category) return json({ error: 'Categoría inválida' }, { status: 400 });
+    const budget = await prisma.budget.create({
+      data: { ...parsed.data, userId: user.userId },
+      include: { category: true },
+    });
+    return json(budget, { status: 201 });
   } catch (error) {
-    console.error('Error creating budget:', error);
-    return NextResponse.json({ error: 'Error creating budget' }, { status: 500 });
+    return handleError('POST /api/finance/budgets', error);
   }
 }
 
 export async function PUT(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, budgetUpdateSchema);
+  if ('error' in parsed) return parsed.error;
+  const { id, ...data } = parsed.data;
   try {
-    const body = await request.json();
-    const { id, ...data } = body;
-    const budget = await prisma.budget.update({
-      where: { id },
-      data: {
-        ...data,
-        amount: data.amount ? Number(data.amount) : undefined,
-        spent: data.spent ? Number(data.spent) : undefined,
-        startDate: data.startDate ? new Date(data.startDate) : undefined,
-        endDate: data.endDate ? new Date(data.endDate) : undefined,
-      },
+    const result = await prisma.budget.updateMany({
+      where: { id, userId: user.userId },
+      data,
     });
-    return NextResponse.json(budget);
+    if (result.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    const budget = await prisma.budget.findUnique({
+      where: { id },
+      include: { category: true },
+    });
+    return json(budget);
   } catch (error) {
-    console.error('Error updating budget:', error);
-    return NextResponse.json({ error: 'Error updating budget' }, { status: 500 });
+    return handleError('PUT /api/finance/budgets', error);
   }
 }
 
 export async function DELETE(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const result = requireId(request);
+  if ('error' in result) return result.error;
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    if (!id) {
-      return NextResponse.json({ error: 'Budget ID required' }, { status: 400 });
-    }
-    await prisma.budget.delete({
-      where: { id },
+    const deleted = await prisma.budget.deleteMany({
+      where: { id: result.id, userId: user.userId },
     });
-    return NextResponse.json({ success: true });
+    if (deleted.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    return json({ success: true });
   } catch (error) {
-    console.error('Error deleting budget:', error);
-    return NextResponse.json({ error: 'Error deleting budget' }, { status: 500 });
+    return handleError('DELETE /api/finance/budgets', error);
   }
 }

@@ -4,8 +4,8 @@ export interface Category {
   type: 'income' | 'expense';
   color: string;
   icon: string;
-  description?: string;
-  createdAt: Date;
+  description?: string | null;
+  createdAt: Date | string;
 }
 
 export interface CategoryFormData {

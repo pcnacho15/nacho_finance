@@ -1,65 +1,71 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { handleError, json, parseJson, requireId, requireUser } from '@/lib/api-utils';
+import { categoryCreateSchema, categoryUpdateSchema } from '@/lib/finance-schemas';
 
 export async function GET() {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
   try {
     const categories = await prisma.category.findMany({
+      where: { userId: user.userId },
       orderBy: { createdAt: 'asc' },
     });
-    return NextResponse.json(categories);
+    return json(categories);
   } catch (error) {
-    console.error('Error fetching categories:', error);
-    return NextResponse.json({ error: 'Error fetching categories' }, { status: 500 });
+    return handleError('GET /api/finance/categories', error);
   }
 }
 
 export async function POST(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, categoryCreateSchema);
+  if ('error' in parsed) return parsed.error;
   try {
-    const body = await request.json();
     const category = await prisma.category.create({
-      data: {
-        name: body.name,
-        type: body.type,
-        color: body.color,
-        icon: body.icon,
-        description: body.description,
-      },
+      data: { ...parsed.data, userId: user.userId },
     });
-    return NextResponse.json(category);
+    return json(category, { status: 201 });
   } catch (error) {
-    console.error('Error creating category:', error);
-    return NextResponse.json({ error: 'Error creating category' }, { status: 500 });
+    return handleError('POST /api/finance/categories', error);
   }
 }
 
 export async function PUT(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, categoryUpdateSchema);
+  if ('error' in parsed) return parsed.error;
+  const { id, ...data } = parsed.data;
   try {
-    const body = await request.json();
-    const { id, ...data } = body;
-    const category = await prisma.category.update({
-      where: { id },
+    const result = await prisma.category.updateMany({
+      where: { id, userId: user.userId },
       data,
     });
-    return NextResponse.json(category);
+    if (result.count === 0) {
+      return json({ error: 'No encontrado' }, { status: 404 });
+    }
+    const category = await prisma.category.findUnique({ where: { id } });
+    return json(category);
   } catch (error) {
-    console.error('Error updating category:', error);
-    return NextResponse.json({ error: 'Error updating category' }, { status: 500 });
+    return handleError('PUT /api/finance/categories', error);
   }
 }
 
 export async function DELETE(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const result = requireId(request);
+  if ('error' in result) return result.error;
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    if (!id) {
-      return NextResponse.json({ error: 'Category ID required' }, { status: 400 });
-    }
-    await prisma.category.delete({
-      where: { id },
+    const deleted = await prisma.category.deleteMany({
+      where: { id: result.id, userId: user.userId },
     });
-    return NextResponse.json({ success: true });
+    if (deleted.count === 0) {
+      return json({ error: 'No encontrado' }, { status: 404 });
+    }
+    return json({ success: true });
   } catch (error) {
-    console.error('Error deleting category:', error);
-    return NextResponse.json({ error: 'Error deleting category' }, { status: 500 });
+    return handleError('DELETE /api/finance/categories', error);
   }
 }

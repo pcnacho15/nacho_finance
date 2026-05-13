@@ -48,7 +48,7 @@ const IncomeModule: React.FC = () => {
     const income = incomes.find(i => i.id === id);
     if (income) {
       setFormData({
-        amount: income.amount,
+        amount: Number(income.amount),
         description: income.description,
         categoryId: income.categoryId,
         date: new Date(income.date),
@@ -64,7 +64,7 @@ const IncomeModule: React.FC = () => {
     }
   };
 
-  const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
+  const totalIncome = incomes.reduce((sum, i) => sum + Number(i.amount), 0);
 
   return (
     <div className="space-y-6">
@@ -110,13 +110,13 @@ const IncomeModule: React.FC = () => {
                 <TableRow key={income.id}>
                   <TableCell className="font-medium">{income.description}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" style={{ borderColor: income.categoryColor, color: income.categoryColor }}>
-                      {income.categoryName}
+                    <Badge variant="outline" style={{ borderColor: income.category?.color, color: income.category?.color }}>
+                      {income.category?.name ?? 'Sin categoría'}
                     </Badge>
                   </TableCell>
                   <TableCell>{format(new Date(income.date), 'dd MMM yyyy')}</TableCell>
                   <TableCell className="text-right font-semibold text-success">
-                    +${income.amount.toLocaleString()}
+                    +${Number(income.amount).toLocaleString()}
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">

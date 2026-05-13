@@ -1,13 +1,14 @@
+import type { Category } from './category';
+
 export interface Income {
   id: string;
   amount: number;
   description: string;
   categoryId: string;
-  categoryName: string;
-  categoryColor: string;
-  date: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  category?: Category;
+  date: Date | string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface IncomeFormData {

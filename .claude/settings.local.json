@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm exec *)",
+      "Bash(pnpm add *)",
+      "Bash(pnpm build *)",
+      "Bash(pnpm dlx *)",
+      "Bash(node *)",
+      "Bash(rm -f \"src/app/\\(DashboardLayout\\)/page.tsx\")",
+      "Bash(rm -rf \"src/app/auth\")",
+      "Bash(rm -f \"src/app/components/auth/Login.tsx\" \"src/app/components/auth/Register.tsx\")",
+      "Bash(pnpm dev *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{redirect_url}\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w \"GET /finance: %{http_code} → %{redirect_url}\\\\n\" -L --max-redirs 0 http://localhost:3001/finance)",
+      "Bash(curl -s -o /dev/null -w \"GET /api/finance/categories: %{http_code} → %{redirect_url}\\\\n\" http://localhost:3001/api/finance/categories)",
+      "Bash(curl -s -o /dev/null -w \"GET /api/auth/providers: %{http_code}\\\\n\" http://localhost:3001/api/auth/providers)",
+      "Bash(curl -s -w \"Body: \" http://localhost:3001/api/finance/categories)",
+      "Bash(curl -s -o /dev/null -w \"GET /finance: %{http_code}\\\\n\" --max-redirs 0 http://localhost:3001/finance)",
+      "Bash(curl -s -o /dev/null -w \"GET /: %{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w \"GET /: %{http_code}\\\\n\" http://localhost:3002/)",
+      "Bash(curl -s -o /dev/null -w \"GET /finance: %{http_code}\\\\n\" --max-redirs 0 http://localhost:3002/finance)",
+      "Bash(curl -s -w \"GET /api/finance/categories body: \" http://localhost:3002/api/finance/categories)"
+    ]
+  }
+}

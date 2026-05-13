@@ -4,6 +4,8 @@ import { DM_Sans } from 'next/font/google'
 import './css/globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import ServiceWorkerRegister from '@/app/components/service-worker/ServiceWorkerRegister'
+import { AuthProviders } from '@/app/components/auth/Providers'
+import { Toaster } from 'sonner'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -12,15 +14,15 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Nacho - Finance App',
-  description: 'Finance App',
+  title: 'Nacho Finance',
+  description: 'Gestión personal de finanzas',
 }
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
-}) {  
+}) {
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
@@ -34,8 +36,11 @@ export default function RootLayout({
           defaultTheme='system'
           enableSystem
           disableTransitionOnChange>
-          <ServiceWorkerRegister />
-          {children}
+          <AuthProviders>
+            <ServiceWorkerRegister />
+            {children}
+            <Toaster richColors position="top-right" />
+          </AuthProviders>
         </ThemeProvider>
       </body>
     </html>

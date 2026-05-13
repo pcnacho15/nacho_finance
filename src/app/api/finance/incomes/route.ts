@@ -1,70 +1,76 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { handleError, json, parseJson, requireId, requireUser } from '@/lib/api-utils';
+import { incomeCreateSchema, incomeUpdateSchema } from '@/lib/finance-schemas';
 
 export async function GET() {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
   try {
     const incomes = await prisma.income.findMany({
+      where: { userId: user.userId },
+      include: { category: true },
       orderBy: { date: 'desc' },
     });
-    return NextResponse.json(incomes);
+    return json(incomes);
   } catch (error) {
-    console.error('Error fetching incomes:', error);
-    return NextResponse.json({ error: 'Error fetching incomes' }, { status: 500 });
+    return handleError('GET /api/finance/incomes', error);
   }
 }
 
 export async function POST(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, incomeCreateSchema);
+  if ('error' in parsed) return parsed.error;
   try {
-    const body = await request.json();
-    const income = await prisma.income.create({
-      data: {
-        amount: Number(body.amount),
-        description: body.description,
-        categoryId: body.categoryId,
-        categoryName: body.categoryName,
-        categoryColor: body.categoryColor,
-        date: new Date(body.date),
-      },
+    const category = await prisma.category.findFirst({
+      where: { id: parsed.data.categoryId, userId: user.userId },
     });
-    return NextResponse.json(income);
+    if (!category) return json({ error: 'Categoría inválida' }, { status: 400 });
+    const income = await prisma.income.create({
+      data: { ...parsed.data, userId: user.userId },
+      include: { category: true },
+    });
+    return json(income, { status: 201 });
   } catch (error) {
-    console.error('Error creating income:', error);
-    return NextResponse.json({ error: 'Error creating income' }, { status: 500 });
+    return handleError('POST /api/finance/incomes', error);
   }
 }
 
 export async function PUT(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, incomeUpdateSchema);
+  if ('error' in parsed) return parsed.error;
+  const { id, ...data } = parsed.data;
   try {
-    const body = await request.json();
-    const { id, ...data } = body;
-    const income = await prisma.income.update({
-      where: { id },
-      data: {
-        ...data,
-        amount: Number(data.amount),
-        date: new Date(data.date),
-      },
+    const result = await prisma.income.updateMany({
+      where: { id, userId: user.userId },
+      data,
     });
-    return NextResponse.json(income);
+    if (result.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    const income = await prisma.income.findUnique({
+      where: { id },
+      include: { category: true },
+    });
+    return json(income);
   } catch (error) {
-    console.error('Error updating income:', error);
-    return NextResponse.json({ error: 'Error updating income' }, { status: 500 });
+    return handleError('PUT /api/finance/incomes', error);
   }
 }
 
 export async function DELETE(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const result = requireId(request);
+  if ('error' in result) return result.error;
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    if (!id) {
-      return NextResponse.json({ error: 'Income ID required' }, { status: 400 });
-    }
-    await prisma.income.delete({
-      where: { id },
+    const deleted = await prisma.income.deleteMany({
+      where: { id: result.id, userId: user.userId },
     });
-    return NextResponse.json({ success: true });
+    if (deleted.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    return json({ success: true });
   } catch (error) {
-    console.error('Error deleting income:', error);
-    return NextResponse.json({ error: 'Error deleting income' }, { status: 500 });
+    return handleError('DELETE /api/finance/incomes', error);
   }
 }

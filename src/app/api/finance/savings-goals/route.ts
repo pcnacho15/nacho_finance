@@ -1,78 +1,68 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { handleError, json, parseJson, requireId, requireUser } from '@/lib/api-utils';
+import { savingsGoalCreateSchema, savingsGoalUpdateSchema } from '@/lib/finance-schemas';
 
 export async function GET() {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
   try {
     const goals = await prisma.savingsGoal.findMany({
-      include: {
-        contributions: {
-          orderBy: { date: 'desc' },
-        },
-      },
+      where: { userId: user.userId },
+      include: { contributions: { orderBy: { date: 'desc' } } },
       orderBy: { createdAt: 'desc' },
     });
-    return NextResponse.json(goals);
+    return json(goals);
   } catch (error) {
-    console.error('Error fetching savings goals:', error);
-    return NextResponse.json({ error: 'Error fetching savings goals' }, { status: 500 });
+    return handleError('GET /api/finance/savings-goals', error);
   }
 }
 
 export async function POST(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, savingsGoalCreateSchema);
+  if ('error' in parsed) return parsed.error;
   try {
-    const body = await request.json();
     const goal = await prisma.savingsGoal.create({
-      data: {
-        name: body.name,
-        targetAmount: Number(body.targetAmount),
-        currentAmount: 0,
-        targetDate: new Date(body.targetDate),
-        status: 'in_progress',
-        icon: body.icon,
-        color: body.color,
-        description: body.description,
-      },
+      data: { ...parsed.data, userId: user.userId },
     });
-    return NextResponse.json(goal);
+    return json(goal, { status: 201 });
   } catch (error) {
-    console.error('Error creating savings goal:', error);
-    return NextResponse.json({ error: 'Error creating savings goal' }, { status: 500 });
+    return handleError('POST /api/finance/savings-goals', error);
   }
 }
 
 export async function PUT(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const parsed = await parseJson(request, savingsGoalUpdateSchema);
+  if ('error' in parsed) return parsed.error;
+  const { id, ...data } = parsed.data;
   try {
-    const body = await request.json();
-    const { id, ...data } = body;
-    const goal = await prisma.savingsGoal.update({
-      where: { id },
-      data: {
-        ...data,
-        targetAmount: data.targetAmount ? Number(data.targetAmount) : undefined,
-        currentAmount: data.currentAmount ? Number(data.currentAmount) : undefined,
-        targetDate: data.targetDate ? new Date(data.targetDate) : undefined,
-      },
+    const result = await prisma.savingsGoal.updateMany({
+      where: { id, userId: user.userId },
+      data,
     });
-    return NextResponse.json(goal);
+    if (result.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    const goal = await prisma.savingsGoal.findUnique({ where: { id } });
+    return json(goal);
   } catch (error) {
-    console.error('Error updating savings goal:', error);
-    return NextResponse.json({ error: 'Error updating savings goal' }, { status: 500 });
+    return handleError('PUT /api/finance/savings-goals', error);
   }
 }
 
 export async function DELETE(request: Request) {
+  const user = await requireUser();
+  if ('error' in user) return user.error;
+  const result = requireId(request);
+  if ('error' in result) return result.error;
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-    if (!id) {
-      return NextResponse.json({ error: 'Goal ID required' }, { status: 400 });
-    }
-    await prisma.savingsGoal.delete({
-      where: { id },
+    const deleted = await prisma.savingsGoal.deleteMany({
+      where: { id: result.id, userId: user.userId },
     });
-    return NextResponse.json({ success: true });
+    if (deleted.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
+    return json({ success: true });
   } catch (error) {
-    console.error('Error deleting savings goal:', error);
-    return NextResponse.json({ error: 'Error deleting savings goal' }, { status: 500 });
+    return handleError('DELETE /api/finance/savings-goals', error);
   }
 }
