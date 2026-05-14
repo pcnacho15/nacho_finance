@@ -62,6 +62,11 @@ export const ModelName = {
   DebtPayment: 'DebtPayment',
   SavingsGoal: 'SavingsGoal',
   SavingsContribution: 'SavingsContribution',
+  Wallet: 'Wallet',
+  WalletTransaction: 'WalletTransaction',
+  ChatConversation: 'ChatConversation',
+  ChatMessage: 'ChatMessage',
+  ChatBlock: 'ChatBlock',
   Budget: 'Budget'
 } as const
 
@@ -88,6 +93,7 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   image: 'image',
   passwordHash: 'passwordHash',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -239,6 +245,70 @@ export const SavingsContributionScalarFieldEnum = {
 } as const
 
 export type SavingsContributionScalarFieldEnum = (typeof SavingsContributionScalarFieldEnum)[keyof typeof SavingsContributionScalarFieldEnum]
+
+
+export const WalletScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  type: 'type',
+  asset: 'asset',
+  network: 'network',
+  notes: 'notes',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
+
+
+export const WalletTransactionScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  type: 'type',
+  amount: 'amount',
+  pricePerUnit: 'pricePerUnit',
+  date: 'date',
+  counterparty: 'counterparty',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFieldEnum)[keyof typeof WalletTransactionScalarFieldEnum]
+
+
+export const ChatConversationScalarFieldEnum = {
+  id: 'id',
+  userAId: 'userAId',
+  userBId: 'userBId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatConversationScalarFieldEnum = (typeof ChatConversationScalarFieldEnum)[keyof typeof ChatConversationScalarFieldEnum]
+
+
+export const ChatMessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  body: 'body',
+  createdAt: 'createdAt',
+  readAt: 'readAt'
+} as const
+
+export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
+
+
+export const ChatBlockScalarFieldEnum = {
+  id: 'id',
+  blockerId: 'blockerId',
+  blockedId: 'blockedId',
+  createdAt: 'createdAt'
+} as const
+
+export type ChatBlockScalarFieldEnum = (typeof ChatBlockScalarFieldEnum)[keyof typeof ChatBlockScalarFieldEnum]
 
 
 export const BudgetScalarFieldEnum = {

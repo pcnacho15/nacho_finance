@@ -14,6 +14,7 @@ model User {
   emailVerified DateTime?
   image         String?
   passwordHash  String?
+  role          String    @default("user")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -25,6 +26,12 @@ model User {
   debts        Debt[]
   savingsGoals SavingsGoal[]
   budgets      Budget[]
+  wallets      Wallet[]
+  chatsAsA     ChatConversation[] @relation("ChatUserA")
+  chatsAsB     ChatConversation[] @relation("ChatUserB")
+  chatMessages ChatMessage[]      @relation("ChatSender")
+  blocksMade   ChatBlock[]        @relation("Blocker")
+  blocksGot    ChatBlock[]        @relation("Blocked")
 }
 
 model Account {
@@ -191,6 +198,86 @@ model SavingsContribution {
   goal SavingsGoal @relation(fields: [goalId], references: [id], onDelete: Cascade)
 
   @@index([goalId])
+}
+
+model Wallet {
+  id         String    @id @default(cuid())
+  userId     String
+  name       String
+  type       String    @default("exchange")
+  asset      String    @default("USDT")
+  network    String?
+  notes      String?
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions WalletTransaction[]
+
+  @@index([userId])
+}
+
+model WalletTransaction {
+  id           String   @id @default(cuid())
+  walletId     String
+  type         String
+  amount       Decimal  @db.Decimal(20, 8)
+  pricePerUnit Decimal? @db.Decimal(20, 8)
+  date         DateTime
+  counterparty String?
+  notes        String?
+  createdAt    DateTime @default(now())
+
+  wallet Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@index([walletId])
+  @@index([date])
+}
+
+model ChatConversation {
+  id        String   @id @default(cuid())
+  userAId   String
+  userBId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userA    User          @relation("ChatUserA", fields: [userAId], references: [id], onDelete: Cascade)
+  userB    User          @relation("ChatUserB", fields: [userBId], references: [id], onDelete: Cascade)
+  messages ChatMessage[]
+
+  @@unique([userAId, userBId])
+  @@index([userAId])
+  @@index([userBId])
+}
+
+model ChatMessage {
+  id             String    @id @default(cuid())
+  conversationId String
+  senderId       String
+  body           String
+  createdAt      DateTime  @default(now())
+  readAt         DateTime?
+
+  conversation ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User             @relation("ChatSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+  @@index([senderId])
+}
+
+model ChatBlock {
+  id        String   @id @default(cuid())
+  blockerId String
+  blockedId String
+  createdAt DateTime @default(now())
+
+  blocker User @relation("Blocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked User @relation("Blocked", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  @@unique([blockerId, blockedId])
+  @@index([blockerId])
+  @@index([blockedId])
 }
 
 model Budget {

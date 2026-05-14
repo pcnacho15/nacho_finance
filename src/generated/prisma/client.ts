@@ -97,6 +97,31 @@ export type SavingsGoal = Prisma.SavingsGoalModel
  */
 export type SavingsContribution = Prisma.SavingsContributionModel
 /**
+ * Model Wallet
+ * 
+ */
+export type Wallet = Prisma.WalletModel
+/**
+ * Model WalletTransaction
+ * 
+ */
+export type WalletTransaction = Prisma.WalletTransactionModel
+/**
+ * Model ChatConversation
+ * 
+ */
+export type ChatConversation = Prisma.ChatConversationModel
+/**
+ * Model ChatMessage
+ * 
+ */
+export type ChatMessage = Prisma.ChatMessageModel
+/**
+ * Model ChatBlock
+ * 
+ */
+export type ChatBlock = Prisma.ChatBlockModel
+/**
  * Model Budget
  * 
  */

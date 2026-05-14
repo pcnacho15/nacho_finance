@@ -1,5 +1,6 @@
 import type { NextAuthConfig } from 'next-auth';
 import Google from 'next-auth/providers/google';
+import type { UserRole } from '@/types/next-auth';
 
 export const authConfig = {
   pages: {
@@ -16,19 +17,23 @@ export const authConfig = {
     authorized({ auth, request }) {
       const isLoggedIn = !!auth?.user;
       const path = request.nextUrl.pathname;
-      const isApi = path.startsWith('/api/finance');
+      const isApi = path.startsWith('/api/finance') || path.startsWith('/api/crypto');
       const isProtectedPage =
         path === '/' || path.startsWith('/finance') || path.startsWith('/user-profile');
       if (isApi || isProtectedPage) return isLoggedIn;
       return true;
     },
     async jwt({ token, user }) {
-      if (user) token.id = user.id;
+      if (user) {
+        token.id = user.id;
+        if (user.role) token.role = user.role as UserRole;
+      }
       return token;
     },
     async session({ session, token }) {
-      if (token?.id && session.user) {
-        session.user.id = token.id as string;
+      if (session.user) {
+        if (token?.id) session.user.id = token.id as string;
+        session.user.role = (token?.role as UserRole) ?? 'user';
       }
       return session;
     },

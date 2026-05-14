@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "cross-env TZ=America/Bogota next dev",
+    "build": "cross-env TZ=America/Bogota next build",
+    "start": "cross-env TZ=America/Bogota next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -51,6 +51,8 @@
     "next-themes": "^0.4.6",
     "pg": "^8.20.0",
     "prisma": "^7.6.0",
+    "pusher": "^5.3.3",
+    "pusher-js": "^8.5.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.3",
     "react-apexcharts": "1.4.1",
@@ -82,6 +84,7 @@
     "@types/react-is": "18.3.0",
     "@types/react-slick": "^0.23.10",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "cross-env": "^10.1.0",
     "postcss": "8",
     "tailwindcss": "^4.1.6",
     "tw-animate-css": "^1.3.7",

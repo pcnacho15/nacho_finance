@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Icon } from "@iconify/react";
 import {
   Sidebar,
@@ -23,17 +24,21 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
-import FullLogo from "@/app/(DashboardLayout)/layout/shared/logo/FullLogo";
+import type { UserRole } from "@/types/next-auth";
+
+type Role = UserRole;
 
 interface SidebarItem {
   title: string;
   url?: string;
   icon?: string;
+  roles?: Role[];
 }
 
 interface SidebarSection {
   title: string;
   items: SidebarItem[];
+  roles?: Role[];
 }
 
 const sidebarData: SidebarSection[] = [
@@ -82,12 +87,63 @@ const sidebarData: SidebarSection[] = [
       },
     ],
   },
+  {
+    title: "Premium",
+    roles: ["investor", "admin"],
+    items: [
+      {
+        title: "USDT en vivo",
+        url: "/finance/crypto",
+        icon: "solar:chart-square-bold",
+        roles: ["investor", "admin"],
+      },
+      {
+        title: "Ofertas P2P",
+        url: "/finance/crypto/p2p",
+        icon: "solar:dollar-minimalistic-bold",
+        roles: ["investor", "admin"],
+      },
+      {
+        title: "Mis Billeteras",
+        url: "/finance/crypto/wallets",
+        icon: "solar:wallet-money-bold",
+        roles: ["investor", "admin"],
+      },
+      {
+        title: "Dashboard P&L",
+        url: "/finance/crypto/dashboard",
+        icon: "solar:chart-2-bold",
+        roles: ["investor", "admin"],
+      },
+      {
+        title: "Chat",
+        url: "/finance/crypto/chat",
+        icon: "solar:chat-round-line-bold",
+        roles: ["investor", "admin"],
+      },
+    ],
+  },
 ];
+
+function isVisible(roles: Role[] | undefined, current: Role) {
+  if (!roles || roles.length === 0) return true;
+  return roles.includes(current);
+}
 
 export function AppSidebar() {
   const pathname = usePathname();
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
+  const { data: session } = useSession();
+  const role = (session?.user?.role ?? "user") as Role;
+
+  const visibleSections = sidebarData
+    .filter((section) => isVisible(section.roles, role))
+    .map((section) => ({
+      ...section,
+      items: section.items.filter((item) => isVisible(item.roles, role)),
+    }))
+    .filter((section) => section.items.length > 0);
 
   return (
     <Sidebar collapsible="icon">
@@ -95,10 +151,6 @@ export function AppSidebar() {
         <div
           className={`flex justify-start items-center gap-2 px-2 py-2 ${isCollapsed ? "hidden" : "block"}`}
         >
-          <Icon
-            icon="game-icons:nachos"
-            className="size-10 bg-muted rounded-lg"
-          />
           <div className="flex flex-col">
             <h1 className="text-xl card-title">Nacho</h1>
             <p className="text-xs text-muted-foreground">Finance app</p>
@@ -117,7 +169,7 @@ export function AppSidebar() {
         )}
       </SidebarHeader>
       <SidebarContent>
-        {sidebarData.map((section) => (
+        {visibleSections.map((section) => (
           <SidebarGroup key={section.title}>
             <Collapsible
               defaultOpen={!isCollapsed}
@@ -137,7 +189,7 @@ export function AppSidebar() {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {section.items.map((item) => (
-                      <SidebarMenuItem key={item.title}>
+                      <SidebarMenuItem key={item.title} className="mb-3">
                         <SidebarMenuButton
                           asChild
                           isActive={pathname === item.url}

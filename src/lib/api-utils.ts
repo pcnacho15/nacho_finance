@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Prisma } from '@/generated/prisma/client';
 import { ZodError, ZodType } from 'zod';
 import { auth } from '@/auth';
+import type { UserRole } from '@/types/next-auth';
 
 export async function requireUser(): Promise<{ userId: string } | { error: NextResponse }> {
   const session = await auth();
@@ -9,6 +10,20 @@ export async function requireUser(): Promise<{ userId: string } | { error: NextR
     return { error: NextResponse.json({ error: 'No autenticado' }, { status: 401 }) };
   }
   return { userId: session.user.id };
+}
+
+export async function requireRole(
+  ...allowed: UserRole[]
+): Promise<{ userId: string; role: UserRole } | { error: NextResponse }> {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return { error: NextResponse.json({ error: 'No autenticado' }, { status: 401 }) };
+  }
+  const role = (session.user.role ?? 'user') as UserRole;
+  if (!allowed.includes(role)) {
+    return { error: NextResponse.json({ error: 'Acceso denegado' }, { status: 403 }) };
+  }
+  return { userId: session.user.id, role };
 }
 
 export async function parseJson<T>(request: Request, schema: ZodType<T>): Promise<{ data: T } | { error: NextResponse }> {
@@ -55,15 +70,14 @@ export function handleError(scope: string, error: unknown): NextResponse {
   return NextResponse.json({ error: 'Error interno' }, { status: 500 });
 }
 
-type DecimalLike = { toNumber: () => number };
+type DecimalLike = { toNumber: () => number; toFixed: (dp?: number) => string };
 
+// Duck-type: Prisma 7 bundles Decimal as `Decimal2`, so constructor.name is unreliable.
+// toNumber + toFixed is unique to decimal.js-style instances among Prisma response values.
 function isDecimal(value: unknown): value is DecimalLike {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    typeof (value as DecimalLike).toNumber === 'function' &&
-    value.constructor?.name === 'Decimal'
-  );
+  if (typeof value !== 'object' || value === null) return false;
+  const v = value as { toNumber?: unknown; toFixed?: unknown };
+  return typeof v.toNumber === 'function' && typeof v.toFixed === 'function';
 }
 
 export function serialize<T>(value: T): T {

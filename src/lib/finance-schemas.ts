@@ -90,3 +90,40 @@ export const budgetUpdateSchema = budgetCreateSchema.partial().extend({
   spent: nonNegativeAmount.optional(),
   isActive: z.boolean().optional(),
 });
+
+export const walletTypeSchema = z.enum(['exchange', 'hot', 'cold', 'other']);
+
+export const walletCreateSchema = z.object({
+  name: z.string().trim().min(1, 'Nombre requerido'),
+  type: walletTypeSchema.optional().default('exchange'),
+  asset: z.string().trim().min(1).optional().default('USDT'),
+  network: z.string().trim().min(1).optional().nullable(),
+  notes: z.string().optional().nullable(),
+});
+
+export const walletUpdateSchema = walletCreateSchema.partial().extend({
+  id: cuid,
+  archivedAt: z.union([z.string(), z.date(), z.null()]).optional(),
+});
+
+export const walletTransactionTypeSchema = z.enum([
+  'buy',
+  'sell',
+  'deposit',
+  'withdrawal',
+]);
+
+export const walletTransactionCreateSchema = z
+  .object({
+    walletId: cuid,
+    type: walletTransactionTypeSchema,
+    amount: positiveAmount,
+    pricePerUnit: positiveAmount.optional().nullable(),
+    date: isoDate,
+    counterparty: z.string().trim().optional().nullable(),
+    notes: z.string().optional().nullable(),
+  })
+  .refine(
+    (d) => (d.type === 'buy' || d.type === 'sell' ? d.pricePerUnit != null : true),
+    { message: 'El precio es obligatorio para compras y ventas', path: ['pricePerUnit'] },
+  );

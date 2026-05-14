@@ -69,7 +69,7 @@ Schemas live in `src/lib/finance-schemas.ts` (Zod). Helpers (`requireUser`, `par
 
 - All monetary fields are `Decimal @db.Decimal(20, 8)` (Float would corrupt rounding and can't represent crypto). `interestRate` uses `Decimal(8, 4)`.
 - `Income`, `Expense`, `Budget` reference their `Category` via FK only — denormalized `categoryName`/`categoryColor` were removed in migration `decimal_amounts_remove_denorm`. Always `include: { category: true }` in reads.
-- Multi-user: `User`, `Account`, `Session`, `VerificationToken` (Auth.js standard) + nullable `userId` on every owned model. **`userId` is nullable for now** to avoid breaking existing data. Once orphan rows are claimed/deleted, run a follow-up migration to make it `NOT NULL`.
+- Multi-user: `User`, `Account`, `Session`, `VerificationToken` (Auth.js standard) + **`userId NOT NULL`** on every owned model (`Category`, `Income`, `Expense`, `Debt`, `SavingsGoal`, `Budget`). Enforced since migration `require_userid_not_null`, which also deleted any rows where `userId IS NULL` (test data). Every insert must carry `userId`.
 - `DebtPayment` and `SavingsContribution` don't carry `userId`; ownership is enforced through their parent (`debt.userId` / `goal.userId`). Mutation endpoints filter on the relation.
 
 ### Route layout
@@ -94,9 +94,8 @@ Schemas live in `src/lib/finance-schemas.ts` (Zod). Helpers (`requireUser`, `par
 
 ### Known leftover technical debt (do not panic, but be aware)
 
-- `src/app/(DashboardLayout)/utilities/form/page.tsx` and `src/app/components/utilities/data-table/DataTable.tsx` carry template-era TS errors (`Input variant`, `Badge "lightprimary"`) that fail `pnpm build`. These pages are demo content; safe to delete or fix when convenient.
+- Template-era API routes still live under `src/app/api/` (`/api/blog`, `/api/notes`, `/api/ticket`) and template-era pages (`/icons/iconify`, `/user-profile`) are unused by the finance app — candidates for pruning.
 - `apexcharts`, `aos`, `swiper`, `react-big-calendar`, `react-slick`, `cmdk`, `vaul`, `simplebar-react`, `redux-persist`, `chance` and others are template leftovers. `react-apexcharts` IS used (in `IncomeExpenseChart`, `ExpenseByCategory`). The rest can likely be pruned.
-- `userId` columns are nullable. Convert to `NOT NULL` once data is reassigned.
 - No tests, no Prettier, no Husky.
 
 ## Deployment
