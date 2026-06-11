@@ -71,7 +71,7 @@ const Header = () => {
               </div>
             </div>
             <div className="flex w-full justify-end items-end">
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-4 items-center">
                 <div
                   className="group focus:ring-0 rounded-full flex justify-center items-center cursor-pointer relative"
                   onClick={toggleMode}
@@ -99,11 +99,11 @@ const Header = () => {
                   </span>
                 </div>
 
-                <div className="xl:block">
+                {/* <div className="xl:block">
                   <div className="flex gap-0 items-center relative">
                     <Notifications />
                   </div>
-                </div>
+                </div> */}
 
                 <Profile />
               </div>

@@ -40,7 +40,7 @@ const Profile = () => {
         <DropdownMenuTrigger asChild>
           <button
             type="button"
-            className="size-9 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center font-medium text-sm"
+            className="size-8 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center font-medium text-sm"
             aria-label="Menú de usuario"
           >
             {session.user.image ? (
@@ -48,7 +48,7 @@ const Profile = () => {
               <img
                 src={session.user.image}
                 alt={name}
-                className="size-9 rounded-full object-cover"
+                className="size-8 rounded-full object-cover"
               />
             ) : (
               initial

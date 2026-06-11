@@ -66,7 +66,7 @@ function Search() {
         />
 
         <Input
-          placeholder='Search....'
+          placeholder='Buscar...'
           className='rounded-xl pl-10'
           required
           value={query}

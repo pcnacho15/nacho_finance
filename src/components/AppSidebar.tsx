@@ -132,7 +132,7 @@ function isVisible(roles: Role[] | undefined, current: Role) {
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const { state } = useSidebar();
+  const { state, setOpenMobile } = useSidebar();
   const isCollapsed = state === "collapsed";
   const { data: session } = useSession();
   const role = (session?.user?.role ?? "user") as Role;
@@ -144,6 +144,10 @@ export function AppSidebar() {
       items: section.items.filter((item) => isVisible(item.roles, role)),
     }))
     .filter((section) => section.items.length > 0);
+
+  const onClose = () => {
+    setOpenMobile(false);
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -189,10 +193,14 @@ export function AppSidebar() {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {section.items.map((item) => (
-                      <SidebarMenuItem key={item.title} className="mb-3">
+                      <SidebarMenuItem
+                        key={item.title}
+                        className="mb-3"
+                      >
                         <SidebarMenuButton
                           asChild
                           isActive={pathname === item.url}
+                          onClick={onClose}
                         >
                           <Link href={item.url || "#"}>
                             {item.icon && (

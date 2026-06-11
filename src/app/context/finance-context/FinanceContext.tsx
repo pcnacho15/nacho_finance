@@ -128,7 +128,7 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
       try {
         await fn();
         await Promise.all(keys.map((k) => mutate(k)));
-        toast.success(successMsg);
+        toast.success(successMsg, {position: "top-center"});
       } catch (err) {
         const msg = err instanceof Error ? err.message : 'Error inesperado';
         toast.error(msg);

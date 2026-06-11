@@ -150,9 +150,9 @@ main {
 
   /* CUSTOM COLORS - Grayscale */
   --info: #525252;
-  --success: #404040;
+  --success: #00c950;
   --warning: #737373;
-  --error: #171717;
+  --error: #ff6467;
   --white: #ffffff;
   --dark: #171717;
   --bodytext: #525252;
@@ -216,9 +216,9 @@ main {
 
   /* CUSTOM COLORS - Dark Grayscale */
   --info: #a3a3a3;
-  --success: #737373;
+  --success: #00c950;
   --warning: #525252;
-  --error: #ffffff;
+  --error: #ff6467;
   --white: #ffffff;
   --dark: #0a0a0a;
   --bodytext: #a3a3a3;
