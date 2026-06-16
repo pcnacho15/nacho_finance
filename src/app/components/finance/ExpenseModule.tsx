@@ -147,17 +147,44 @@ const ExpenseModule: React.FC = () => {
                                 className="w-4 h-4"
                               />
                             </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => handleDelete(expense.id)}
-                              className="text-red-500 hover:text-error"
-                            >
-                              <Icon
-                                icon="solar:trash-bin-trash-bold"
-                                className="w-4 h-4"
-                              />
-                            </Button>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="text-error hover:text-error"
+                                >
+                                  <Icon
+                                    icon="solar:trash-bin-trash-bold"
+                                    className="w-4 h-4 text-red-500"
+                                  />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent size="sm">
+                                <AlertDialogHeader>
+                                  <AlertDialogMedia className="bg-red-500/10 text-red-500 dark:bg-red-500/20 dark:text-red-500 w-10 h-10 p-2">
+                                    <Trash2Icon />
+                                  </AlertDialogMedia>
+                                  <AlertDialogTitle>
+                                    ¿Eliminar Gasto?
+                                  </AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Este registro se borrará de manera
+                                    permanente.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel variant="outline">
+                                    Cancelar
+                                  </AlertDialogCancel>
+                                  <AlertDialogAction
+                                    onClick={() => handleDelete(expense.id)}
+                                  >
+                                    Eliminar
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                         </TableCell>
                         <TableCell className="font-medium">
@@ -265,7 +292,7 @@ const ExpenseModule: React.FC = () => {
                                   <Trash2Icon />
                                 </AlertDialogMedia>
                                 <AlertDialogTitle>
-                                  ¿Eliminar Ingreso?
+                                  ¿Eliminar Gasto?
                                 </AlertDialogTitle>
                                 <AlertDialogDescription>
                                   Este registro se borrará de manera permanente.

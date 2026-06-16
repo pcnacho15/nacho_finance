@@ -4,6 +4,7 @@ import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
 import Header from './layout/header/Header'
 import { FinanceProvider } from '@/app/context/finance-context/FinanceContext'
+import { BottomNavBar } from "./layout/header/BottomNavBar"
 
 export default function Layout({
   children,
@@ -20,6 +21,7 @@ export default function Layout({
             <div className="container mx-auto px-6 py-30 flex-1">
               {children}
             </div>
+            <BottomNavBar />
           </div>
         </div>
       </SidebarProvider>

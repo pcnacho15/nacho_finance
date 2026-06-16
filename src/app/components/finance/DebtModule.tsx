@@ -1,38 +1,76 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useFinance } from '@/app/context/finance-context/FinanceContext';
-import CardBox from '../shared/CardBox';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
-import { Icon } from '@iconify/react/dist/iconify.js';
-import { DebtFormData, DebtType, DEBT_TYPE_LABELS, DEBT_STATUS_LABELS } from '@/app/(DashboardLayout)/types/finance';
-import { format } from 'date-fns';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+import React, { useState } from "react";
+import { useFinance } from "@/app/context/finance-context/FinanceContext";
+import CardBox from "../shared/CardBox";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import {
+  DebtFormData,
+  DebtType,
+  DEBT_TYPE_LABELS,
+  DEBT_STATUS_LABELS,
+} from "@/app/(DashboardLayout)/types/finance";
+import { format } from "date-fns";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Trash2Icon } from "lucide-react";
 
 const DebtModule: React.FC = () => {
-  const { debts, addDebt, updateDebt, deleteDebt, addDebtPayment } = useFinance();
+  const { debts, addDebt, updateDebt, deleteDebt, addDebtPayment } =
+    useFinance();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [selectedDebtId, setSelectedDebtId] = useState<string | null>(null);
   const [paymentAmount, setPaymentAmount] = useState<number>(0);
   const [formData, setFormData] = useState<DebtFormData>({
-    name: '',
-    type: 'loan',
-    creditor: '',
+    name: "",
+    type: "loan",
+    creditor: "",
     originalAmount: 0,
     currentAmount: 0,
     interestRate: 0,
     monthlyPayment: 0,
     startDate: new Date(),
     dueDate: new Date(),
-    notes: '',
+    notes: "",
   });
 
   const handleSubmit = () => {
@@ -53,23 +91,23 @@ const DebtModule: React.FC = () => {
 
   const resetForm = () => {
     setFormData({
-      name: '',
-      type: 'loan',
-      creditor: '',
+      name: "",
+      type: "loan",
+      creditor: "",
       originalAmount: 0,
       currentAmount: 0,
       interestRate: 0,
       monthlyPayment: 0,
       startDate: new Date(),
       dueDate: new Date(),
-      notes: '',
+      notes: "",
     });
     setEditingId(null);
     setIsDialogOpen(false);
   };
 
   const handleEdit = (id: string) => {
-    const debt = debts.find(d => d.id === id);
+    const debt = debts.find((d) => d.id === id);
     if (debt) {
       setFormData({
         name: debt.name,
@@ -89,9 +127,7 @@ const DebtModule: React.FC = () => {
   };
 
   const handleDelete = (id: string) => {
-    if (confirm('¿Estás seguro de eliminar esta deuda?')) {
-      deleteDebt(id);
-    }
+    deleteDebt(id);
   };
 
   const handlePayment = (debtId: string) => {
@@ -109,7 +145,7 @@ const DebtModule: React.FC = () => {
 
   const totalDebt = debts.reduce((sum, d) => sum + d.currentAmount, 0);
   const totalPaid = debts.reduce((sum, d) => sum + d.paidAmount, 0);
-  const activeDebts = debts.filter(d => d.status === 'active').length;
+  const activeDebts = debts.filter((d) => d.status === "active").length;
 
   return (
     <div className="space-y-6">
@@ -249,17 +285,40 @@ const DebtModule: React.FC = () => {
                     className="w-4 h-4"
                   />
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleDelete(debt.id)}
-                  className="text-error hover:text-error w-4"
-                >
-                  <Icon
-                    icon="solar:trash-bin-trash-bold"
-                    className="w-4 h-4"
-                  />
-                </Button>
+
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-error hover:text-error w-4"
+                    >
+                      <Icon
+                        icon="solar:trash-bin-trash-bold"
+                        className="w-4 h-4"
+                      />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent size="sm">
+                    <AlertDialogHeader>
+                      <AlertDialogMedia className="bg-red-500/10 text-red-500 dark:bg-red-500/20 dark:text-red-500 w-10 h-10 p-2">
+                        <Trash2Icon />
+                      </AlertDialogMedia>
+                      <AlertDialogTitle>¿Eliminar Deuda?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Este registro se borrará de manera permanente.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel variant="outline">
+                        Cancelar
+                      </AlertDialogCancel>
+                      <AlertDialogAction onClick={() => handleDelete(debt.id)}>
+                        Eliminar
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             </CardBox>
           );
