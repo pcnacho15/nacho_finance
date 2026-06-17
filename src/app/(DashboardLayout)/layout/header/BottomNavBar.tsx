@@ -55,21 +55,21 @@ export const BottomNavBar = () => {
     const pathname = usePathname();
 
   return (
-    <div className="flex justify-center fixed md:hidden w-full bottom-3 m-auto">
+    <div className="flex justify-center fixed md:hidden w-full bottom-3 mt-5">
       <nav
-        className={`rounded-full py-2 max-w-full bg-dark/60 backdrop-blur-xs flex items-center px-3`}
+        className={`rounded-full py-2 max-w-full  backdrop-blur-md flex items-center px-3`}
       >
         <div className="flex items-center justify-between gap-2">
           {bottombarData.map((item) => (
             <Link
               key={item.title}
               href={item.url || "#"}
-              className={`rounded-full px-4 py-2 text-white ${pathname === item.url ? "bg-gray-300/10 backdrop-blur-sm transition-all duration-300 ease-in-out" : ""}`}
+              className={`rounded-full px-4 py-2 text-dark dark:text-white ${pathname === item.url ? "bg-muted transition-all duration-300 ease-in-out" : ""}`}
             >
               {item.icon && (
                 <Icon
                   icon={(pathname === item.url ? item.icon : item.iconOutline || item.icon)}
-                  className="size-5"
+                  className="size-6"
                 />
               )}
             </Link>

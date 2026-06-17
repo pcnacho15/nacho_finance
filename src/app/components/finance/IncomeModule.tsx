@@ -112,7 +112,7 @@ const IncomeModule: React.FC = () => {
           <h2 className="text-2xl font-bold">Ingresos</h2>
           <p className="text-muted-foreground">Gestiona tus ingresos</p>
         </div>
-        <div className="flex justify-between md:justify-end items-center gap-4 rounded-md p-2 md:bg-transparent w-full">
+        <div className="flex justify-between md:justify-end items-center gap-4 rounded-md  md:bg-transparent w-full">
           <div className="text-left md:text-right">
             <p className="text-sm font-semibold text-muted-foreground">Total</p>
             <p className="text-2xl font-bold">
@@ -183,9 +183,7 @@ const IncomeModule: React.FC = () => {
                                   size="icon"
                                   className="text-red-500 hover:text-error"
                                 >
-                                  <Icon
-                                    icon="solar:trash-bin-trash-bold"
-                                  />
+                                  <Icon icon="solar:trash-bin-trash-bold" />
                                 </Button>
                               </AlertDialogTrigger>
                               <AlertDialogContent size="sm">
@@ -243,7 +241,7 @@ const IncomeModule: React.FC = () => {
               </Table>
             </div>
             <div className="block md:hidden">
-              <ScrollArea className="grid grid-cols-1 gap-2 h-68">
+              <ScrollArea className="grid grid-cols-1 gap-2 h-90">
                 {incomes
                   .sort(
                     (a, b) =>

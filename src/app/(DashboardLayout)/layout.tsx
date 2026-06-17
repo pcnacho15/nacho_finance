@@ -18,7 +18,7 @@ export default function Layout({
           <AppSidebar />
           <div className="flex-1 flex flex-col min-h-screen">
             <Header />
-            <div className="container mx-auto px-6 py-30 flex-1">
+            <div className="container mx-auto px-6 pb-[70px] md:pb-auto md:py-30 flex-1">
               {children}
             </div>
             <BottomNavBar />

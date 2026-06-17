@@ -224,7 +224,7 @@ const ExpenseModule: React.FC = () => {
               </Table>
             </div>
             <div className="block md:hidden">
-              <ScrollArea className="grid grid-cols-1 gap-2 h-68">
+              <ScrollArea className="grid grid-cols-1 gap-2 h-90">
                 {expenses
                   .sort(
                     (a, b) =>
