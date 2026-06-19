@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const cuid = z.string().min(1);
 const isoDate = z.union([z.string(), z.date()]).transform((v) => new Date(v));
-const positiveAmount = z.coerce.number().positive('El monto debe ser mayor a 0');
+const positiveAmount = z.coerce.number().positive();
 const nonNegativeAmount = z.coerce.number().nonnegative();
 
 export const categoryCreateSchema = z.object({
@@ -62,8 +62,8 @@ export const debtPaymentSchema = z.object({
 
 export const savingsGoalCreateSchema = z.object({
   name: z.string().trim().min(1),
-  targetAmount: positiveAmount,
-  targetDate: isoDate,
+  targetAmount: positiveAmount.optional().nullable(),
+  targetDate: isoDate.optional().nullable(),
   icon: z.string().min(1),
   color: z.string().min(1),
   description: z.string().optional().nullable(),
@@ -117,8 +117,8 @@ export const walletTransactionCreateSchema = z
   .object({
     walletId: cuid,
     type: walletTransactionTypeSchema,
-    amount: positiveAmount,
-    pricePerUnit: positiveAmount.optional().nullable(),
+    amount: positiveAmount.optional().nullable(),
+    pricePerUnit: positiveAmount,
     date: isoDate,
     counterparty: z.string().trim().optional().nullable(),
     notes: z.string().optional().nullable(),

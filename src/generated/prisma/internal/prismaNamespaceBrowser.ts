@@ -93,9 +93,9 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   image: 'image',
   passwordHash: 'passwordHash',
-  role: 'role',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  role: 'role'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -140,14 +140,14 @@ export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFi
 
 export const CategoryScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   name: 'name',
   type: 'type',
   color: 'color',
   icon: 'icon',
   description: 'description',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -155,13 +155,13 @@ export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typ
 
 export const IncomeScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   amount: 'amount',
   description: 'description',
   categoryId: 'categoryId',
   date: 'date',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type IncomeScalarFieldEnum = (typeof IncomeScalarFieldEnum)[keyof typeof IncomeScalarFieldEnum]
@@ -169,7 +169,6 @@ export type IncomeScalarFieldEnum = (typeof IncomeScalarFieldEnum)[keyof typeof 
 
 export const ExpenseScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   amount: 'amount',
   description: 'description',
   categoryId: 'categoryId',
@@ -177,7 +176,8 @@ export const ExpenseScalarFieldEnum = {
   isRecurring: 'isRecurring',
   recurringFrequency: 'recurringFrequency',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
@@ -185,7 +185,6 @@ export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeo
 
 export const DebtScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   name: 'name',
   type: 'type',
   creditor: 'creditor',
@@ -199,7 +198,8 @@ export const DebtScalarFieldEnum = {
   status: 'status',
   notes: 'notes',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type DebtScalarFieldEnum = (typeof DebtScalarFieldEnum)[keyof typeof DebtScalarFieldEnum]
@@ -219,7 +219,6 @@ export type DebtPaymentScalarFieldEnum = (typeof DebtPaymentScalarFieldEnum)[key
 
 export const SavingsGoalScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   name: 'name',
   targetAmount: 'targetAmount',
   currentAmount: 'currentAmount',
@@ -229,7 +228,8 @@ export const SavingsGoalScalarFieldEnum = {
   color: 'color',
   description: 'description',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type SavingsGoalScalarFieldEnum = (typeof SavingsGoalScalarFieldEnum)[keyof typeof SavingsGoalScalarFieldEnum]
@@ -313,7 +313,6 @@ export type ChatBlockScalarFieldEnum = (typeof ChatBlockScalarFieldEnum)[keyof t
 
 export const BudgetScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   categoryId: 'categoryId',
   amount: 'amount',
   spent: 'spent',
@@ -322,7 +321,8 @@ export const BudgetScalarFieldEnum = {
   endDate: 'endDate',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type BudgetScalarFieldEnum = (typeof BudgetScalarFieldEnum)[keyof typeof BudgetScalarFieldEnum]

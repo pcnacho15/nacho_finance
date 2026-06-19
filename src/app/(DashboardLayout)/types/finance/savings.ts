@@ -26,8 +26,8 @@ export interface SavingsContribution {
 
 export interface SavingsGoalFormData {
   name: string;
-  targetAmount: number;
-  targetDate: Date;
+  targetAmount?: number | null;
+  targetDate?: Date | null;
   icon: string;
   color: string;
   description?: string;
@@ -47,12 +47,12 @@ export interface SavingsSummary {
 }
 
 export const SAVINGS_ICONS = [
-  { value: 'solar:home-bold', label: 'Casa' },
-  { value: 'solar:car-bold', label: 'Auto' },
-  { value: 'solar:airplane-bold', label: 'Viaje' },
-  { value: 'solar:laptop-bold', label: 'Tecnología' },
-  { value: 'solar:graduation-cap-bold', label: 'Educación' },
-  { value: 'solar:gift-bold', label: 'Regalo' },
-  { value: 'solar:diamond-bold', label: 'Joyería' },
-  { value: 'solar:piggy-bank-bold', label: 'Ahorro General' },
+  { value: "solar:home-bold", label: "Casa" },
+  { value: "glyphs:car-bold", label: "Auto" },
+  { value: "ph:airplane-bold", label: "Viaje" },
+  { value: "solar:laptop-bold", label: "Tecnología" },
+  { value: "glyphs:graduation-cap-bold", label: "Educación" },
+  { value: "solar:gift-bold", label: "Regalo" },
+  { value: "mdi:gold", label: "Joyería" },
+  { value: "ph:piggy-bank-bold", label: "Ahorro General" },
 ];

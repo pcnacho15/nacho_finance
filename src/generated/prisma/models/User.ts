@@ -31,9 +31,9 @@ export type UserMinAggregateOutputType = {
   emailVerified: Date | null
   image: string | null
   passwordHash: string | null
-  role: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  role: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -43,9 +43,9 @@ export type UserMaxAggregateOutputType = {
   emailVerified: Date | null
   image: string | null
   passwordHash: string | null
-  role: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  role: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -55,9 +55,9 @@ export type UserCountAggregateOutputType = {
   emailVerified: number
   image: number
   passwordHash: number
-  role: number
   createdAt: number
   updatedAt: number
+  role: number
   _all: number
 }
 
@@ -69,9 +69,9 @@ export type UserMinAggregateInputType = {
   emailVerified?: true
   image?: true
   passwordHash?: true
-  role?: true
   createdAt?: true
   updatedAt?: true
+  role?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -81,9 +81,9 @@ export type UserMaxAggregateInputType = {
   emailVerified?: true
   image?: true
   passwordHash?: true
-  role?: true
   createdAt?: true
   updatedAt?: true
+  role?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -93,9 +93,9 @@ export type UserCountAggregateInputType = {
   emailVerified?: true
   image?: true
   passwordHash?: true
-  role?: true
   createdAt?: true
   updatedAt?: true
+  role?: true
   _all?: true
 }
 
@@ -178,9 +178,9 @@ export type UserGroupByOutputType = {
   emailVerified: Date | null
   image: string | null
   passwordHash: string | null
-  role: string
   createdAt: Date
   updatedAt: Date
+  role: string
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -211,23 +211,23 @@ export type UserWhereInput = {
   emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  role?: Prisma.StringFilter<"User"> | string
   accounts?: Prisma.AccountListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  categories?: Prisma.CategoryListRelationFilter
-  incomes?: Prisma.IncomeListRelationFilter
-  expenses?: Prisma.ExpenseListRelationFilter
-  debts?: Prisma.DebtListRelationFilter
-  savingsGoals?: Prisma.SavingsGoalListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
-  wallets?: Prisma.WalletListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  blocksGot?: Prisma.ChatBlockListRelationFilter
+  blocksMade?: Prisma.ChatBlockListRelationFilter
   chatsAsA?: Prisma.ChatConversationListRelationFilter
   chatsAsB?: Prisma.ChatConversationListRelationFilter
   chatMessages?: Prisma.ChatMessageListRelationFilter
-  blocksMade?: Prisma.ChatBlockListRelationFilter
-  blocksGot?: Prisma.ChatBlockListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  incomes?: Prisma.IncomeListRelationFilter
+  savingsGoals?: Prisma.SavingsGoalListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
+  wallets?: Prisma.WalletListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -237,23 +237,23 @@ export type UserOrderByWithRelationInput = {
   emailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
-  sessions?: Prisma.SessionOrderByRelationAggregateInput
-  categories?: Prisma.CategoryOrderByRelationAggregateInput
-  incomes?: Prisma.IncomeOrderByRelationAggregateInput
-  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
-  debts?: Prisma.DebtOrderByRelationAggregateInput
-  savingsGoals?: Prisma.SavingsGoalOrderByRelationAggregateInput
   budgets?: Prisma.BudgetOrderByRelationAggregateInput
-  wallets?: Prisma.WalletOrderByRelationAggregateInput
+  categories?: Prisma.CategoryOrderByRelationAggregateInput
+  blocksGot?: Prisma.ChatBlockOrderByRelationAggregateInput
+  blocksMade?: Prisma.ChatBlockOrderByRelationAggregateInput
   chatsAsA?: Prisma.ChatConversationOrderByRelationAggregateInput
   chatsAsB?: Prisma.ChatConversationOrderByRelationAggregateInput
   chatMessages?: Prisma.ChatMessageOrderByRelationAggregateInput
-  blocksMade?: Prisma.ChatBlockOrderByRelationAggregateInput
-  blocksGot?: Prisma.ChatBlockOrderByRelationAggregateInput
+  debts?: Prisma.DebtOrderByRelationAggregateInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  incomes?: Prisma.IncomeOrderByRelationAggregateInput
+  savingsGoals?: Prisma.SavingsGoalOrderByRelationAggregateInput
+  sessions?: Prisma.SessionOrderByRelationAggregateInput
+  wallets?: Prisma.WalletOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -266,23 +266,23 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  role?: Prisma.StringFilter<"User"> | string
   accounts?: Prisma.AccountListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  categories?: Prisma.CategoryListRelationFilter
-  incomes?: Prisma.IncomeListRelationFilter
-  expenses?: Prisma.ExpenseListRelationFilter
-  debts?: Prisma.DebtListRelationFilter
-  savingsGoals?: Prisma.SavingsGoalListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
-  wallets?: Prisma.WalletListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  blocksGot?: Prisma.ChatBlockListRelationFilter
+  blocksMade?: Prisma.ChatBlockListRelationFilter
   chatsAsA?: Prisma.ChatConversationListRelationFilter
   chatsAsB?: Prisma.ChatConversationListRelationFilter
   chatMessages?: Prisma.ChatMessageListRelationFilter
-  blocksMade?: Prisma.ChatBlockListRelationFilter
-  blocksGot?: Prisma.ChatBlockListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  incomes?: Prisma.IncomeListRelationFilter
+  savingsGoals?: Prisma.SavingsGoalListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
+  wallets?: Prisma.WalletListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -292,9 +292,9 @@ export type UserOrderByWithAggregationInput = {
   emailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -310,9 +310,9 @@ export type UserScalarWhereWithAggregatesInput = {
   emailVerified?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  role?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  role?: Prisma.StringWithAggregatesFilter<"User"> | string
 }
 
 export type UserCreateInput = {
@@ -322,23 +322,23 @@ export type UserCreateInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -348,23 +348,23 @@ export type UserUncheckedCreateInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -374,23 +374,23 @@ export type UserUpdateInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -400,23 +400,23 @@ export type UserUncheckedUpdateInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -426,9 +426,9 @@ export type UserCreateManyInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -438,9 +438,9 @@ export type UserUpdateManyMutationInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -450,9 +450,9 @@ export type UserUncheckedUpdateManyInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -462,9 +462,9 @@ export type UserCountOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -474,9 +474,9 @@ export type UserMaxOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -486,9 +486,9 @@ export type UserMinOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -666,24 +666,16 @@ export type UserUpdateOneRequiredWithoutChatMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChatMessagesInput, Prisma.UserUpdateWithoutChatMessagesInput>, Prisma.UserUncheckedUpdateWithoutChatMessagesInput>
 }
 
-export type UserCreateNestedOneWithoutBlocksMadeInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutBlocksMadeInput, Prisma.UserUncheckedCreateWithoutBlocksMadeInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBlocksMadeInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
 export type UserCreateNestedOneWithoutBlocksGotInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBlocksGotInput, Prisma.UserUncheckedCreateWithoutBlocksGotInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBlocksGotInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutBlocksMadeNestedInput = {
+export type UserCreateNestedOneWithoutBlocksMadeInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBlocksMadeInput, Prisma.UserUncheckedCreateWithoutBlocksMadeInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBlocksMadeInput
-  upsert?: Prisma.UserUpsertWithoutBlocksMadeInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBlocksMadeInput, Prisma.UserUpdateWithoutBlocksMadeInput>, Prisma.UserUncheckedUpdateWithoutBlocksMadeInput>
 }
 
 export type UserUpdateOneRequiredWithoutBlocksGotNestedInput = {
@@ -692,6 +684,14 @@ export type UserUpdateOneRequiredWithoutBlocksGotNestedInput = {
   upsert?: Prisma.UserUpsertWithoutBlocksGotInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBlocksGotInput, Prisma.UserUpdateWithoutBlocksGotInput>, Prisma.UserUncheckedUpdateWithoutBlocksGotInput>
+}
+
+export type UserUpdateOneRequiredWithoutBlocksMadeNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBlocksMadeInput, Prisma.UserUncheckedCreateWithoutBlocksMadeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBlocksMadeInput
+  upsert?: Prisma.UserUpsertWithoutBlocksMadeInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBlocksMadeInput, Prisma.UserUpdateWithoutBlocksMadeInput>, Prisma.UserUncheckedUpdateWithoutBlocksMadeInput>
 }
 
 export type UserCreateNestedOneWithoutBudgetsInput = {
@@ -715,22 +715,22 @@ export type UserCreateWithoutAccountsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  role?: string
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -740,22 +740,22 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  role?: string
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -781,22 +781,22 @@ export type UserUpdateWithoutAccountsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -806,22 +806,22 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -831,22 +831,22 @@ export type UserCreateWithoutSessionsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -856,22 +856,22 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -897,22 +897,22 @@ export type UserUpdateWithoutSessionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -922,22 +922,22 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCategoriesInput = {
@@ -947,22 +947,22 @@ export type UserCreateWithoutCategoriesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCategoriesInput = {
@@ -972,22 +972,22 @@ export type UserUncheckedCreateWithoutCategoriesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCategoriesInput = {
@@ -1013,22 +1013,22 @@ export type UserUpdateWithoutCategoriesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCategoriesInput = {
@@ -1038,22 +1038,22 @@ export type UserUncheckedUpdateWithoutCategoriesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutIncomesInput = {
@@ -1063,22 +1063,22 @@ export type UserCreateWithoutIncomesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIncomesInput = {
@@ -1088,22 +1088,22 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIncomesInput = {
@@ -1129,22 +1129,22 @@ export type UserUpdateWithoutIncomesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIncomesInput = {
@@ -1154,22 +1154,22 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExpensesInput = {
@@ -1179,22 +1179,22 @@ export type UserCreateWithoutExpensesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExpensesInput = {
@@ -1204,22 +1204,22 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExpensesInput = {
@@ -1245,22 +1245,22 @@ export type UserUpdateWithoutExpensesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesInput = {
@@ -1270,22 +1270,22 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDebtsInput = {
@@ -1295,22 +1295,22 @@ export type UserCreateWithoutDebtsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDebtsInput = {
@@ -1320,22 +1320,22 @@ export type UserUncheckedCreateWithoutDebtsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDebtsInput = {
@@ -1361,22 +1361,22 @@ export type UserUpdateWithoutDebtsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDebtsInput = {
@@ -1386,22 +1386,22 @@ export type UserUncheckedUpdateWithoutDebtsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSavingsGoalsInput = {
@@ -1411,22 +1411,22 @@ export type UserCreateWithoutSavingsGoalsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSavingsGoalsInput = {
@@ -1436,22 +1436,22 @@ export type UserUncheckedCreateWithoutSavingsGoalsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSavingsGoalsInput = {
@@ -1477,22 +1477,22 @@ export type UserUpdateWithoutSavingsGoalsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavingsGoalsInput = {
@@ -1502,22 +1502,22 @@ export type UserUncheckedUpdateWithoutSavingsGoalsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWalletsInput = {
@@ -1527,22 +1527,22 @@ export type UserCreateWithoutWalletsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWalletsInput = {
@@ -1552,22 +1552,22 @@ export type UserUncheckedCreateWithoutWalletsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWalletsInput = {
@@ -1593,22 +1593,22 @@ export type UserUpdateWithoutWalletsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWalletsInput = {
@@ -1618,22 +1618,22 @@ export type UserUncheckedUpdateWithoutWalletsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChatsAsAInput = {
@@ -1643,22 +1643,22 @@ export type UserCreateWithoutChatsAsAInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChatsAsAInput = {
@@ -1668,22 +1668,22 @@ export type UserUncheckedCreateWithoutChatsAsAInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChatsAsAInput = {
@@ -1698,22 +1698,22 @@ export type UserCreateWithoutChatsAsBInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChatsAsBInput = {
@@ -1723,22 +1723,22 @@ export type UserUncheckedCreateWithoutChatsAsBInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChatsAsBInput = {
@@ -1764,22 +1764,22 @@ export type UserUpdateWithoutChatsAsAInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatsAsAInput = {
@@ -1789,22 +1789,22 @@ export type UserUncheckedUpdateWithoutChatsAsAInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutChatsAsBInput = {
@@ -1825,22 +1825,22 @@ export type UserUpdateWithoutChatsAsBInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatsAsBInput = {
@@ -1850,22 +1850,22 @@ export type UserUncheckedUpdateWithoutChatsAsBInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChatMessagesInput = {
@@ -1875,22 +1875,22 @@ export type UserCreateWithoutChatMessagesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChatMessagesInput = {
@@ -1900,22 +1900,22 @@ export type UserUncheckedCreateWithoutChatMessagesInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChatMessagesInput = {
@@ -1941,22 +1941,22 @@ export type UserUpdateWithoutChatMessagesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatMessagesInput = {
@@ -1966,77 +1966,22 @@ export type UserUncheckedUpdateWithoutChatMessagesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
-}
-
-export type UserCreateWithoutBlocksMadeInput = {
-  id?: string
-  name?: string | null
-  email: string
-  emailVerified?: Date | string | null
-  image?: string | null
-  passwordHash?: string | null
-  role?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
-  budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
-  chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
-  chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
-  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
-}
-
-export type UserUncheckedCreateWithoutBlocksMadeInput = {
-  id?: string
-  name?: string | null
-  email: string
-  emailVerified?: Date | string | null
-  image?: string | null
-  passwordHash?: string | null
-  role?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
-  budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
-  chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
-  chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
-  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
-}
-
-export type UserCreateOrConnectWithoutBlocksMadeInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutBlocksMadeInput, Prisma.UserUncheckedCreateWithoutBlocksMadeInput>
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBlocksGotInput = {
@@ -2046,22 +1991,22 @@ export type UserCreateWithoutBlocksGotInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBlocksGotInput = {
@@ -2071,22 +2016,22 @@ export type UserUncheckedCreateWithoutBlocksGotInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBlocksGotInput = {
@@ -2094,65 +2039,59 @@ export type UserCreateOrConnectWithoutBlocksGotInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutBlocksGotInput, Prisma.UserUncheckedCreateWithoutBlocksGotInput>
 }
 
-export type UserUpsertWithoutBlocksMadeInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutBlocksMadeInput, Prisma.UserUncheckedUpdateWithoutBlocksMadeInput>
+export type UserCreateWithoutBlocksMadeInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  passwordHash?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
+  chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBlocksMadeInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  passwordHash?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
+  chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBlocksMadeInput = {
+  where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutBlocksMadeInput, Prisma.UserUncheckedCreateWithoutBlocksMadeInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutBlocksMadeInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutBlocksMadeInput, Prisma.UserUncheckedUpdateWithoutBlocksMadeInput>
-}
-
-export type UserUpdateWithoutBlocksMadeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
-  budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
-  chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
-  chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
-  chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
-}
-
-export type UserUncheckedUpdateWithoutBlocksMadeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
-  budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
-  chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
-  chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
-  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
 }
 
 export type UserUpsertWithoutBlocksGotInput = {
@@ -2173,22 +2112,22 @@ export type UserUpdateWithoutBlocksGotInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBlocksGotInput = {
@@ -2198,22 +2137,83 @@ export type UserUncheckedUpdateWithoutBlocksGotInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutBlocksMadeInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBlocksMadeInput, Prisma.UserUncheckedUpdateWithoutBlocksMadeInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBlocksMadeInput, Prisma.UserUncheckedCreateWithoutBlocksMadeInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBlocksMadeInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBlocksMadeInput, Prisma.UserUncheckedUpdateWithoutBlocksMadeInput>
+}
+
+export type UserUpdateWithoutBlocksMadeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
+  chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBlocksMadeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
+  chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBudgetsInput = {
@@ -2223,22 +2223,22 @@ export type UserCreateWithoutBudgetsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBudgetsInput = {
@@ -2248,22 +2248,22 @@ export type UserUncheckedCreateWithoutBudgetsInput = {
   emailVerified?: Date | string | null
   image?: string | null
   passwordHash?: string | null
-  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  role?: string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
   chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
-  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
-  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBudgetsInput = {
@@ -2289,22 +2289,22 @@ export type UserUpdateWithoutBudgetsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBudgetsInput = {
@@ -2314,22 +2314,22 @@ export type UserUncheckedUpdateWithoutBudgetsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
-  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
-  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
   chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
-  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
-  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2339,36 +2339,36 @@ export type UserUncheckedUpdateWithoutBudgetsInput = {
 
 export type UserCountOutputType = {
   accounts: number
-  sessions: number
-  categories: number
-  incomes: number
-  expenses: number
-  debts: number
-  savingsGoals: number
   budgets: number
-  wallets: number
+  categories: number
+  blocksGot: number
+  blocksMade: number
   chatsAsA: number
   chatsAsB: number
   chatMessages: number
-  blocksMade: number
-  blocksGot: number
+  debts: number
+  expenses: number
+  incomes: number
+  savingsGoals: number
+  sessions: number
+  wallets: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-  categories?: boolean | UserCountOutputTypeCountCategoriesArgs
-  incomes?: boolean | UserCountOutputTypeCountIncomesArgs
-  expenses?: boolean | UserCountOutputTypeCountExpensesArgs
-  debts?: boolean | UserCountOutputTypeCountDebtsArgs
-  savingsGoals?: boolean | UserCountOutputTypeCountSavingsGoalsArgs
   budgets?: boolean | UserCountOutputTypeCountBudgetsArgs
-  wallets?: boolean | UserCountOutputTypeCountWalletsArgs
+  categories?: boolean | UserCountOutputTypeCountCategoriesArgs
+  blocksGot?: boolean | UserCountOutputTypeCountBlocksGotArgs
+  blocksMade?: boolean | UserCountOutputTypeCountBlocksMadeArgs
   chatsAsA?: boolean | UserCountOutputTypeCountChatsAsAArgs
   chatsAsB?: boolean | UserCountOutputTypeCountChatsAsBArgs
   chatMessages?: boolean | UserCountOutputTypeCountChatMessagesArgs
-  blocksMade?: boolean | UserCountOutputTypeCountBlocksMadeArgs
-  blocksGot?: boolean | UserCountOutputTypeCountBlocksGotArgs
+  debts?: boolean | UserCountOutputTypeCountDebtsArgs
+  expenses?: boolean | UserCountOutputTypeCountExpensesArgs
+  incomes?: boolean | UserCountOutputTypeCountIncomesArgs
+  savingsGoals?: boolean | UserCountOutputTypeCountSavingsGoalsArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  wallets?: boolean | UserCountOutputTypeCountWalletsArgs
 }
 
 /**
@@ -2391,8 +2391,8 @@ export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SessionWhereInput
+export type UserCountOutputTypeCountBudgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BudgetWhereInput
 }
 
 /**
@@ -2405,43 +2405,15 @@ export type UserCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountIncomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.IncomeWhereInput
+export type UserCountOutputTypeCountBlocksGotArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatBlockWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ExpenseWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountDebtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DebtWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountSavingsGoalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SavingsGoalWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountBudgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BudgetWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountWalletsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.WalletWhereInput
+export type UserCountOutputTypeCountBlocksMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatBlockWhereInput
 }
 
 /**
@@ -2468,15 +2440,43 @@ export type UserCountOutputTypeCountChatMessagesArgs<ExtArgs extends runtime.Typ
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountBlocksMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatBlockWhereInput
+export type UserCountOutputTypeCountDebtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DebtWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountBlocksGotArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatBlockWhereInput
+export type UserCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIncomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IncomeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSavingsGoalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavingsGoalWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWalletsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalletWhereInput
 }
 
 
@@ -2487,23 +2487,23 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   emailVerified?: boolean
   image?: boolean
   passwordHash?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  categories?: boolean | Prisma.User$categoriesArgs<ExtArgs>
-  incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
-  expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
-  debts?: boolean | Prisma.User$debtsArgs<ExtArgs>
-  savingsGoals?: boolean | Prisma.User$savingsGoalsArgs<ExtArgs>
   budgets?: boolean | Prisma.User$budgetsArgs<ExtArgs>
-  wallets?: boolean | Prisma.User$walletsArgs<ExtArgs>
+  categories?: boolean | Prisma.User$categoriesArgs<ExtArgs>
+  blocksGot?: boolean | Prisma.User$blocksGotArgs<ExtArgs>
+  blocksMade?: boolean | Prisma.User$blocksMadeArgs<ExtArgs>
   chatsAsA?: boolean | Prisma.User$chatsAsAArgs<ExtArgs>
   chatsAsB?: boolean | Prisma.User$chatsAsBArgs<ExtArgs>
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
-  blocksMade?: boolean | Prisma.User$blocksMadeArgs<ExtArgs>
-  blocksGot?: boolean | Prisma.User$blocksGotArgs<ExtArgs>
+  debts?: boolean | Prisma.User$debtsArgs<ExtArgs>
+  expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
+  incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
+  savingsGoals?: boolean | Prisma.User$savingsGoalsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  wallets?: boolean | Prisma.User$walletsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2514,9 +2514,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   emailVerified?: boolean
   image?: boolean
   passwordHash?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2526,9 +2526,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   emailVerified?: boolean
   image?: boolean
   passwordHash?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -2538,27 +2538,27 @@ export type UserSelectScalar = {
   emailVerified?: boolean
   image?: boolean
   passwordHash?: boolean
-  role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  role?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "passwordHash" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "passwordHash" | "createdAt" | "updatedAt" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  categories?: boolean | Prisma.User$categoriesArgs<ExtArgs>
-  incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
-  expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
-  debts?: boolean | Prisma.User$debtsArgs<ExtArgs>
-  savingsGoals?: boolean | Prisma.User$savingsGoalsArgs<ExtArgs>
   budgets?: boolean | Prisma.User$budgetsArgs<ExtArgs>
-  wallets?: boolean | Prisma.User$walletsArgs<ExtArgs>
+  categories?: boolean | Prisma.User$categoriesArgs<ExtArgs>
+  blocksGot?: boolean | Prisma.User$blocksGotArgs<ExtArgs>
+  blocksMade?: boolean | Prisma.User$blocksMadeArgs<ExtArgs>
   chatsAsA?: boolean | Prisma.User$chatsAsAArgs<ExtArgs>
   chatsAsB?: boolean | Prisma.User$chatsAsBArgs<ExtArgs>
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
-  blocksMade?: boolean | Prisma.User$blocksMadeArgs<ExtArgs>
-  blocksGot?: boolean | Prisma.User$blocksGotArgs<ExtArgs>
+  debts?: boolean | Prisma.User$debtsArgs<ExtArgs>
+  expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
+  incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
+  savingsGoals?: boolean | Prisma.User$savingsGoalsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  wallets?: boolean | Prisma.User$walletsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2568,19 +2568,19 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     accounts: Prisma.$AccountPayload<ExtArgs>[]
-    sessions: Prisma.$SessionPayload<ExtArgs>[]
-    categories: Prisma.$CategoryPayload<ExtArgs>[]
-    incomes: Prisma.$IncomePayload<ExtArgs>[]
-    expenses: Prisma.$ExpensePayload<ExtArgs>[]
-    debts: Prisma.$DebtPayload<ExtArgs>[]
-    savingsGoals: Prisma.$SavingsGoalPayload<ExtArgs>[]
     budgets: Prisma.$BudgetPayload<ExtArgs>[]
-    wallets: Prisma.$WalletPayload<ExtArgs>[]
+    categories: Prisma.$CategoryPayload<ExtArgs>[]
+    blocksGot: Prisma.$ChatBlockPayload<ExtArgs>[]
+    blocksMade: Prisma.$ChatBlockPayload<ExtArgs>[]
     chatsAsA: Prisma.$ChatConversationPayload<ExtArgs>[]
     chatsAsB: Prisma.$ChatConversationPayload<ExtArgs>[]
     chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
-    blocksMade: Prisma.$ChatBlockPayload<ExtArgs>[]
-    blocksGot: Prisma.$ChatBlockPayload<ExtArgs>[]
+    debts: Prisma.$DebtPayload<ExtArgs>[]
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
+    incomes: Prisma.$IncomePayload<ExtArgs>[]
+    savingsGoals: Prisma.$SavingsGoalPayload<ExtArgs>[]
+    sessions: Prisma.$SessionPayload<ExtArgs>[]
+    wallets: Prisma.$WalletPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2589,9 +2589,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     emailVerified: Date | null
     image: string | null
     passwordHash: string | null
-    role: string
     createdAt: Date
     updatedAt: Date
+    role: string
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2987,19 +2987,19 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  categories<T extends Prisma.User$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  incomes<T extends Prisma.User$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  expenses<T extends Prisma.User$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  debts<T extends Prisma.User$debtsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$debtsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  savingsGoals<T extends Prisma.User$savingsGoalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savingsGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavingsGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   budgets<T extends Prisma.User$budgetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$budgetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  wallets<T extends Prisma.User$walletsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$walletsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  categories<T extends Prisma.User$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  blocksGot<T extends Prisma.User$blocksGotArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blocksGotArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  blocksMade<T extends Prisma.User$blocksMadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blocksMadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatsAsA<T extends Prisma.User$chatsAsAArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatsAsAArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatsAsB<T extends Prisma.User$chatsAsBArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatsAsBArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatMessages<T extends Prisma.User$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  blocksMade<T extends Prisma.User$blocksMadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blocksMadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  blocksGot<T extends Prisma.User$blocksGotArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blocksGotArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  debts<T extends Prisma.User$debtsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$debtsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenses<T extends Prisma.User$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  incomes<T extends Prisma.User$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  savingsGoals<T extends Prisma.User$savingsGoalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savingsGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavingsGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  wallets<T extends Prisma.User$walletsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$walletsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3035,9 +3035,9 @@ export interface UserFieldRefs {
   readonly emailVerified: Prisma.FieldRef<"User", 'DateTime'>
   readonly image: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
-  readonly role: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly role: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -3455,27 +3455,27 @@ export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.sessions
+ * User.budgets
  */
-export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$budgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Session
+   * Select specific fields to fetch from the Budget
    */
-  select?: Prisma.SessionSelect<ExtArgs> | null
+  select?: Prisma.BudgetSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Session
+   * Omit specific fields from the Budget
    */
-  omit?: Prisma.SessionOmit<ExtArgs> | null
+  omit?: Prisma.BudgetOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SessionInclude<ExtArgs> | null
-  where?: Prisma.SessionWhereInput
-  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
-  cursor?: Prisma.SessionWhereUniqueInput
+  include?: Prisma.BudgetInclude<ExtArgs> | null
+  where?: Prisma.BudgetWhereInput
+  orderBy?: Prisma.BudgetOrderByWithRelationInput | Prisma.BudgetOrderByWithRelationInput[]
+  cursor?: Prisma.BudgetWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
+  distinct?: Prisma.BudgetScalarFieldEnum | Prisma.BudgetScalarFieldEnum[]
 }
 
 /**
@@ -3503,147 +3503,51 @@ export type User$categoriesArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * User.incomes
+ * User.blocksGot
  */
-export type User$incomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$blocksGotArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Income
+   * Select specific fields to fetch from the ChatBlock
    */
-  select?: Prisma.IncomeSelect<ExtArgs> | null
+  select?: Prisma.ChatBlockSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Income
+   * Omit specific fields from the ChatBlock
    */
-  omit?: Prisma.IncomeOmit<ExtArgs> | null
+  omit?: Prisma.ChatBlockOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.IncomeInclude<ExtArgs> | null
-  where?: Prisma.IncomeWhereInput
-  orderBy?: Prisma.IncomeOrderByWithRelationInput | Prisma.IncomeOrderByWithRelationInput[]
-  cursor?: Prisma.IncomeWhereUniqueInput
+  include?: Prisma.ChatBlockInclude<ExtArgs> | null
+  where?: Prisma.ChatBlockWhereInput
+  orderBy?: Prisma.ChatBlockOrderByWithRelationInput | Prisma.ChatBlockOrderByWithRelationInput[]
+  cursor?: Prisma.ChatBlockWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.IncomeScalarFieldEnum | Prisma.IncomeScalarFieldEnum[]
+  distinct?: Prisma.ChatBlockScalarFieldEnum | Prisma.ChatBlockScalarFieldEnum[]
 }
 
 /**
- * User.expenses
+ * User.blocksMade
  */
-export type User$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$blocksMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Expense
+   * Select specific fields to fetch from the ChatBlock
    */
-  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  select?: Prisma.ChatBlockSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Expense
+   * Omit specific fields from the ChatBlock
    */
-  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  omit?: Prisma.ChatBlockOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ExpenseInclude<ExtArgs> | null
-  where?: Prisma.ExpenseWhereInput
-  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
-  cursor?: Prisma.ExpenseWhereUniqueInput
+  include?: Prisma.ChatBlockInclude<ExtArgs> | null
+  where?: Prisma.ChatBlockWhereInput
+  orderBy?: Prisma.ChatBlockOrderByWithRelationInput | Prisma.ChatBlockOrderByWithRelationInput[]
+  cursor?: Prisma.ChatBlockWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
-}
-
-/**
- * User.debts
- */
-export type User$debtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Debt
-   */
-  select?: Prisma.DebtSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Debt
-   */
-  omit?: Prisma.DebtOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DebtInclude<ExtArgs> | null
-  where?: Prisma.DebtWhereInput
-  orderBy?: Prisma.DebtOrderByWithRelationInput | Prisma.DebtOrderByWithRelationInput[]
-  cursor?: Prisma.DebtWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DebtScalarFieldEnum | Prisma.DebtScalarFieldEnum[]
-}
-
-/**
- * User.savingsGoals
- */
-export type User$savingsGoalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SavingsGoal
-   */
-  select?: Prisma.SavingsGoalSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the SavingsGoal
-   */
-  omit?: Prisma.SavingsGoalOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SavingsGoalInclude<ExtArgs> | null
-  where?: Prisma.SavingsGoalWhereInput
-  orderBy?: Prisma.SavingsGoalOrderByWithRelationInput | Prisma.SavingsGoalOrderByWithRelationInput[]
-  cursor?: Prisma.SavingsGoalWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SavingsGoalScalarFieldEnum | Prisma.SavingsGoalScalarFieldEnum[]
-}
-
-/**
- * User.budgets
- */
-export type User$budgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Budget
-   */
-  select?: Prisma.BudgetSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Budget
-   */
-  omit?: Prisma.BudgetOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BudgetInclude<ExtArgs> | null
-  where?: Prisma.BudgetWhereInput
-  orderBy?: Prisma.BudgetOrderByWithRelationInput | Prisma.BudgetOrderByWithRelationInput[]
-  cursor?: Prisma.BudgetWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BudgetScalarFieldEnum | Prisma.BudgetScalarFieldEnum[]
-}
-
-/**
- * User.wallets
- */
-export type User$walletsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Wallet
-   */
-  select?: Prisma.WalletSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Wallet
-   */
-  omit?: Prisma.WalletOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
-  where?: Prisma.WalletWhereInput
-  orderBy?: Prisma.WalletOrderByWithRelationInput | Prisma.WalletOrderByWithRelationInput[]
-  cursor?: Prisma.WalletWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.WalletScalarFieldEnum | Prisma.WalletScalarFieldEnum[]
+  distinct?: Prisma.ChatBlockScalarFieldEnum | Prisma.ChatBlockScalarFieldEnum[]
 }
 
 /**
@@ -3719,51 +3623,147 @@ export type User$chatMessagesArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * User.blocksMade
+ * User.debts
  */
-export type User$blocksMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$debtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ChatBlock
+   * Select specific fields to fetch from the Debt
    */
-  select?: Prisma.ChatBlockSelect<ExtArgs> | null
+  select?: Prisma.DebtSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ChatBlock
+   * Omit specific fields from the Debt
    */
-  omit?: Prisma.ChatBlockOmit<ExtArgs> | null
+  omit?: Prisma.DebtOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ChatBlockInclude<ExtArgs> | null
-  where?: Prisma.ChatBlockWhereInput
-  orderBy?: Prisma.ChatBlockOrderByWithRelationInput | Prisma.ChatBlockOrderByWithRelationInput[]
-  cursor?: Prisma.ChatBlockWhereUniqueInput
+  include?: Prisma.DebtInclude<ExtArgs> | null
+  where?: Prisma.DebtWhereInput
+  orderBy?: Prisma.DebtOrderByWithRelationInput | Prisma.DebtOrderByWithRelationInput[]
+  cursor?: Prisma.DebtWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ChatBlockScalarFieldEnum | Prisma.ChatBlockScalarFieldEnum[]
+  distinct?: Prisma.DebtScalarFieldEnum | Prisma.DebtScalarFieldEnum[]
 }
 
 /**
- * User.blocksGot
+ * User.expenses
  */
-export type User$blocksGotArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ChatBlock
+   * Select specific fields to fetch from the Expense
    */
-  select?: Prisma.ChatBlockSelect<ExtArgs> | null
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ChatBlock
+   * Omit specific fields from the Expense
    */
-  omit?: Prisma.ChatBlockOmit<ExtArgs> | null
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ChatBlockInclude<ExtArgs> | null
-  where?: Prisma.ChatBlockWhereInput
-  orderBy?: Prisma.ChatBlockOrderByWithRelationInput | Prisma.ChatBlockOrderByWithRelationInput[]
-  cursor?: Prisma.ChatBlockWhereUniqueInput
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ChatBlockScalarFieldEnum | Prisma.ChatBlockScalarFieldEnum[]
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
+}
+
+/**
+ * User.incomes
+ */
+export type User$incomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Income
+   */
+  select?: Prisma.IncomeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Income
+   */
+  omit?: Prisma.IncomeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IncomeInclude<ExtArgs> | null
+  where?: Prisma.IncomeWhereInput
+  orderBy?: Prisma.IncomeOrderByWithRelationInput | Prisma.IncomeOrderByWithRelationInput[]
+  cursor?: Prisma.IncomeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IncomeScalarFieldEnum | Prisma.IncomeScalarFieldEnum[]
+}
+
+/**
+ * User.savingsGoals
+ */
+export type User$savingsGoalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SavingsGoal
+   */
+  select?: Prisma.SavingsGoalSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SavingsGoal
+   */
+  omit?: Prisma.SavingsGoalOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SavingsGoalInclude<ExtArgs> | null
+  where?: Prisma.SavingsGoalWhereInput
+  orderBy?: Prisma.SavingsGoalOrderByWithRelationInput | Prisma.SavingsGoalOrderByWithRelationInput[]
+  cursor?: Prisma.SavingsGoalWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SavingsGoalScalarFieldEnum | Prisma.SavingsGoalScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
+}
+
+/**
+ * User.wallets
+ */
+export type User$walletsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Wallet
+   */
+  select?: Prisma.WalletSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Wallet
+   */
+  omit?: Prisma.WalletOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalletInclude<ExtArgs> | null
+  where?: Prisma.WalletWhereInput
+  orderBy?: Prisma.WalletOrderByWithRelationInput | Prisma.WalletOrderByWithRelationInput[]
+  cursor?: Prisma.WalletWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalletScalarFieldEnum | Prisma.WalletScalarFieldEnum[]
 }
 
 /**

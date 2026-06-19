@@ -30,10 +30,12 @@ export async function parseJson<T>(request: Request, schema: ZodType<T>): Promis
   let body: unknown;
   try {
     body = await request.json();
+    console.log({body})
   } catch {
     return { error: NextResponse.json({ error: 'JSON inválido' }, { status: 400 }) };
   }
   const result = schema.safeParse(body);
+  console.log({result})
   if (!result.success) {
     return {
       error: NextResponse.json(

@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         where: { id: goalId },
         data: {
           currentAmount: newCurrent,
-          status: newCurrent.gte(goal.targetAmount) ? 'completed' : goal.status,
+          status: newCurrent.gte(goal.targetAmount ?? 0) ? 'completed' : goal.status,
         },
       });
       return created;

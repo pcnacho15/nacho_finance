@@ -38,7 +38,6 @@ export type SavingsGoalSumAggregateOutputType = {
 
 export type SavingsGoalMinAggregateOutputType = {
   id: string | null
-  userId: string | null
   name: string | null
   targetAmount: runtime.Decimal | null
   currentAmount: runtime.Decimal | null
@@ -49,11 +48,11 @@ export type SavingsGoalMinAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type SavingsGoalMaxAggregateOutputType = {
   id: string | null
-  userId: string | null
   name: string | null
   targetAmount: runtime.Decimal | null
   currentAmount: runtime.Decimal | null
@@ -64,11 +63,11 @@ export type SavingsGoalMaxAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type SavingsGoalCountAggregateOutputType = {
   id: number
-  userId: number
   name: number
   targetAmount: number
   currentAmount: number
@@ -79,6 +78,7 @@ export type SavingsGoalCountAggregateOutputType = {
   description: number
   createdAt: number
   updatedAt: number
+  userId: number
   _all: number
 }
 
@@ -95,7 +95,6 @@ export type SavingsGoalSumAggregateInputType = {
 
 export type SavingsGoalMinAggregateInputType = {
   id?: true
-  userId?: true
   name?: true
   targetAmount?: true
   currentAmount?: true
@@ -106,11 +105,11 @@ export type SavingsGoalMinAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type SavingsGoalMaxAggregateInputType = {
   id?: true
-  userId?: true
   name?: true
   targetAmount?: true
   currentAmount?: true
@@ -121,11 +120,11 @@ export type SavingsGoalMaxAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type SavingsGoalCountAggregateInputType = {
   id?: true
-  userId?: true
   name?: true
   targetAmount?: true
   currentAmount?: true
@@ -136,6 +135,7 @@ export type SavingsGoalCountAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
   _all?: true
 }
 
@@ -227,17 +227,17 @@ export type SavingsGoalGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type SavingsGoalGroupByOutputType = {
   id: string
-  userId: string
   name: string
-  targetAmount: runtime.Decimal
+  targetAmount: runtime.Decimal | null
   currentAmount: runtime.Decimal
-  targetDate: Date
+  targetDate: Date | null
   status: string
   icon: string
   color: string
   description: string | null
   createdAt: Date
   updatedAt: Date
+  userId: string
   _count: SavingsGoalCountAggregateOutputType | null
   _avg: SavingsGoalAvgAggregateOutputType | null
   _sum: SavingsGoalSumAggregateOutputType | null
@@ -265,36 +265,36 @@ export type SavingsGoalWhereInput = {
   OR?: Prisma.SavingsGoalWhereInput[]
   NOT?: Prisma.SavingsGoalWhereInput | Prisma.SavingsGoalWhereInput[]
   id?: Prisma.StringFilter<"SavingsGoal"> | string
-  userId?: Prisma.StringFilter<"SavingsGoal"> | string
   name?: Prisma.StringFilter<"SavingsGoal"> | string
-  targetAmount?: Prisma.DecimalFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.DecimalNullableFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
+  targetDate?: Prisma.DateTimeNullableFilter<"SavingsGoal"> | Date | string | null
   status?: Prisma.StringFilter<"SavingsGoal"> | string
   icon?: Prisma.StringFilter<"SavingsGoal"> | string
   color?: Prisma.StringFilter<"SavingsGoal"> | string
   description?: Prisma.StringNullableFilter<"SavingsGoal"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  userId?: Prisma.StringFilter<"SavingsGoal"> | string
   contributions?: Prisma.SavingsContributionListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type SavingsGoalOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  targetAmount?: Prisma.SortOrder
+  targetAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   currentAmount?: Prisma.SortOrder
-  targetDate?: Prisma.SortOrder
+  targetDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  userId?: Prisma.SortOrder
   contributions?: Prisma.SavingsContributionOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type SavingsGoalWhereUniqueInput = Prisma.AtLeast<{
@@ -302,34 +302,34 @@ export type SavingsGoalWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SavingsGoalWhereInput | Prisma.SavingsGoalWhereInput[]
   OR?: Prisma.SavingsGoalWhereInput[]
   NOT?: Prisma.SavingsGoalWhereInput | Prisma.SavingsGoalWhereInput[]
-  userId?: Prisma.StringFilter<"SavingsGoal"> | string
   name?: Prisma.StringFilter<"SavingsGoal"> | string
-  targetAmount?: Prisma.DecimalFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.DecimalNullableFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
+  targetDate?: Prisma.DateTimeNullableFilter<"SavingsGoal"> | Date | string | null
   status?: Prisma.StringFilter<"SavingsGoal"> | string
   icon?: Prisma.StringFilter<"SavingsGoal"> | string
   color?: Prisma.StringFilter<"SavingsGoal"> | string
   description?: Prisma.StringNullableFilter<"SavingsGoal"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  userId?: Prisma.StringFilter<"SavingsGoal"> | string
   contributions?: Prisma.SavingsContributionListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type SavingsGoalOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  targetAmount?: Prisma.SortOrder
+  targetAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   currentAmount?: Prisma.SortOrder
-  targetDate?: Prisma.SortOrder
+  targetDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   _count?: Prisma.SavingsGoalCountOrderByAggregateInput
   _avg?: Prisma.SavingsGoalAvgOrderByAggregateInput
   _max?: Prisma.SavingsGoalMaxOrderByAggregateInput
@@ -342,104 +342,104 @@ export type SavingsGoalScalarWhereWithAggregatesInput = {
   OR?: Prisma.SavingsGoalScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SavingsGoalScalarWhereWithAggregatesInput | Prisma.SavingsGoalScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SavingsGoal"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"SavingsGoal"> | string
   name?: Prisma.StringWithAggregatesFilter<"SavingsGoal"> | string
-  targetAmount?: Prisma.DecimalWithAggregatesFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.DecimalNullableWithAggregatesFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalWithAggregatesFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeWithAggregatesFilter<"SavingsGoal"> | Date | string
+  targetDate?: Prisma.DateTimeNullableWithAggregatesFilter<"SavingsGoal"> | Date | string | null
   status?: Prisma.StringWithAggregatesFilter<"SavingsGoal"> | string
   icon?: Prisma.StringWithAggregatesFilter<"SavingsGoal"> | string
   color?: Prisma.StringWithAggregatesFilter<"SavingsGoal"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"SavingsGoal"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SavingsGoal"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SavingsGoal"> | Date | string
+  userId?: Prisma.StringWithAggregatesFilter<"SavingsGoal"> | string
 }
 
 export type SavingsGoalCreateInput = {
   id?: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutSavingsGoalsInput
   contributions?: Prisma.SavingsContributionCreateNestedManyWithoutGoalInput
+  user: Prisma.UserCreateNestedOneWithoutSavingsGoalsInput
 }
 
 export type SavingsGoalUncheckedCreateInput = {
   id?: string
-  userId: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId: string
   contributions?: Prisma.SavingsContributionUncheckedCreateNestedManyWithoutGoalInput
 }
 
 export type SavingsGoalUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutSavingsGoalsNestedInput
   contributions?: Prisma.SavingsContributionUpdateManyWithoutGoalNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSavingsGoalsNestedInput
 }
 
 export type SavingsGoalUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   contributions?: Prisma.SavingsContributionUncheckedUpdateManyWithoutGoalNestedInput
 }
 
 export type SavingsGoalCreateManyInput = {
   id?: string
-  userId: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId: string
 }
 
 export type SavingsGoalUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -450,17 +450,17 @@ export type SavingsGoalUpdateManyMutationInput = {
 
 export type SavingsGoalUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SavingsGoalListRelationFilter = {
@@ -475,7 +475,6 @@ export type SavingsGoalOrderByRelationAggregateInput = {
 
 export type SavingsGoalCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   currentAmount?: Prisma.SortOrder
@@ -486,6 +485,7 @@ export type SavingsGoalCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type SavingsGoalAvgOrderByAggregateInput = {
@@ -495,7 +495,6 @@ export type SavingsGoalAvgOrderByAggregateInput = {
 
 export type SavingsGoalMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   currentAmount?: Prisma.SortOrder
@@ -506,11 +505,11 @@ export type SavingsGoalMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type SavingsGoalMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   targetAmount?: Prisma.SortOrder
   currentAmount?: Prisma.SortOrder
@@ -521,6 +520,7 @@ export type SavingsGoalMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type SavingsGoalSumOrderByAggregateInput = {
@@ -575,6 +575,14 @@ export type SavingsGoalUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.SavingsGoalScalarWhereInput | Prisma.SavingsGoalScalarWhereInput[]
 }
 
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type SavingsGoalCreateNestedOneWithoutContributionsInput = {
   create?: Prisma.XOR<Prisma.SavingsGoalCreateWithoutContributionsInput, Prisma.SavingsGoalUncheckedCreateWithoutContributionsInput>
   connectOrCreate?: Prisma.SavingsGoalCreateOrConnectWithoutContributionsInput
@@ -592,9 +600,9 @@ export type SavingsGoalUpdateOneRequiredWithoutContributionsNestedInput = {
 export type SavingsGoalCreateWithoutUserInput = {
   id?: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
@@ -607,9 +615,9 @@ export type SavingsGoalCreateWithoutUserInput = {
 export type SavingsGoalUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
@@ -650,25 +658,25 @@ export type SavingsGoalScalarWhereInput = {
   OR?: Prisma.SavingsGoalScalarWhereInput[]
   NOT?: Prisma.SavingsGoalScalarWhereInput | Prisma.SavingsGoalScalarWhereInput[]
   id?: Prisma.StringFilter<"SavingsGoal"> | string
-  userId?: Prisma.StringFilter<"SavingsGoal"> | string
   name?: Prisma.StringFilter<"SavingsGoal"> | string
-  targetAmount?: Prisma.DecimalFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.DecimalNullableFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFilter<"SavingsGoal"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
+  targetDate?: Prisma.DateTimeNullableFilter<"SavingsGoal"> | Date | string | null
   status?: Prisma.StringFilter<"SavingsGoal"> | string
   icon?: Prisma.StringFilter<"SavingsGoal"> | string
   color?: Prisma.StringFilter<"SavingsGoal"> | string
   description?: Prisma.StringNullableFilter<"SavingsGoal"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SavingsGoal"> | Date | string
+  userId?: Prisma.StringFilter<"SavingsGoal"> | string
 }
 
 export type SavingsGoalCreateWithoutContributionsInput = {
   id?: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
@@ -680,17 +688,17 @@ export type SavingsGoalCreateWithoutContributionsInput = {
 
 export type SavingsGoalUncheckedCreateWithoutContributionsInput = {
   id?: string
-  userId: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId: string
 }
 
 export type SavingsGoalCreateOrConnectWithoutContributionsInput = {
@@ -712,9 +720,9 @@ export type SavingsGoalUpdateToOneWithWhereWithoutContributionsInput = {
 export type SavingsGoalUpdateWithoutContributionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -726,25 +734,25 @@ export type SavingsGoalUpdateWithoutContributionsInput = {
 
 export type SavingsGoalUncheckedUpdateWithoutContributionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SavingsGoalCreateManyUserInput = {
   id?: string
   name: string
-  targetAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate: Date | string
+  targetDate?: Date | string | null
   status?: string
   icon: string
   color: string
@@ -756,9 +764,9 @@ export type SavingsGoalCreateManyUserInput = {
 export type SavingsGoalUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -771,9 +779,9 @@ export type SavingsGoalUpdateWithoutUserInput = {
 export type SavingsGoalUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -786,9 +794,9 @@ export type SavingsGoalUncheckedUpdateWithoutUserInput = {
 export type SavingsGoalUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  targetAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  targetAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   currentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  targetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  targetDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -830,7 +838,6 @@ export type SavingsGoalCountOutputTypeCountContributionsArgs<ExtArgs extends run
 
 export type SavingsGoalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
   name?: boolean
   targetAmount?: boolean
   currentAmount?: boolean
@@ -841,14 +848,14 @@ export type SavingsGoalSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  userId?: boolean
   contributions?: boolean | Prisma.SavingsGoal$contributionsArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SavingsGoalCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["savingsGoal"]>
 
 export type SavingsGoalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
   name?: boolean
   targetAmount?: boolean
   currentAmount?: boolean
@@ -859,12 +866,12 @@ export type SavingsGoalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["savingsGoal"]>
 
 export type SavingsGoalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
   name?: boolean
   targetAmount?: boolean
   currentAmount?: boolean
@@ -875,12 +882,12 @@ export type SavingsGoalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["savingsGoal"]>
 
 export type SavingsGoalSelectScalar = {
   id?: boolean
-  userId?: boolean
   name?: boolean
   targetAmount?: boolean
   currentAmount?: boolean
@@ -891,12 +898,13 @@ export type SavingsGoalSelectScalar = {
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
 }
 
-export type SavingsGoalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "targetAmount" | "currentAmount" | "targetDate" | "status" | "icon" | "color" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["savingsGoal"]>
+export type SavingsGoalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "targetAmount" | "currentAmount" | "targetDate" | "status" | "icon" | "color" | "description" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["savingsGoal"]>
 export type SavingsGoalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   contributions?: boolean | Prisma.SavingsGoal$contributionsArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SavingsGoalCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SavingsGoalIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -909,22 +917,22 @@ export type SavingsGoalIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type $SavingsGoalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SavingsGoal"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     contributions: Prisma.$SavingsContributionPayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    userId: string
     name: string
-    targetAmount: runtime.Decimal
+    targetAmount: runtime.Decimal | null
     currentAmount: runtime.Decimal
-    targetDate: Date
+    targetDate: Date | null
     status: string
     icon: string
     color: string
     description: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string
   }, ExtArgs["result"]["savingsGoal"]>
   composites: {}
 }
@@ -1319,8 +1327,8 @@ readonly fields: SavingsGoalFieldRefs;
  */
 export interface Prisma__SavingsGoalClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   contributions<T extends Prisma.SavingsGoal$contributionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SavingsGoal$contributionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavingsContributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1351,7 +1359,6 @@ export interface Prisma__SavingsGoalClient<T, Null = never, ExtArgs extends runt
  */
 export interface SavingsGoalFieldRefs {
   readonly id: Prisma.FieldRef<"SavingsGoal", 'String'>
-  readonly userId: Prisma.FieldRef<"SavingsGoal", 'String'>
   readonly name: Prisma.FieldRef<"SavingsGoal", 'String'>
   readonly targetAmount: Prisma.FieldRef<"SavingsGoal", 'Decimal'>
   readonly currentAmount: Prisma.FieldRef<"SavingsGoal", 'Decimal'>
@@ -1362,6 +1369,7 @@ export interface SavingsGoalFieldRefs {
   readonly description: Prisma.FieldRef<"SavingsGoal", 'String'>
   readonly createdAt: Prisma.FieldRef<"SavingsGoal", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SavingsGoal", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"SavingsGoal", 'String'>
 }
     
 

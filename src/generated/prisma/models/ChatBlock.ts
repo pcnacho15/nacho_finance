@@ -174,8 +174,8 @@ export type ChatBlockWhereInput = {
   blockerId?: Prisma.StringFilter<"ChatBlock"> | string
   blockedId?: Prisma.StringFilter<"ChatBlock"> | string
   createdAt?: Prisma.DateTimeFilter<"ChatBlock"> | Date | string
-  blocker?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   blocked?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  blocker?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type ChatBlockOrderByWithRelationInput = {
@@ -183,8 +183,8 @@ export type ChatBlockOrderByWithRelationInput = {
   blockerId?: Prisma.SortOrder
   blockedId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  blocker?: Prisma.UserOrderByWithRelationInput
   blocked?: Prisma.UserOrderByWithRelationInput
+  blocker?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ChatBlockWhereUniqueInput = Prisma.AtLeast<{
@@ -196,8 +196,8 @@ export type ChatBlockWhereUniqueInput = Prisma.AtLeast<{
   blockerId?: Prisma.StringFilter<"ChatBlock"> | string
   blockedId?: Prisma.StringFilter<"ChatBlock"> | string
   createdAt?: Prisma.DateTimeFilter<"ChatBlock"> | Date | string
-  blocker?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   blocked?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  blocker?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "blockerId_blockedId">
 
 export type ChatBlockOrderByWithAggregationInput = {
@@ -223,8 +223,8 @@ export type ChatBlockScalarWhereWithAggregatesInput = {
 export type ChatBlockCreateInput = {
   id?: string
   createdAt?: Date | string
-  blocker: Prisma.UserCreateNestedOneWithoutBlocksMadeInput
   blocked: Prisma.UserCreateNestedOneWithoutBlocksGotInput
+  blocker: Prisma.UserCreateNestedOneWithoutBlocksMadeInput
 }
 
 export type ChatBlockUncheckedCreateInput = {
@@ -237,8 +237,8 @@ export type ChatBlockUncheckedCreateInput = {
 export type ChatBlockUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  blocker?: Prisma.UserUpdateOneRequiredWithoutBlocksMadeNestedInput
   blocked?: Prisma.UserUpdateOneRequiredWithoutBlocksGotNestedInput
+  blocker?: Prisma.UserUpdateOneRequiredWithoutBlocksMadeNestedInput
 }
 
 export type ChatBlockUncheckedUpdateInput = {
@@ -303,13 +303,6 @@ export type ChatBlockMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
-export type ChatBlockCreateNestedManyWithoutBlockerInput = {
-  create?: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput> | Prisma.ChatBlockCreateWithoutBlockerInput[] | Prisma.ChatBlockUncheckedCreateWithoutBlockerInput[]
-  connectOrCreate?: Prisma.ChatBlockCreateOrConnectWithoutBlockerInput | Prisma.ChatBlockCreateOrConnectWithoutBlockerInput[]
-  createMany?: Prisma.ChatBlockCreateManyBlockerInputEnvelope
-  connect?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
-}
-
 export type ChatBlockCreateNestedManyWithoutBlockedInput = {
   create?: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockedInput, Prisma.ChatBlockUncheckedCreateWithoutBlockedInput> | Prisma.ChatBlockCreateWithoutBlockedInput[] | Prisma.ChatBlockUncheckedCreateWithoutBlockedInput[]
   connectOrCreate?: Prisma.ChatBlockCreateOrConnectWithoutBlockedInput | Prisma.ChatBlockCreateOrConnectWithoutBlockedInput[]
@@ -317,7 +310,7 @@ export type ChatBlockCreateNestedManyWithoutBlockedInput = {
   connect?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
 }
 
-export type ChatBlockUncheckedCreateNestedManyWithoutBlockerInput = {
+export type ChatBlockCreateNestedManyWithoutBlockerInput = {
   create?: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput> | Prisma.ChatBlockCreateWithoutBlockerInput[] | Prisma.ChatBlockUncheckedCreateWithoutBlockerInput[]
   connectOrCreate?: Prisma.ChatBlockCreateOrConnectWithoutBlockerInput | Prisma.ChatBlockCreateOrConnectWithoutBlockerInput[]
   createMany?: Prisma.ChatBlockCreateManyBlockerInputEnvelope
@@ -331,18 +324,11 @@ export type ChatBlockUncheckedCreateNestedManyWithoutBlockedInput = {
   connect?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
 }
 
-export type ChatBlockUpdateManyWithoutBlockerNestedInput = {
+export type ChatBlockUncheckedCreateNestedManyWithoutBlockerInput = {
   create?: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput> | Prisma.ChatBlockCreateWithoutBlockerInput[] | Prisma.ChatBlockUncheckedCreateWithoutBlockerInput[]
   connectOrCreate?: Prisma.ChatBlockCreateOrConnectWithoutBlockerInput | Prisma.ChatBlockCreateOrConnectWithoutBlockerInput[]
-  upsert?: Prisma.ChatBlockUpsertWithWhereUniqueWithoutBlockerInput | Prisma.ChatBlockUpsertWithWhereUniqueWithoutBlockerInput[]
   createMany?: Prisma.ChatBlockCreateManyBlockerInputEnvelope
-  set?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
-  disconnect?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
-  delete?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
   connect?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
-  update?: Prisma.ChatBlockUpdateWithWhereUniqueWithoutBlockerInput | Prisma.ChatBlockUpdateWithWhereUniqueWithoutBlockerInput[]
-  updateMany?: Prisma.ChatBlockUpdateManyWithWhereWithoutBlockerInput | Prisma.ChatBlockUpdateManyWithWhereWithoutBlockerInput[]
-  deleteMany?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
 }
 
 export type ChatBlockUpdateManyWithoutBlockedNestedInput = {
@@ -359,7 +345,7 @@ export type ChatBlockUpdateManyWithoutBlockedNestedInput = {
   deleteMany?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
 }
 
-export type ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput = {
+export type ChatBlockUpdateManyWithoutBlockerNestedInput = {
   create?: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput> | Prisma.ChatBlockCreateWithoutBlockerInput[] | Prisma.ChatBlockUncheckedCreateWithoutBlockerInput[]
   connectOrCreate?: Prisma.ChatBlockCreateOrConnectWithoutBlockerInput | Prisma.ChatBlockCreateOrConnectWithoutBlockerInput[]
   upsert?: Prisma.ChatBlockUpsertWithWhereUniqueWithoutBlockerInput | Prisma.ChatBlockUpsertWithWhereUniqueWithoutBlockerInput[]
@@ -387,26 +373,18 @@ export type ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput = {
   deleteMany?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
 }
 
-export type ChatBlockCreateWithoutBlockerInput = {
-  id?: string
-  createdAt?: Date | string
-  blocked: Prisma.UserCreateNestedOneWithoutBlocksGotInput
-}
-
-export type ChatBlockUncheckedCreateWithoutBlockerInput = {
-  id?: string
-  blockedId: string
-  createdAt?: Date | string
-}
-
-export type ChatBlockCreateOrConnectWithoutBlockerInput = {
-  where: Prisma.ChatBlockWhereUniqueInput
-  create: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput>
-}
-
-export type ChatBlockCreateManyBlockerInputEnvelope = {
-  data: Prisma.ChatBlockCreateManyBlockerInput | Prisma.ChatBlockCreateManyBlockerInput[]
-  skipDuplicates?: boolean
+export type ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput> | Prisma.ChatBlockCreateWithoutBlockerInput[] | Prisma.ChatBlockUncheckedCreateWithoutBlockerInput[]
+  connectOrCreate?: Prisma.ChatBlockCreateOrConnectWithoutBlockerInput | Prisma.ChatBlockCreateOrConnectWithoutBlockerInput[]
+  upsert?: Prisma.ChatBlockUpsertWithWhereUniqueWithoutBlockerInput | Prisma.ChatBlockUpsertWithWhereUniqueWithoutBlockerInput[]
+  createMany?: Prisma.ChatBlockCreateManyBlockerInputEnvelope
+  set?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
+  disconnect?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
+  delete?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
+  connect?: Prisma.ChatBlockWhereUniqueInput | Prisma.ChatBlockWhereUniqueInput[]
+  update?: Prisma.ChatBlockUpdateWithWhereUniqueWithoutBlockerInput | Prisma.ChatBlockUpdateWithWhereUniqueWithoutBlockerInput[]
+  updateMany?: Prisma.ChatBlockUpdateManyWithWhereWithoutBlockerInput | Prisma.ChatBlockUpdateManyWithWhereWithoutBlockerInput[]
+  deleteMany?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
 }
 
 export type ChatBlockCreateWithoutBlockedInput = {
@@ -431,30 +409,26 @@ export type ChatBlockCreateManyBlockedInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type ChatBlockUpsertWithWhereUniqueWithoutBlockerInput = {
+export type ChatBlockCreateWithoutBlockerInput = {
+  id?: string
+  createdAt?: Date | string
+  blocked: Prisma.UserCreateNestedOneWithoutBlocksGotInput
+}
+
+export type ChatBlockUncheckedCreateWithoutBlockerInput = {
+  id?: string
+  blockedId: string
+  createdAt?: Date | string
+}
+
+export type ChatBlockCreateOrConnectWithoutBlockerInput = {
   where: Prisma.ChatBlockWhereUniqueInput
-  update: Prisma.XOR<Prisma.ChatBlockUpdateWithoutBlockerInput, Prisma.ChatBlockUncheckedUpdateWithoutBlockerInput>
   create: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput>
 }
 
-export type ChatBlockUpdateWithWhereUniqueWithoutBlockerInput = {
-  where: Prisma.ChatBlockWhereUniqueInput
-  data: Prisma.XOR<Prisma.ChatBlockUpdateWithoutBlockerInput, Prisma.ChatBlockUncheckedUpdateWithoutBlockerInput>
-}
-
-export type ChatBlockUpdateManyWithWhereWithoutBlockerInput = {
-  where: Prisma.ChatBlockScalarWhereInput
-  data: Prisma.XOR<Prisma.ChatBlockUpdateManyMutationInput, Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerInput>
-}
-
-export type ChatBlockScalarWhereInput = {
-  AND?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
-  OR?: Prisma.ChatBlockScalarWhereInput[]
-  NOT?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
-  id?: Prisma.StringFilter<"ChatBlock"> | string
-  blockerId?: Prisma.StringFilter<"ChatBlock"> | string
-  blockedId?: Prisma.StringFilter<"ChatBlock"> | string
-  createdAt?: Prisma.DateTimeFilter<"ChatBlock"> | Date | string
+export type ChatBlockCreateManyBlockerInputEnvelope = {
+  data: Prisma.ChatBlockCreateManyBlockerInput | Prisma.ChatBlockCreateManyBlockerInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChatBlockUpsertWithWhereUniqueWithoutBlockedInput = {
@@ -473,10 +447,30 @@ export type ChatBlockUpdateManyWithWhereWithoutBlockedInput = {
   data: Prisma.XOR<Prisma.ChatBlockUpdateManyMutationInput, Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedInput>
 }
 
-export type ChatBlockCreateManyBlockerInput = {
-  id?: string
-  blockedId: string
-  createdAt?: Date | string
+export type ChatBlockScalarWhereInput = {
+  AND?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
+  OR?: Prisma.ChatBlockScalarWhereInput[]
+  NOT?: Prisma.ChatBlockScalarWhereInput | Prisma.ChatBlockScalarWhereInput[]
+  id?: Prisma.StringFilter<"ChatBlock"> | string
+  blockerId?: Prisma.StringFilter<"ChatBlock"> | string
+  blockedId?: Prisma.StringFilter<"ChatBlock"> | string
+  createdAt?: Prisma.DateTimeFilter<"ChatBlock"> | Date | string
+}
+
+export type ChatBlockUpsertWithWhereUniqueWithoutBlockerInput = {
+  where: Prisma.ChatBlockWhereUniqueInput
+  update: Prisma.XOR<Prisma.ChatBlockUpdateWithoutBlockerInput, Prisma.ChatBlockUncheckedUpdateWithoutBlockerInput>
+  create: Prisma.XOR<Prisma.ChatBlockCreateWithoutBlockerInput, Prisma.ChatBlockUncheckedCreateWithoutBlockerInput>
+}
+
+export type ChatBlockUpdateWithWhereUniqueWithoutBlockerInput = {
+  where: Prisma.ChatBlockWhereUniqueInput
+  data: Prisma.XOR<Prisma.ChatBlockUpdateWithoutBlockerInput, Prisma.ChatBlockUncheckedUpdateWithoutBlockerInput>
+}
+
+export type ChatBlockUpdateManyWithWhereWithoutBlockerInput = {
+  where: Prisma.ChatBlockScalarWhereInput
+  data: Prisma.XOR<Prisma.ChatBlockUpdateManyMutationInput, Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerInput>
 }
 
 export type ChatBlockCreateManyBlockedInput = {
@@ -485,22 +479,10 @@ export type ChatBlockCreateManyBlockedInput = {
   createdAt?: Date | string
 }
 
-export type ChatBlockUpdateWithoutBlockerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  blocked?: Prisma.UserUpdateOneRequiredWithoutBlocksGotNestedInput
-}
-
-export type ChatBlockUncheckedUpdateWithoutBlockerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  blockedId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ChatBlockUncheckedUpdateManyWithoutBlockerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  blockedId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type ChatBlockCreateManyBlockerInput = {
+  id?: string
+  blockedId: string
+  createdAt?: Date | string
 }
 
 export type ChatBlockUpdateWithoutBlockedInput = {
@@ -521,6 +503,24 @@ export type ChatBlockUncheckedUpdateManyWithoutBlockedInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type ChatBlockUpdateWithoutBlockerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blocked?: Prisma.UserUpdateOneRequiredWithoutBlocksGotNestedInput
+}
+
+export type ChatBlockUncheckedUpdateWithoutBlockerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  blockedId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ChatBlockUncheckedUpdateManyWithoutBlockerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  blockedId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 
 export type ChatBlockSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -528,8 +528,8 @@ export type ChatBlockSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   blockerId?: boolean
   blockedId?: boolean
   createdAt?: boolean
-  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   blocked?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chatBlock"]>
 
 export type ChatBlockSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -537,8 +537,8 @@ export type ChatBlockSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   blockerId?: boolean
   blockedId?: boolean
   createdAt?: boolean
-  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   blocked?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chatBlock"]>
 
 export type ChatBlockSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -546,8 +546,8 @@ export type ChatBlockSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   blockerId?: boolean
   blockedId?: boolean
   createdAt?: boolean
-  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   blocked?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chatBlock"]>
 
 export type ChatBlockSelectScalar = {
@@ -559,23 +559,23 @@ export type ChatBlockSelectScalar = {
 
 export type ChatBlockOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "blockerId" | "blockedId" | "createdAt", ExtArgs["result"]["chatBlock"]>
 export type ChatBlockInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   blocked?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type ChatBlockIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   blocked?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type ChatBlockIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   blocked?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  blocker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $ChatBlockPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ChatBlock"
   objects: {
-    blocker: Prisma.$UserPayload<ExtArgs>
     blocked: Prisma.$UserPayload<ExtArgs>
+    blocker: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -976,8 +976,8 @@ readonly fields: ChatBlockFieldRefs;
  */
 export interface Prisma__ChatBlockClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  blocker<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   blocked<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  blocker<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

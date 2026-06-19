@@ -26,7 +26,6 @@ export type AggregateCategory = {
 
 export type CategoryMinAggregateOutputType = {
   id: string | null
-  userId: string | null
   name: string | null
   type: string | null
   color: string | null
@@ -34,11 +33,11 @@ export type CategoryMinAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type CategoryMaxAggregateOutputType = {
   id: string | null
-  userId: string | null
   name: string | null
   type: string | null
   color: string | null
@@ -46,11 +45,11 @@ export type CategoryMaxAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  userId: string | null
 }
 
 export type CategoryCountAggregateOutputType = {
   id: number
-  userId: number
   name: number
   type: number
   color: number
@@ -58,13 +57,13 @@ export type CategoryCountAggregateOutputType = {
   description: number
   createdAt: number
   updatedAt: number
+  userId: number
   _all: number
 }
 
 
 export type CategoryMinAggregateInputType = {
   id?: true
-  userId?: true
   name?: true
   type?: true
   color?: true
@@ -72,11 +71,11 @@ export type CategoryMinAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type CategoryMaxAggregateInputType = {
   id?: true
-  userId?: true
   name?: true
   type?: true
   color?: true
@@ -84,11 +83,11 @@ export type CategoryMaxAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
 }
 
 export type CategoryCountAggregateInputType = {
   id?: true
-  userId?: true
   name?: true
   type?: true
   color?: true
@@ -96,6 +95,7 @@ export type CategoryCountAggregateInputType = {
   description?: true
   createdAt?: true
   updatedAt?: true
+  userId?: true
   _all?: true
 }
 
@@ -173,7 +173,6 @@ export type CategoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type CategoryGroupByOutputType = {
   id: string
-  userId: string
   name: string
   type: string
   color: string
@@ -181,6 +180,7 @@ export type CategoryGroupByOutputType = {
   description: string | null
   createdAt: Date
   updatedAt: Date
+  userId: string
   _count: CategoryCountAggregateOutputType | null
   _min: CategoryMinAggregateOutputType | null
   _max: CategoryMaxAggregateOutputType | null
@@ -206,7 +206,6 @@ export type CategoryWhereInput = {
   OR?: Prisma.CategoryWhereInput[]
   NOT?: Prisma.CategoryWhereInput | Prisma.CategoryWhereInput[]
   id?: Prisma.StringFilter<"Category"> | string
-  userId?: Prisma.StringFilter<"Category"> | string
   name?: Prisma.StringFilter<"Category"> | string
   type?: Prisma.StringFilter<"Category"> | string
   color?: Prisma.StringFilter<"Category"> | string
@@ -214,15 +213,15 @@ export type CategoryWhereInput = {
   description?: Prisma.StringNullableFilter<"Category"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Category"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Category"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  incomes?: Prisma.IncomeListRelationFilter
-  expenses?: Prisma.ExpenseListRelationFilter
+  userId?: Prisma.StringFilter<"Category"> | string
   budgets?: Prisma.BudgetListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  expenses?: Prisma.ExpenseListRelationFilter
+  incomes?: Prisma.IncomeListRelationFilter
 }
 
 export type CategoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   color?: Prisma.SortOrder
@@ -230,10 +229,11 @@ export type CategoryOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
-  incomes?: Prisma.IncomeOrderByRelationAggregateInput
-  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  userId?: Prisma.SortOrder
   budgets?: Prisma.BudgetOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  incomes?: Prisma.IncomeOrderByRelationAggregateInput
 }
 
 export type CategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -241,7 +241,6 @@ export type CategoryWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CategoryWhereInput | Prisma.CategoryWhereInput[]
   OR?: Prisma.CategoryWhereInput[]
   NOT?: Prisma.CategoryWhereInput | Prisma.CategoryWhereInput[]
-  userId?: Prisma.StringFilter<"Category"> | string
   name?: Prisma.StringFilter<"Category"> | string
   type?: Prisma.StringFilter<"Category"> | string
   color?: Prisma.StringFilter<"Category"> | string
@@ -249,15 +248,15 @@ export type CategoryWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Category"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Category"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Category"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  incomes?: Prisma.IncomeListRelationFilter
-  expenses?: Prisma.ExpenseListRelationFilter
+  userId?: Prisma.StringFilter<"Category"> | string
   budgets?: Prisma.BudgetListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  expenses?: Prisma.ExpenseListRelationFilter
+  incomes?: Prisma.IncomeListRelationFilter
 }, "id">
 
 export type CategoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   color?: Prisma.SortOrder
@@ -265,6 +264,7 @@ export type CategoryOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   _count?: Prisma.CategoryCountOrderByAggregateInput
   _max?: Prisma.CategoryMaxOrderByAggregateInput
   _min?: Prisma.CategoryMinOrderByAggregateInput
@@ -275,7 +275,6 @@ export type CategoryScalarWhereWithAggregatesInput = {
   OR?: Prisma.CategoryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CategoryScalarWhereWithAggregatesInput | Prisma.CategoryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Category"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"Category"> | string
   name?: Prisma.StringWithAggregatesFilter<"Category"> | string
   type?: Prisma.StringWithAggregatesFilter<"Category"> | string
   color?: Prisma.StringWithAggregatesFilter<"Category"> | string
@@ -283,6 +282,7 @@ export type CategoryScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Category"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Category"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Category"> | Date | string
+  userId?: Prisma.StringWithAggregatesFilter<"Category"> | string
 }
 
 export type CategoryCreateInput = {
@@ -294,15 +294,14 @@ export type CategoryCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCategoriesInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutCategoryInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutCategoryInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
+  user: Prisma.UserCreateNestedOneWithoutCategoriesInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCategoryInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryUncheckedCreateInput = {
   id?: string
-  userId: string
   name: string
   type?: string
   color: string
@@ -310,9 +309,10 @@ export type CategoryUncheckedCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCategoryInput
+  userId: string
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutCategoryInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCategoryInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryUpdateInput = {
@@ -324,15 +324,14 @@ export type CategoryUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCategoriesNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutCategoryNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutCategoryNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCategoriesNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCategoryNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -340,14 +339,14 @@ export type CategoryUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutCategoryNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryCreateManyInput = {
   id?: string
-  userId: string
   name: string
   type?: string
   color: string
@@ -355,6 +354,7 @@ export type CategoryCreateManyInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  userId: string
 }
 
 export type CategoryUpdateManyMutationInput = {
@@ -370,7 +370,6 @@ export type CategoryUpdateManyMutationInput = {
 
 export type CategoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -378,6 +377,7 @@ export type CategoryUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CategoryListRelationFilter = {
@@ -392,7 +392,6 @@ export type CategoryOrderByRelationAggregateInput = {
 
 export type CategoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   color?: Prisma.SortOrder
@@ -400,11 +399,11 @@ export type CategoryCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type CategoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   color?: Prisma.SortOrder
@@ -412,11 +411,11 @@ export type CategoryMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type CategoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   color?: Prisma.SortOrder
@@ -424,6 +423,7 @@ export type CategoryMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type CategoryScalarRelationFilter = {
@@ -524,9 +524,9 @@ export type CategoryCreateWithoutUserInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  incomes?: Prisma.IncomeCreateNestedManyWithoutCategoryInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutCategoryInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCategoryInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryUncheckedCreateWithoutUserInput = {
@@ -538,9 +538,9 @@ export type CategoryUncheckedCreateWithoutUserInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCategoryInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutCategoryInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCategoryInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryCreateOrConnectWithoutUserInput = {
@@ -574,7 +574,6 @@ export type CategoryScalarWhereInput = {
   OR?: Prisma.CategoryScalarWhereInput[]
   NOT?: Prisma.CategoryScalarWhereInput | Prisma.CategoryScalarWhereInput[]
   id?: Prisma.StringFilter<"Category"> | string
-  userId?: Prisma.StringFilter<"Category"> | string
   name?: Prisma.StringFilter<"Category"> | string
   type?: Prisma.StringFilter<"Category"> | string
   color?: Prisma.StringFilter<"Category"> | string
@@ -582,6 +581,7 @@ export type CategoryScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Category"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Category"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Category"> | Date | string
+  userId?: Prisma.StringFilter<"Category"> | string
 }
 
 export type CategoryCreateWithoutIncomesInput = {
@@ -593,14 +593,13 @@ export type CategoryCreateWithoutIncomesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
   user: Prisma.UserCreateNestedOneWithoutCategoriesInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCategoryInput
-  budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryUncheckedCreateWithoutIncomesInput = {
   id?: string
-  userId: string
   name: string
   type?: string
   color: string
@@ -608,8 +607,9 @@ export type CategoryUncheckedCreateWithoutIncomesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCategoryInput
+  userId: string
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutCategoryInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryCreateOrConnectWithoutIncomesInput = {
@@ -637,14 +637,13 @@ export type CategoryUpdateWithoutIncomesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutCategoriesNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCategoryNestedInput
-  budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryUncheckedUpdateWithoutIncomesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -652,8 +651,9 @@ export type CategoryUncheckedUpdateWithoutIncomesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutCategoryNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryCreateWithoutExpensesInput = {
@@ -665,14 +665,13 @@ export type CategoryCreateWithoutExpensesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
   user: Prisma.UserCreateNestedOneWithoutCategoriesInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutCategoryInput
-  budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryUncheckedCreateWithoutExpensesInput = {
   id?: string
-  userId: string
   name: string
   type?: string
   color: string
@@ -680,8 +679,9 @@ export type CategoryUncheckedCreateWithoutExpensesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
+  userId: string
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutCategoryInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryCreateOrConnectWithoutExpensesInput = {
@@ -709,14 +709,13 @@ export type CategoryUpdateWithoutExpensesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutCategoriesNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutCategoryNestedInput
-  budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryUncheckedUpdateWithoutExpensesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -724,8 +723,9 @@ export type CategoryUncheckedUpdateWithoutExpensesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutCategoryNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryCreateWithoutBudgetsInput = {
@@ -738,13 +738,12 @@ export type CategoryCreateWithoutBudgetsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCategoriesInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutCategoryInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCategoryInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryUncheckedCreateWithoutBudgetsInput = {
   id?: string
-  userId: string
   name: string
   type?: string
   color: string
@@ -752,8 +751,9 @@ export type CategoryUncheckedCreateWithoutBudgetsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
+  userId: string
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCategoryInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type CategoryCreateOrConnectWithoutBudgetsInput = {
@@ -782,13 +782,12 @@ export type CategoryUpdateWithoutBudgetsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCategoriesNestedInput
-  incomes?: Prisma.IncomeUpdateManyWithoutCategoryNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCategoryNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryUncheckedUpdateWithoutBudgetsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -796,8 +795,9 @@ export type CategoryUncheckedUpdateWithoutBudgetsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryCreateManyUserInput = {
@@ -820,9 +820,9 @@ export type CategoryUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  incomes?: Prisma.IncomeUpdateManyWithoutCategoryNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutCategoryNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCategoryNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryUncheckedUpdateWithoutUserInput = {
@@ -834,9 +834,9 @@ export type CategoryUncheckedUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutCategoryNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCategoryNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type CategoryUncheckedUpdateManyWithoutUserInput = {
@@ -856,15 +856,15 @@ export type CategoryUncheckedUpdateManyWithoutUserInput = {
  */
 
 export type CategoryCountOutputType = {
-  incomes: number
-  expenses: number
   budgets: number
+  expenses: number
+  incomes: number
 }
 
 export type CategoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  incomes?: boolean | CategoryCountOutputTypeCountIncomesArgs
-  expenses?: boolean | CategoryCountOutputTypeCountExpensesArgs
   budgets?: boolean | CategoryCountOutputTypeCountBudgetsArgs
+  expenses?: boolean | CategoryCountOutputTypeCountExpensesArgs
+  incomes?: boolean | CategoryCountOutputTypeCountIncomesArgs
 }
 
 /**
@@ -880,8 +880,8 @@ export type CategoryCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
 /**
  * CategoryCountOutputType without action
  */
-export type CategoryCountOutputTypeCountIncomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.IncomeWhereInput
+export type CategoryCountOutputTypeCountBudgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BudgetWhereInput
 }
 
 /**
@@ -894,14 +894,13 @@ export type CategoryCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Typ
 /**
  * CategoryCountOutputType without action
  */
-export type CategoryCountOutputTypeCountBudgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BudgetWhereInput
+export type CategoryCountOutputTypeCountIncomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IncomeWhereInput
 }
 
 
 export type CategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
   name?: boolean
   type?: boolean
   color?: boolean
@@ -909,16 +908,16 @@ export type CategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  incomes?: boolean | Prisma.Category$incomesArgs<ExtArgs>
-  expenses?: boolean | Prisma.Category$expensesArgs<ExtArgs>
+  userId?: boolean
   budgets?: boolean | Prisma.Category$budgetsArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  expenses?: boolean | Prisma.Category$expensesArgs<ExtArgs>
+  incomes?: boolean | Prisma.Category$incomesArgs<ExtArgs>
   _count?: boolean | Prisma.CategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["category"]>
 
 export type CategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
   name?: boolean
   type?: boolean
   color?: boolean
@@ -926,12 +925,12 @@ export type CategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["category"]>
 
 export type CategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
   name?: boolean
   type?: boolean
   color?: boolean
@@ -939,12 +938,12 @@ export type CategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["category"]>
 
 export type CategorySelectScalar = {
   id?: boolean
-  userId?: boolean
   name?: boolean
   type?: boolean
   color?: boolean
@@ -952,14 +951,15 @@ export type CategorySelectScalar = {
   description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userId?: boolean
 }
 
-export type CategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "color" | "icon" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+export type CategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "color" | "icon" | "description" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["category"]>
 export type CategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  incomes?: boolean | Prisma.Category$incomesArgs<ExtArgs>
-  expenses?: boolean | Prisma.Category$expensesArgs<ExtArgs>
   budgets?: boolean | Prisma.Category$budgetsArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  expenses?: boolean | Prisma.Category$expensesArgs<ExtArgs>
+  incomes?: boolean | Prisma.Category$incomesArgs<ExtArgs>
   _count?: boolean | Prisma.CategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CategoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -972,14 +972,13 @@ export type CategoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $CategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Category"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
-    incomes: Prisma.$IncomePayload<ExtArgs>[]
-    expenses: Prisma.$ExpensePayload<ExtArgs>[]
     budgets: Prisma.$BudgetPayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs>
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
+    incomes: Prisma.$IncomePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    userId: string
     name: string
     type: string
     color: string
@@ -987,6 +986,7 @@ export type $CategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     description: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string
   }, ExtArgs["result"]["category"]>
   composites: {}
 }
@@ -1381,10 +1381,10 @@ readonly fields: CategoryFieldRefs;
  */
 export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  incomes<T extends Prisma.Category$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Category$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  expenses<T extends Prisma.Category$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Category$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   budgets<T extends Prisma.Category$budgetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Category$budgetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  expenses<T extends Prisma.Category$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Category$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  incomes<T extends Prisma.Category$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Category$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1415,7 +1415,6 @@ export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends runtime
  */
 export interface CategoryFieldRefs {
   readonly id: Prisma.FieldRef<"Category", 'String'>
-  readonly userId: Prisma.FieldRef<"Category", 'String'>
   readonly name: Prisma.FieldRef<"Category", 'String'>
   readonly type: Prisma.FieldRef<"Category", 'String'>
   readonly color: Prisma.FieldRef<"Category", 'String'>
@@ -1423,6 +1422,7 @@ export interface CategoryFieldRefs {
   readonly description: Prisma.FieldRef<"Category", 'String'>
   readonly createdAt: Prisma.FieldRef<"Category", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Category", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"Category", 'String'>
 }
     
 
@@ -1824,27 +1824,27 @@ export type CategoryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Category.incomes
+ * Category.budgets
  */
-export type Category$incomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Category$budgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Income
+   * Select specific fields to fetch from the Budget
    */
-  select?: Prisma.IncomeSelect<ExtArgs> | null
+  select?: Prisma.BudgetSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Income
+   * Omit specific fields from the Budget
    */
-  omit?: Prisma.IncomeOmit<ExtArgs> | null
+  omit?: Prisma.BudgetOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.IncomeInclude<ExtArgs> | null
-  where?: Prisma.IncomeWhereInput
-  orderBy?: Prisma.IncomeOrderByWithRelationInput | Prisma.IncomeOrderByWithRelationInput[]
-  cursor?: Prisma.IncomeWhereUniqueInput
+  include?: Prisma.BudgetInclude<ExtArgs> | null
+  where?: Prisma.BudgetWhereInput
+  orderBy?: Prisma.BudgetOrderByWithRelationInput | Prisma.BudgetOrderByWithRelationInput[]
+  cursor?: Prisma.BudgetWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.IncomeScalarFieldEnum | Prisma.IncomeScalarFieldEnum[]
+  distinct?: Prisma.BudgetScalarFieldEnum | Prisma.BudgetScalarFieldEnum[]
 }
 
 /**
@@ -1872,27 +1872,27 @@ export type Category$expensesArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Category.budgets
+ * Category.incomes
  */
-export type Category$budgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Category$incomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Budget
+   * Select specific fields to fetch from the Income
    */
-  select?: Prisma.BudgetSelect<ExtArgs> | null
+  select?: Prisma.IncomeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Budget
+   * Omit specific fields from the Income
    */
-  omit?: Prisma.BudgetOmit<ExtArgs> | null
+  omit?: Prisma.IncomeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BudgetInclude<ExtArgs> | null
-  where?: Prisma.BudgetWhereInput
-  orderBy?: Prisma.BudgetOrderByWithRelationInput | Prisma.BudgetOrderByWithRelationInput[]
-  cursor?: Prisma.BudgetWhereUniqueInput
+  include?: Prisma.IncomeInclude<ExtArgs> | null
+  where?: Prisma.IncomeWhereInput
+  orderBy?: Prisma.IncomeOrderByWithRelationInput | Prisma.IncomeOrderByWithRelationInput[]
+  cursor?: Prisma.IncomeWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BudgetScalarFieldEnum | Prisma.BudgetScalarFieldEnum[]
+  distinct?: Prisma.IncomeScalarFieldEnum | Prisma.IncomeScalarFieldEnum[]
 }
 
 /**

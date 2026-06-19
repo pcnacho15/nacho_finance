@@ -21,6 +21,7 @@ export async function POST(request: Request) {
   const user = await requireUser();
   if ('error' in user) return user.error;
   const parsed = await parseJson(request, savingsGoalCreateSchema);
+  // console.log({parsed})
   if ('error' in parsed) return parsed.error;
   try {
     const goal = await prisma.savingsGoal.create({

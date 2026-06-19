@@ -6,13 +6,13 @@ import CardBox from "../shared/CardBox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -25,11 +25,28 @@ import {
   SavingsGoalFormData,
   SAVINGS_ICONS,
 } from "@/app/(DashboardLayout)/types/finance";
-import { format, differenceInDays } from "date-fns";
+import { format, differenceInBusinessDays } from "date-fns";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { Trash2Icon } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { CalendarIcon, Trash2Icon } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
 const SavingsModule: React.FC = () => {
   const {
@@ -40,6 +57,7 @@ const SavingsModule: React.FC = () => {
     addSavingsContribution,
   } = useFinance();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [isContributionOpen, setIsContributionOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [selectedGoalId, setSelectedGoalId] = useState<string | null>(null);
@@ -47,8 +65,8 @@ const SavingsModule: React.FC = () => {
   const [contributionNotes, setContributionNotes] = useState<string>("");
   const [formData, setFormData] = useState<SavingsGoalFormData>({
     name: "",
-    targetAmount: 0,
-    targetDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+    targetAmount: null,
+    targetDate: null,
     icon: "solar:piggy-bank-bold",
     color: "#22c55e",
     description: "",
@@ -66,27 +84,27 @@ const SavingsModule: React.FC = () => {
   ];
 
   const handleSubmit = () => {
-    if (!formData.name || formData.targetAmount <= 0) return;
+    if (!formData.name) return;
 
     if (editingId) {
       updateSavingsGoal(editingId, formData);
     } else {
       addSavingsGoal(formData);
     }
+    setIsDialogOpen(false);
     resetForm();
   };
 
   const resetForm = () => {
     setFormData({
       name: "",
-      targetAmount: 0,
-      targetDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+      targetAmount: null,
+      targetDate: null,
       icon: "solar:piggy-bank-bold",
       color: "#22c55e",
       description: "",
     });
     setEditingId(null);
-    setIsDialogOpen(false);
   };
 
   const handleEdit = (id: string) => {
@@ -106,7 +124,7 @@ const SavingsModule: React.FC = () => {
   };
 
   const handleDelete = (id: string) => {
-      deleteSavingsGoal(id);
+    deleteSavingsGoal(id);
   };
 
   const handleContribution = (goalId: string) => {
@@ -162,7 +180,10 @@ const SavingsModule: React.FC = () => {
             </div>
           </div>
           <Button
-            onClick={() => setIsDialogOpen(true)}
+            onClick={() => {
+              setIsDialogOpen(true);
+              resetForm();
+            }}
             className="gap-2"
           >
             <Icon icon="solar:add-circle-bold" />
@@ -177,10 +198,15 @@ const SavingsModule: React.FC = () => {
             100,
             Math.round((goal.currentAmount / goal.targetAmount) * 100),
           );
-          const daysRemaining = differenceInDays(
-            new Date(goal.targetDate),
-            new Date(),
+          const daysRemaining = differenceInBusinessDays(
+            goal.targetDate,
+            format(new Date(), "yyyy-MM-dd"),
           );
+          console.log({
+            daysRemaining,
+            dateNow: format(new Date(), "yyyy-MM-dd"),
+            dateLimit: goal.targetDate,
+          });
           const remaining = goal.targetAmount - goal.currentAmount;
 
           return (
@@ -188,7 +214,7 @@ const SavingsModule: React.FC = () => {
               key={goal.id}
               className="hover:shadow-md transition-shadow"
             >
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div
                     className="p-3 rounded-xl"
@@ -201,38 +227,47 @@ const SavingsModule: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <h4 className="font-semibold">{goal.name}</h4>
+                    <h4 className="font-semibold capitalize">{goal.name}</h4>
                     <p className="text-xs text-muted-foreground">
-                      {daysRemaining > 0
-                        ? `${daysRemaining} días restantes`
-                        : "Fecha límite"}
+                      {goal.targetDate
+                        ? daysRemaining > 0
+                          ? `${daysRemaining} días restantes`
+                          : "Fecha límite"
+                        : "Sin fecha límite"}
                     </p>
                   </div>
                 </div>
-                <Badge
-                  variant={
-                    goal.status === "completed" ? "default" : "secondary"
-                  }
-                >
-                  {goal.status === "completed" ? "Completada" : "En progreso"}
-                </Badge>
-              </div>
-
-              <div className="mb-4">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-muted-foreground">Progreso</span>
-                  <span
-                    className="font-bold"
-                    style={{ color: goal.color }}
+                {!goal.targetAmount ? (
+                  ""
+                ) : (
+                  <Badge
+                    variant={
+                      goal.status === "completed" ? "default" : "secondary"
+                    }
                   >
-                    {percentage}%
-                  </span>
-                </div>
-                <Progress
-                  value={percentage}
-                  className="h-3"
-                />
+                    {goal.status === "completed" ? "Completada" : "En progreso"}
+                  </Badge>
+                )}
               </div>
+              {!goal.targetAmount ? (
+                ""
+              ) : (
+                <div className="mb-4">
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-muted-foreground">Progreso</span>
+                    <span
+                      className="font-bold"
+                      style={{ color: goal.color }}
+                    >
+                      {percentage}%
+                    </span>
+                  </div>
+                  <Progress
+                    value={percentage}
+                    className="h-3"
+                  />
+                </div>
+              )}
 
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between text-sm">
@@ -241,16 +276,22 @@ const SavingsModule: React.FC = () => {
                     ${goal.currentAmount.toLocaleString()}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Meta</span>
-                  <span className="font-semibold">
-                    ${goal.targetAmount.toLocaleString()}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>Faltan</span>
-                  <span>${remaining.toLocaleString()}</span>
-                </div>
+                {goal.targetAmount ? (
+                  <>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Meta</span>
+                      <span className="font-semibold">
+                        ${goal.targetAmount.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-sm text-muted-foreground">
+                      <span>Faltan</span>
+                      <span>${remaining.toLocaleString()}</span>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
 
               {goal.description && (
@@ -288,7 +329,7 @@ const SavingsModule: React.FC = () => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-error hover:text-error w-4"
+                      className="text-error hover:text-error"
                     >
                       <Icon
                         icon="solar:trash-bin-trash-bold"
@@ -301,7 +342,9 @@ const SavingsModule: React.FC = () => {
                       <AlertDialogMedia className="bg-red-500/10 text-red-500 dark:bg-red-500/20 dark:text-red-500 w-10 h-10 p-2">
                         <Trash2Icon />
                       </AlertDialogMedia>
-                      <AlertDialogTitle>¿Eliminar Meta De Ahorro?</AlertDialogTitle>
+                      <AlertDialogTitle>
+                        ¿Eliminar Meta De Ahorro?
+                      </AlertDialogTitle>
                       <AlertDialogDescription>
                         Este registro se borrará de manera permanente.
                       </AlertDialogDescription>
@@ -358,30 +401,70 @@ const SavingsModule: React.FC = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Monto Objetivo</Label>
+                <Label>Monto Objetivo (opcional)</Label>
                 <Input
                   type="number"
                   value={formData.targetAmount || ""}
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      targetAmount: parseFloat(e.target.value) || 0,
+                      targetAmount: parseFloat(e.target.value) || null,
                     })
                   }
                 />
               </div>
               <div className="space-y-2">
-                <Label>Fecha Límite</Label>
-                <Input
+                <Label>Fecha Límite (opcional)</Label>
+                {/* <Input
                   type="date"
-                  value={format(formData.targetDate, "yyyy-MM-dd")}
+                  value={
+                    formData.targetDate
+                      ? format(formData.targetDate ?? new Date(), "yyyy-MM-dd")
+                      : ""
+                  }
                   onChange={(e) =>
                     setFormData({
                       ...formData,
                       targetDate: new Date(e.target.value),
                     })
                   }
-                />
+                /> */}
+                <Popover
+                  open={open}
+                  onOpenChange={setOpen}
+                >
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      id="date-picker-simple"
+                      className="flex justify-between w-full font-normal"
+                    >
+                      {formData.targetDate ? (
+                        format(formData.targetDate, "yyyy-MM-dd")
+                      ) : (
+                        <span>yyyy-mm-dd</span>
+                      )}
+                      <CalendarIcon />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    className="w-auto p-0"
+                    align="start"
+                  >
+                    <Calendar
+                      mode="single"
+                      selected={formData.targetDate ?? undefined}
+                      onSelect={(e) => {
+                        setFormData({
+                          ...formData,
+                          targetDate: e,
+                        });
+                        setOpen(false);
+                      }}
+                      defaultMonth={formData.targetDate ?? undefined}
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
             <div className="space-y-2">
