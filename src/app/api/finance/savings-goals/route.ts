@@ -43,9 +43,23 @@ export async function PUT(request: Request) {
     const result = await prisma.savingsGoal.updateMany({
       where: { id, userId: user.userId },
       data,
+      
     });
     if (result.count === 0) return json({ error: 'No encontrado' }, { status: 404 });
     const goal = await prisma.savingsGoal.findUnique({ where: { id } });
+    if (goal?.targetAmount && goal.currentAmount) {
+      if (
+        goal.status === "completed" &&
+        goal.currentAmount < goal.targetAmount
+      ) {
+        await prisma.savingsGoal.updateMany({
+          where: { id: goal.id },
+          data: {
+            status: "in_progress",
+          },
+        });
+      }
+    }
     return json(goal);
   } catch (error) {
     return handleError('PUT /api/finance/savings-goals', error);

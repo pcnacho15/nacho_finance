@@ -26,6 +26,7 @@ import {
   SAVINGS_ICONS,
 } from "@/app/(DashboardLayout)/types/finance";
 import { format, differenceInBusinessDays } from "date-fns";
+import { formatInTimeZone, toZonedTime } from "date-fns-tz";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -113,11 +114,12 @@ const SavingsModule: React.FC = () => {
       setFormData({
         name: goal.name,
         targetAmount: goal.targetAmount,
-        targetDate: new Date(goal.targetDate),
+        targetDate: goal.targetDate,
         icon: goal.icon,
         color: goal.color,
         description: goal.description,
       });
+      console.log(toZonedTime(goal.targetDate, 'UTC'))
       setEditingId(id);
       setIsDialogOpen(true);
     }
@@ -202,11 +204,6 @@ const SavingsModule: React.FC = () => {
             goal.targetDate,
             format(new Date(), "yyyy-MM-dd"),
           );
-          console.log({
-            daysRemaining,
-            dateNow: format(new Date(), "yyyy-MM-dd"),
-            dateLimit: goal.targetDate,
-          });
           const remaining = goal.targetAmount - goal.currentAmount;
 
           return (
@@ -271,8 +268,12 @@ const SavingsModule: React.FC = () => {
 
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Actual</span>
-                  <span className="font-semibold text-success">
+                  <span className="text-muted-foreground">
+                    {percentage === 100 ? "Ahorrado" : "Actual"}
+                  </span>
+                  <span
+                    className={`font-semibold ${goal.currentAmount === 0 ? "text-muted-foreground" : "text-success"}`}
+                  >
                     ${goal.currentAmount.toLocaleString()}
                   </span>
                 </div>
@@ -284,10 +285,17 @@ const SavingsModule: React.FC = () => {
                         ${goal.targetAmount.toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>Faltan</span>
-                      <span>${remaining.toLocaleString()}</span>
-                    </div>
+                    {remaining > 0 ? (
+                      <div className="flex justify-between text-sm text-muted-foreground">
+                        <span>Faltan</span>
+                        <span>${remaining.toLocaleString()}</span>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center text-sm text-muted-foreground mt-5">
+                        <span className="text-success">¡Felicidades!</span>
+                        <span>Has completado tu meta.</span>
+                      </div>
+                    )}
                   </>
                 ) : (
                   ""
@@ -440,7 +448,11 @@ const SavingsModule: React.FC = () => {
                       className="flex justify-between w-full font-normal"
                     >
                       {formData.targetDate ? (
-                        format(formData.targetDate, "yyyy-MM-dd")
+                        formatInTimeZone(
+                          formData.targetDate,
+                          "UTC",
+                          "yyyy-MM-dd",
+                        )
                       ) : (
                         <span>yyyy-mm-dd</span>
                       )}
@@ -453,7 +465,10 @@ const SavingsModule: React.FC = () => {
                   >
                     <Calendar
                       mode="single"
-                      selected={formData.targetDate ?? undefined}
+                      selected={toZonedTime(
+                        formData.targetDate ?? new Date(),
+                        "UTC",
+                      )}
                       onSelect={(e) => {
                         setFormData({
                           ...formData,
@@ -461,7 +476,10 @@ const SavingsModule: React.FC = () => {
                         });
                         setOpen(false);
                       }}
-                      defaultMonth={formData.targetDate ?? undefined}
+                      defaultMonth={toZonedTime(
+                        formData.targetDate ?? new Date(),
+                        "UTC",
+                      )}
                     />
                   </PopoverContent>
                 </Popover>
@@ -516,7 +534,10 @@ const SavingsModule: React.FC = () => {
           <DialogFooter>
             <Button
               variant="outline"
-              onClick={resetForm}
+              onClick={() => {
+                resetForm;
+                setIsDialogOpen(false);
+              }}
             >
               Cancelar
             </Button>
