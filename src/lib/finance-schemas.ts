@@ -117,7 +117,7 @@ export const walletTransactionCreateSchema = z
   .object({
     walletId: cuid,
     type: walletTransactionTypeSchema,
-    amount: positiveAmount.optional().nullable(),
+    amount: positiveAmount,
     pricePerUnit: positiveAmount,
     date: isoDate,
     counterparty: z.string().trim().optional().nullable(),
