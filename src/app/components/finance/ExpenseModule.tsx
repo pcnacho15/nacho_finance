@@ -16,12 +16,16 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { Trash2Icon } from 'lucide-react';
+import { CalendarIcon, Trash2Icon } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { formatInTimeZone, toZonedTime } from 'date-fns-tz';
+import { Calendar } from '@/components/ui/calendar';
 
 const ExpenseModule: React.FC = () => {
   const { expenses, categories, addExpense, updateExpense, deleteExpense } = useFinance();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<ExpenseFormData>({
     amount: 0,
@@ -386,13 +390,52 @@ const ExpenseModule: React.FC = () => {
             </div>
             <div className="space-y-2">
               <Label>Fecha</Label>
-              <Input
+              {/* <Input
                 type="date"
                 value={format(formData.date, "yyyy-MM-dd")}
                 onChange={(e) =>
                   setFormData({ ...formData, date: new Date(e.target.value) })
                 }
-              />
+              /> */}
+              <Popover
+                open={open}
+                onOpenChange={setOpen}
+              >
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    id="date-picker-simple"
+                    className="flex justify-between w-full font-normal"
+                  >
+                    {formData.date ? (
+                      format(formData.date, "yyyy-MM-dd")
+                    ) : (
+                      <span>yyyy-mm-dd</span>
+                    )}
+                    <CalendarIcon />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-auto p-0"
+                  align="start"
+                >
+                  <Calendar
+                    mode="single"
+                    selected={new Date()}
+                    onSelect={(e) => {
+                      setFormData({
+                        ...formData,
+                        date: e ?? new Date(),
+                      });
+                      setOpen(false);
+                    }}
+                    defaultMonth={toZonedTime(
+                      formData.date ?? new Date(),
+                      "UTC",
+                    )}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox
