@@ -8,7 +8,7 @@ export interface Expense {
   category?: Category;
   date: Date | string;
   isRecurring: boolean;
-  recurringFrequency?: 'daily' | 'weekly' | 'monthly' | 'yearly' | null;
+  recurringFrequency?: 'diario' | 'semanal' | 'mensual' | 'anual' | null;
   createdAt: Date | string;
   updatedAt: Date | string;
 }
@@ -19,7 +19,7 @@ export interface ExpenseFormData {
   categoryId: string;
   date: Date;
   isRecurring?: boolean;
-  recurringFrequency?: 'daily' | 'weekly' | 'monthly' | 'yearly';
+  recurringFrequency?: "diario" | "semanal" | "mensual" | "anual";
 }
 
 export interface ExpenseSummary {

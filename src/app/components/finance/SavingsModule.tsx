@@ -48,6 +48,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group";
+import CurrencyInput from "react-currency-input-field";
 
 const SavingsModule: React.FC = () => {
   const {
@@ -410,7 +412,7 @@ const SavingsModule: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Monto Objetivo (opcional)</Label>
-                <Input
+                {/* <Input
                   type="number"
                   value={formData.targetAmount || ""}
                   onChange={(e) =>
@@ -419,24 +421,27 @@ const SavingsModule: React.FC = () => {
                       targetAmount: parseFloat(e.target.value) || null,
                     })
                   }
-                />
+                /> */}
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>$</InputGroupText>
+                  </InputGroupAddon>
+                  <CurrencyInput
+                    customInput={InputGroupInput} // Mantiene tus estilos
+                    placeholder="0.00"
+                    decimalsLimit={2}
+                    value={formData.targetAmount || ""}
+                    onValueChange={(value, name, values) => {
+                      setFormData({
+                        ...formData,
+                        targetAmount: values?.float,
+                      });
+                    }}
+                  />
+                </InputGroup>
               </div>
               <div className="space-y-2">
                 <Label>Fecha Límite (opcional)</Label>
-                {/* <Input
-                  type="date"
-                  value={
-                    formData.targetDate
-                      ? format(formData.targetDate ?? new Date(), "yyyy-MM-dd")
-                      : ""
-                  }
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      targetDate: new Date(e.target.value),
-                    })
-                  }
-                /> */}
                 <Popover
                   open={open}
                   onOpenChange={setOpen}
@@ -559,14 +564,28 @@ const SavingsModule: React.FC = () => {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label>Monto</Label>
-              <Input
+              {/* <Input
                 type="number"
                 placeholder="0.00"
                 value={contributionAmount || ""}
                 onChange={(e) =>
                   setContributionAmount(parseFloat(e.target.value) || 0)
                 }
-              />
+              /> */}
+              <InputGroup>
+                <InputGroupAddon>
+                  <InputGroupText>$</InputGroupText>
+                </InputGroupAddon>
+                <CurrencyInput
+                  customInput={InputGroupInput} // Mantiene tus estilos
+                  placeholder="0.00"
+                  decimalsLimit={2}
+                  value={contributionAmount || ""}
+                  onValueChange={(value, name, values) => {
+                    setContributionAmount(values?.float || 0);
+                  }}
+                />
+              </InputGroup>
             </div>
             <div className="space-y-2">
               <Label>Notas (opcional)</Label>

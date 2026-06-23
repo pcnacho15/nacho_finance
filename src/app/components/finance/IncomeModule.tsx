@@ -45,13 +45,19 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Trash2Icon } from "lucide-react";
+import { CalendarIcon, Trash2Icon } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { toZonedTime } from "date-fns-tz";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group";
+import CurrencyInput from "react-currency-input-field";
 
 const IncomeModule: React.FC = () => {
   const { incomes, categories, addIncome, updateIncome, deleteIncome } =
     useFinance();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<IncomeFormData>({
     amount: 0,
@@ -72,6 +78,8 @@ const IncomeModule: React.FC = () => {
       addIncome(formData);
     }
     resetForm();
+    
+    setIsDialogOpen(false);
   };
 
   const resetForm = () => {
@@ -82,7 +90,6 @@ const IncomeModule: React.FC = () => {
       date: new Date(),
     });
     setEditingId(null);
-    setIsDialogOpen(false);
   };
 
   const handleEdit = (id: string) => {
@@ -120,7 +127,10 @@ const IncomeModule: React.FC = () => {
             </p>
           </div>
           <Button
-            onClick={() => setIsDialogOpen(true)}
+            onClick={() => {
+              setIsDialogOpen(true);
+              resetForm();
+            }}
             className="gap-2"
           >
             <Icon icon="solar:add-circle-bold" />
@@ -168,7 +178,6 @@ const IncomeModule: React.FC = () => {
                               variant="ghost"
                               size="icon"
                               onClick={() => handleEdit(income.id)}
-                              className="text-blue-500 hover:text-blue-400"
                             >
                               <Icon
                                 icon="solar:pen-bold"
@@ -289,7 +298,6 @@ const IncomeModule: React.FC = () => {
                               className="w-4 h-4"
                             />
                           </Button>
-                          {/* <Separator orientation="vertical" /> */}
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <Button
@@ -329,8 +337,6 @@ const IncomeModule: React.FC = () => {
                           </AlertDialog>
                         </div>
                       </div>
-
-                      {/* <Separator /> */}
                     </div>
                   ))}
               </ScrollArea>
@@ -358,64 +364,109 @@ const IncomeModule: React.FC = () => {
                 }
               />
             </div>
-            <div className="space-y-2">
-              <Label>Categoría</Label>
-              <Select
-                value={formData.categoryId}
-                onValueChange={(v) =>
-                  setFormData({ ...formData, categoryId: v })
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecciona categoría" />
-                </SelectTrigger>
-                <SelectContent>
-                  {incomeCategories.map((cat) => (
-                    <SelectItem
-                      key={cat.id}
-                      value={cat.id}
+            <div className="flex justify-between gap-2">
+              <div className="space-y-2 flex-1">
+                <Label>Categoría</Label>
+                <Select
+                  value={formData.categoryId}
+                  onValueChange={(v) =>
+                    setFormData({ ...formData, categoryId: v })
+                  }
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Selecciona categoría" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {incomeCategories.map((cat) => (
+                      <SelectItem
+                        key={cat.id}
+                        value={cat.id}
+                      >
+                        <div className="flex items-center gap-2">
+                          <div
+                            className="w-3 h-3 rounded-full"
+                            style={{ backgroundColor: cat.color }}
+                          />
+                          {cat.name}
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2 flex-1">
+                <Label>Fecha</Label>
+                <Popover
+                  open={open}
+                  onOpenChange={setOpen}
+                >
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      id="date-picker-simple"
+                      className="flex justify-between w-full font-normal"
                     >
-                      <div className="flex items-center gap-2">
-                        <div
-                          className="w-3 h-3 rounded-full"
-                          style={{ backgroundColor: cat.color }}
-                        />
-                        {cat.name}
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                      {formData.date ? (
+                        format(formData.date, "yyyy-MM-dd")
+                      ) : (
+                        <span>yyyy-mm-dd</span>
+                      )}
+                      <CalendarIcon />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    className="w-auto p-0"
+                    align="start"
+                  >
+                    <Calendar
+                      mode="single"
+                      className="rounded-lg"
+                      selected={new Date()}
+                      onSelect={(e) => {
+                        setFormData({
+                          ...formData,
+                          date: e ?? new Date(),
+                        });
+                        setOpen(false);
+                      }}
+                      defaultMonth={toZonedTime(
+                        formData.date ?? new Date(),
+                        "UTC",
+                      )}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
             </div>
             <div className="space-y-2">
               <Label>Monto</Label>
-              <Input
-                type="number"
-                placeholder="0.00"
-                value={formData.amount || ""}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    amount: parseFloat(e.target.value) || 0,
-                  })
-                }
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Fecha</Label>
-              <Input
-                type="date"
-                value={format(formData.date, "yyyy-MM-dd")}
-                onChange={(e) =>
-                  setFormData({ ...formData, date: new Date(e.target.value) })
-                }
-              />
+              <InputGroup>
+                <InputGroupAddon>
+                  <InputGroupText>$</InputGroupText>
+                </InputGroupAddon>
+                <CurrencyInput
+                  customInput={InputGroupInput} // Mantiene tus estilos
+                  placeholder="0.00"
+                  decimalsLimit={2}
+                  value={formData.amount || ''}
+                  onValueChange={(value, name, values) => {
+                    // values.float contiene el número listo para tu estado
+                    setFormData({
+                      ...formData,
+                      amount: values?.float || 0,
+                    });
+                  }}
+                />
+              </InputGroup>
             </div>
           </div>
           <DialogFooter>
             <Button
               variant="outline"
-              onClick={resetForm}
+              onClick={() => {
+                resetForm;
+                setIsDialogOpen(false);
+              }}
             >
               Cancelar
             </Button>

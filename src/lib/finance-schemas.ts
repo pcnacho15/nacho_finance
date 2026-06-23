@@ -26,7 +26,7 @@ export const incomeCreateSchema = z.object({
 
 export const incomeUpdateSchema = incomeCreateSchema.partial().extend({ id: cuid });
 
-const recurringFrequency = z.enum(['daily', 'weekly', 'monthly', 'yearly']);
+const recurringFrequency = z.enum(["diario", "semanal", "mensual", "anual"]);
 
 export const expenseCreateSchema = z.object({
   amount: positiveAmount,

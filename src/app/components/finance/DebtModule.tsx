@@ -50,12 +50,24 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Trash2Icon } from "lucide-react";
+import { CalendarIcon, Trash2Icon } from "lucide-react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
+import CurrencyInput from "react-currency-input-field";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { toZonedTime } from "date-fns-tz";
 
 const DebtModule: React.FC = () => {
   const { debts, addDebt, updateDebt, deleteDebt, addDebtPayment } =
     useFinance();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false)
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [selectedDebtId, setSelectedDebtId] = useState<string | null>(null);
@@ -86,6 +98,7 @@ const DebtModule: React.FC = () => {
     } else {
       addDebt(debtData);
     }
+    setIsDialogOpen(false);
     resetForm();
   };
 
@@ -103,7 +116,6 @@ const DebtModule: React.FC = () => {
       notes: "",
     });
     setEditingId(null);
-    setIsDialogOpen(false);
   };
 
   const handleEdit = (id: string) => {
@@ -176,7 +188,10 @@ const DebtModule: React.FC = () => {
             </div>
           </div>
           <Button
-            onClick={() => setIsDialogOpen(true)}
+            onClick={() => {
+              setIsDialogOpen(true);
+              resetForm();
+            }}
             className="gap-2"
           >
             <Icon icon="solar:add-circle-bold" />
@@ -291,7 +306,7 @@ const DebtModule: React.FC = () => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-error hover:text-error w-4"
+                      className="text-error hover:text-error"
                     >
                       <Icon
                         icon="solar:trash-bin-trash-bold"
@@ -346,7 +361,7 @@ const DebtModule: React.FC = () => {
           <DialogHeader>
             <DialogTitle>{editingId ? "Editar" : "Nueva"} Deuda</DialogTitle>
           </DialogHeader>
-          <div className="space-y-4 py-4 max-h-[60vh] overflow-y-auto">
+          <div className="space-y-4 py-4 max-h-[60vh] overflow-y-auto px-1">
             <div className="space-y-2">
               <Label>Nombre</Label>
               <Input
@@ -395,86 +410,180 @@ const DebtModule: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Monto Original</Label>
-                <Input
-                  type="number"
-                  value={formData.originalAmount || ""}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      originalAmount: parseFloat(e.target.value) || 0,
-                    })
-                  }
-                />
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>$</InputGroupText>
+                  </InputGroupAddon>
+                  <CurrencyInput
+                    customInput={InputGroupInput} // Mantiene tus estilos
+                    placeholder="0.00"
+                    decimalsLimit={2}
+                    value={formData.originalAmount || ""}
+                    onValueChange={(value, name, values) => {
+                      setFormData({
+                        ...formData,
+                        originalAmount: values?.float || 0,
+                      });
+                    }}
+                  />
+                </InputGroup>
               </div>
               <div className="space-y-2">
                 <Label>Monto Actual</Label>
-                <Input
-                  type="number"
-                  value={formData.currentAmount || ""}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      currentAmount: parseFloat(e.target.value) || 0,
-                    })
-                  }
-                />
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>$</InputGroupText>
+                  </InputGroupAddon>
+                  <CurrencyInput
+                    customInput={InputGroupInput} // Mantiene tus estilos
+                    placeholder="0.00"
+                    decimalsLimit={2}
+                    value={formData.currentAmount || ""}
+                    onValueChange={(value, name, values) => {
+                      setFormData({
+                        ...formData,
+                        currentAmount: values?.float || 0,
+                      });
+                    }}
+                  />
+                </InputGroup>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Tasa de Interés (%)</Label>
-                <Input
-                  type="number"
-                  step="0.1"
-                  value={formData.interestRate || ""}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      interestRate: parseFloat(e.target.value) || 0,
-                    })
-                  }
-                />
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>%</InputGroupText>
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    type="number"
+                    step="0.1"
+                    placeholder="0.1"
+                    value={formData.interestRate || ""}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        interestRate: parseFloat(e.target.value) || 0,
+                      })
+                    }
+                  />
+                </InputGroup>
               </div>
               <div className="space-y-2">
                 <Label>Pago Mensual</Label>
-                <Input
-                  type="number"
-                  value={formData.monthlyPayment || ""}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      monthlyPayment: parseFloat(e.target.value) || 0,
-                    })
-                  }
-                />
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>$</InputGroupText>
+                  </InputGroupAddon>
+                  <CurrencyInput
+                    customInput={InputGroupInput} // Mantiene tus estilos
+                    placeholder="0.00"
+                    decimalsLimit={2}
+                    value={formData.monthlyPayment || ""}
+                    onValueChange={(value, name, values) => {
+                      // values.float contiene el número listo para tu estado
+                      setFormData({
+                        ...formData,
+                        monthlyPayment: values?.float || 0,
+                      });
+                    }}
+                  />
+                </InputGroup>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Fecha de Inicio</Label>
-                <Input
-                  type="date"
-                  value={format(formData.startDate, "yyyy-MM-dd")}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      startDate: new Date(e.target.value),
-                    })
-                  }
-                />
+                <Popover
+                  open={open}
+                  onOpenChange={setOpen}
+                >
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      id="date-picker-simple"
+                      className="flex justify-between w-full font-normal"
+                    >
+                      {formData.startDate ? (
+                        format(formData.startDate, "yyyy-MM-dd")
+                      ) : (
+                        <span>yyyy-mm-dd</span>
+                      )}
+                      <CalendarIcon />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    className="w-auto p-0"
+                    align="start"
+                  >
+                    <Calendar
+                      mode="single"
+                      className="rounded-lg"
+                      selected={toZonedTime(
+                        formData.startDate ?? new Date(),
+                        "UTC",
+                      )}
+                      onSelect={(e) => {
+                        setFormData({
+                          ...formData,
+                          startDate: e ?? new Date(),
+                        });
+                        setOpen(false);
+                      }}
+                      defaultMonth={toZonedTime(
+                        formData.startDate ?? new Date(),
+                        "UTC",
+                      )}
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
               <div className="space-y-2">
                 <Label>Fecha de Vencimiento</Label>
-                <Input
-                  type="date"
-                  value={format(formData.dueDate, "yyyy-MM-dd")}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      dueDate: new Date(e.target.value),
-                    })
-                  }
-                />
+                <Popover
+                  open={openCalendar}
+                  onOpenChange={setOpenCalendar}
+                >
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      id="date-picker-simple"
+                      className="flex justify-between w-full font-normal"
+                    >
+                      {formData.dueDate ? (
+                        format(formData.dueDate, "yyyy-MM-dd")
+                      ) : (
+                        <span>yyyy-mm-dd</span>
+                      )}
+                      <CalendarIcon />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    className="w-auto p-0"
+                    align="start"
+                  >
+                    <Calendar
+                      mode="single"
+                      className="rounded-lg"
+                      selected={toZonedTime(
+                        formData.dueDate ?? new Date(),
+                        "UTC",
+                      )}
+                      onSelect={(e) => {
+                        setFormData({
+                          ...formData,
+                          dueDate: e ?? new Date(),
+                        });
+                        setOpenCalendar(false);
+                      }}
+                      defaultMonth={toZonedTime(
+                        formData.dueDate ?? new Date(),
+                        "UTC",
+                      )}
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
             <div className="space-y-2">
@@ -491,7 +600,10 @@ const DebtModule: React.FC = () => {
           <DialogFooter>
             <Button
               variant="outline"
-              onClick={resetForm}
+              onClick={() => {
+                resetForm;
+                setIsDialogOpen(false);
+              }}
             >
               Cancelar
             </Button>
@@ -513,14 +625,28 @@ const DebtModule: React.FC = () => {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label>Monto del Pago</Label>
-              <Input
+              {/* <Input
                 type="number"
                 placeholder="0.00"
                 value={paymentAmount || ""}
                 onChange={(e) =>
                   setPaymentAmount(parseFloat(e.target.value) || 0)
                 }
-              />
+              /> */}
+              <InputGroup>
+                <InputGroupAddon>
+                  <InputGroupText>$</InputGroupText>
+                </InputGroupAddon>
+                <CurrencyInput
+                  customInput={InputGroupInput} // Mantiene tus estilos
+                  placeholder="0.00"
+                  decimalsLimit={2}
+                  value={paymentAmount || ""}
+                  onValueChange={(value, name, values) => {
+                    setPaymentAmount(values?.float || 0);
+                  }}
+                />
+              </InputGroup>
             </div>
           </div>
           <DialogFooter>
