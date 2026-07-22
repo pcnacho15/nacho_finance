@@ -21,6 +21,15 @@ interface PnlResult {
   monthlyPnl: { month: string; realized: number }[];
 }
 
+interface DashboardResult {
+  trading: PnlResult;
+  custody: {
+    holdings: number;
+    walletCount: number;
+    byChain: { tron: number; ethereum: number };
+  };
+}
+
 const DASHBOARD_KEY = '/api/crypto/dashboard';
 const PRICE_KEY = '/api/crypto/usdt/price';
 
@@ -41,7 +50,7 @@ const fmtSigned = (n: number) =>
   `${n >= 0 ? '+' : '−'}$${Math.abs(n).toFixed(2)}`;
 
 const PnlDashboardModule: React.FC = () => {
-  const { data, isLoading, error } = useSWR<PnlResult>(DASHBOARD_KEY, fetcher);
+  const { data, isLoading, error } = useSWR<DashboardResult>(DASHBOARD_KEY, fetcher);
   const { data: live } = useSWR<{ price: number; fetchedAt: number }>(PRICE_KEY, fetcher, {
     refreshInterval: 30_000,
     revalidateOnFocus: false,
@@ -51,21 +60,36 @@ const PnlDashboardModule: React.FC = () => {
 
   const metrics = useMemo(() => {
     if (!data) return null;
-    const holdings = num(data.holdings);
-    const avgCost = num(data.avgCost);
-    const realized = num(data.realizedPnl);
+    const t = data.trading;
+    const holdings = num(t.holdings);
+    const avgCost = num(t.avgCost);
+    const realized = num(t.realizedPnl);
     const holdingsValue = holdings * livePrice;
     const unrealized = holdings * (livePrice - avgCost);
+
+    const custodyHoldings = num(data.custody?.holdings);
+    const tron = num(data.custody?.byChain?.tron);
+    const ethereum = num(data.custody?.byChain?.ethereum);
+
     return {
+      // trading
       holdings,
       avgCost,
       realized,
       unrealized,
       total: realized + unrealized,
       holdingsValue,
-      tradeCount: num(data.tradeCount),
-      buyVolume: num(data.buyVolume),
-      sellVolume: num(data.sellVolume),
+      tradeCount: num(t.tradeCount),
+      buyVolume: num(t.buyVolume),
+      sellVolume: num(t.sellVolume),
+      // custody
+      custodyHoldings,
+      custodyValue: custodyHoldings * livePrice,
+      custodyByChain: { tron, ethereum },
+      custodyWalletCount: num(data.custody?.walletCount),
+      // combined net worth
+      netHoldings: holdings + custodyHoldings,
+      netValue: (holdings + custodyHoldings) * livePrice,
     };
   }, [data, livePrice]);
 
@@ -108,7 +132,7 @@ const PnlDashboardModule: React.FC = () => {
       colors: ['#3b82f6'],
       dataLabels: { enabled: false },
       xaxis: {
-        categories: data?.monthlyPnl.map((m) => m.month) ?? [],
+        categories: data?.trading.monthlyPnl.map((m) => m.month) ?? [],
         labels: { style: { colors: 'var(--muted-foreground)' } },
         axisBorder: { show: false },
         axisTicks: { show: false },
@@ -129,7 +153,7 @@ const PnlDashboardModule: React.FC = () => {
     () => [
       {
         name: 'P&L realizado acumulado',
-        data: (data?.timeline ?? []).map((p) => [
+        data: (data?.trading.timeline ?? []).map((p) => [
           new Date(p.date).getTime(),
           num(p.realizedPnl),
         ]),
@@ -139,7 +163,7 @@ const PnlDashboardModule: React.FC = () => {
   );
 
   const monthlySeries = useMemo(
-    () => [{ name: 'Ganancia', data: (data?.monthlyPnl ?? []).map((m) => num(m.realized)) }],
+    () => [{ name: 'Ganancia', data: (data?.trading.monthlyPnl ?? []).map((m) => num(m.realized)) }],
     [data],
   );
 
@@ -160,53 +184,119 @@ const PnlDashboardModule: React.FC = () => {
     );
   }
 
-  if (metrics.tradeCount === 0 && metrics.holdings === 0) {
+  const hasTrading = metrics.tradeCount > 0 || metrics.holdings !== 0;
+  const hasCustody = metrics.custodyWalletCount > 0 || metrics.custodyHoldings !== 0;
+
+  if (!hasTrading && !hasCustody) {
     return (
       <CardBox className="p-8 text-center">
         <Icon icon="solar:chart-2-bold" className="size-12 mx-auto text-muted-foreground mb-2" />
-        <h3 className="font-medium">Aún no hay datos de trading</h3>
+        <h3 className="font-medium">Aún no hay datos</h3>
         <p className="text-sm text-muted-foreground">
-          Registra compras y ventas de USDT en tus billeteras y aquí verás tus ganancias y pérdidas.
+          Conecta una billetera on-chain o registra compras y ventas de USDT, y aquí verás tu
+          patrimonio y tus ganancias.
         </p>
       </CardBox>
     );
   }
 
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard
-          label="P&L total"
-          value={fmtSigned(metrics.total)}
-          tone={metrics.total >= 0 ? 'pos' : 'neg'}
-          sub="Realizado + no realizado"
-        />
-        <StatCard
-          label="P&L realizado"
-          value={fmtSigned(metrics.realized)}
-          tone={metrics.realized >= 0 ? 'pos' : 'neg'}
-          sub="De ventas cerradas"
-        />
-        <StatCard
-          label="P&L no realizado"
-          value={fmtSigned(metrics.unrealized)}
-          tone={metrics.unrealized >= 0 ? 'pos' : 'neg'}
-          sub={`@ ${fmtUsd(livePrice)} / USDT`}
-        />
-        <StatCard
-          label="Holdings actuales"
-          value={fmtUsdt(metrics.holdings)}
-          sub={`Valor ${fmtUsd(metrics.holdingsValue)}`}
-        />
-      </div>
+    <div className="space-y-6">
+      {/* Patrimonio: custodia real on-chain separada del inventario de trading */}
+      <section className="space-y-3">
+        <div className="flex items-center gap-2">
+          <Icon icon="solar:safe-2-bold" className="size-5 text-muted-foreground" />
+          <h2 className="font-semibold">Patrimonio</h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <StatCard
+            label="Patrimonio total"
+            value={fmtUsdt(metrics.netHoldings)}
+            sub={`Valor ${fmtUsd(metrics.netValue)}`}
+          />
+          <StatCard
+            label="Custodia on-chain"
+            value={fmtUsdt(metrics.custodyHoldings)}
+            sub={
+              metrics.custodyWalletCount > 0
+                ? `TRON ${fmtUsdt(metrics.custodyByChain.tron)} · ETH ${fmtUsdt(
+                    metrics.custodyByChain.ethereum,
+                  )}`
+                : 'Sin billeteras conectadas'
+            }
+          />
+          <StatCard
+            label="Valor custodia"
+            value={fmtUsd(metrics.custodyValue)}
+            sub={`@ ${fmtUsd(livePrice)} / USDT`}
+          />
+          <StatCard
+            label="Inventario trading"
+            value={fmtUsdt(metrics.holdings)}
+            sub={`Valor ${fmtUsd(metrics.holdingsValue)}`}
+          />
+        </div>
+        <p className="text-xs text-muted-foreground">
+          La custodia on-chain es el saldo real en cadena; no lleva P&L porque su base de costo se
+          desconoce.
+        </p>
+      </section>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard label="Costo promedio" value={fmtUsd(metrics.avgCost)} sub="Por USDT" />
-        <StatCard label="Operaciones" value={String(metrics.tradeCount)} sub="Compras + ventas" />
-        <StatCard label="Volumen comprado" value={fmtUsdt(metrics.buyVolume)} />
-        <StatCard label="Volumen vendido" value={fmtUsdt(metrics.sellVolume)} />
-      </div>
+      {/* Trading: P&L a costo promedio, solo sobre movimientos manuales */}
+      <section className="space-y-3">
+        <div className="flex items-center gap-2">
+          <Icon icon="solar:chart-2-bold" className="size-5 text-muted-foreground" />
+          <h2 className="font-semibold">Trading</h2>
+        </div>
+        {hasTrading ? (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <StatCard
+                label="P&L total"
+                value={fmtSigned(metrics.total)}
+                tone={metrics.total >= 0 ? 'pos' : 'neg'}
+                sub="Realizado + no realizado"
+              />
+              <StatCard
+                label="P&L realizado"
+                value={fmtSigned(metrics.realized)}
+                tone={metrics.realized >= 0 ? 'pos' : 'neg'}
+                sub="De ventas cerradas"
+              />
+              <StatCard
+                label="P&L no realizado"
+                value={fmtSigned(metrics.unrealized)}
+                tone={metrics.unrealized >= 0 ? 'pos' : 'neg'}
+                sub={`@ ${fmtUsd(livePrice)} / USDT`}
+              />
+              <StatCard
+                label="Costo promedio"
+                value={fmtUsd(metrics.avgCost)}
+                sub="Por USDT"
+              />
+            </div>
 
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <StatCard label="Operaciones" value={String(metrics.tradeCount)} sub="Compras + ventas" />
+              <StatCard label="Volumen comprado" value={fmtUsdt(metrics.buyVolume)} />
+              <StatCard label="Volumen vendido" value={fmtUsdt(metrics.sellVolume)} />
+              <StatCard
+                label="Inventario trading"
+                value={fmtUsdt(metrics.holdings)}
+                sub={`Valor ${fmtUsd(metrics.holdingsValue)}`}
+              />
+            </div>
+          </>
+        ) : (
+          <CardBox className="p-6 text-center text-sm text-muted-foreground">
+            Aún no registras compras ni ventas. Añade movimientos manuales en una billetera para
+            calcular tu P&L.
+          </CardBox>
+        )}
+      </section>
+
+      {hasTrading && (
+      <>
       <CardBox className="p-4">
         <h3 className="font-medium mb-3">P&L realizado acumulado</h3>
         {cumulativeSeries[0].data.length === 0 ? (
@@ -228,6 +318,8 @@ const PnlDashboardModule: React.FC = () => {
           <Chart options={monthlyOptions} series={monthlySeries} type="bar" height={300} />
         )}
       </CardBox>
+      </>
+      )}
     </div>
   );
 };
