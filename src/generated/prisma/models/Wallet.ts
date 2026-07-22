@@ -32,6 +32,10 @@ export type WalletMinAggregateOutputType = {
   asset: string | null
   network: string | null
   notes: string | null
+  source: string | null
+  chain: string | null
+  address: string | null
+  lastSyncedAt: Date | null
   archivedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -45,6 +49,10 @@ export type WalletMaxAggregateOutputType = {
   asset: string | null
   network: string | null
   notes: string | null
+  source: string | null
+  chain: string | null
+  address: string | null
+  lastSyncedAt: Date | null
   archivedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -58,6 +66,10 @@ export type WalletCountAggregateOutputType = {
   asset: number
   network: number
   notes: number
+  source: number
+  chain: number
+  address: number
+  lastSyncedAt: number
   archivedAt: number
   createdAt: number
   updatedAt: number
@@ -73,6 +85,10 @@ export type WalletMinAggregateInputType = {
   asset?: true
   network?: true
   notes?: true
+  source?: true
+  chain?: true
+  address?: true
+  lastSyncedAt?: true
   archivedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -86,6 +102,10 @@ export type WalletMaxAggregateInputType = {
   asset?: true
   network?: true
   notes?: true
+  source?: true
+  chain?: true
+  address?: true
+  lastSyncedAt?: true
   archivedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -99,6 +119,10 @@ export type WalletCountAggregateInputType = {
   asset?: true
   network?: true
   notes?: true
+  source?: true
+  chain?: true
+  address?: true
+  lastSyncedAt?: true
   archivedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -185,6 +209,10 @@ export type WalletGroupByOutputType = {
   asset: string
   network: string | null
   notes: string | null
+  source: string
+  chain: string
+  address: string | null
+  lastSyncedAt: Date | null
   archivedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -219,6 +247,10 @@ export type WalletWhereInput = {
   asset?: Prisma.StringFilter<"Wallet"> | string
   network?: Prisma.StringNullableFilter<"Wallet"> | string | null
   notes?: Prisma.StringNullableFilter<"Wallet"> | string | null
+  source?: Prisma.StringFilter<"Wallet"> | string
+  chain?: Prisma.StringFilter<"Wallet"> | string
+  address?: Prisma.StringNullableFilter<"Wallet"> | string | null
+  lastSyncedAt?: Prisma.DateTimeNullableFilter<"Wallet"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Wallet"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
@@ -234,6 +266,10 @@ export type WalletOrderByWithRelationInput = {
   asset?: Prisma.SortOrder
   network?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrder
+  chain?: Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastSyncedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -243,6 +279,7 @@ export type WalletOrderByWithRelationInput = {
 
 export type WalletWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId_address?: Prisma.WalletUserIdAddressCompoundUniqueInput
   AND?: Prisma.WalletWhereInput | Prisma.WalletWhereInput[]
   OR?: Prisma.WalletWhereInput[]
   NOT?: Prisma.WalletWhereInput | Prisma.WalletWhereInput[]
@@ -252,12 +289,16 @@ export type WalletWhereUniqueInput = Prisma.AtLeast<{
   asset?: Prisma.StringFilter<"Wallet"> | string
   network?: Prisma.StringNullableFilter<"Wallet"> | string | null
   notes?: Prisma.StringNullableFilter<"Wallet"> | string | null
+  source?: Prisma.StringFilter<"Wallet"> | string
+  chain?: Prisma.StringFilter<"Wallet"> | string
+  address?: Prisma.StringNullableFilter<"Wallet"> | string | null
+  lastSyncedAt?: Prisma.DateTimeNullableFilter<"Wallet"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Wallet"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   transactions?: Prisma.WalletTransactionListRelationFilter
-}, "id">
+}, "id" | "userId_address">
 
 export type WalletOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -267,6 +308,10 @@ export type WalletOrderByWithAggregationInput = {
   asset?: Prisma.SortOrder
   network?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrder
+  chain?: Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastSyncedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -286,6 +331,10 @@ export type WalletScalarWhereWithAggregatesInput = {
   asset?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
   network?: Prisma.StringNullableWithAggregatesFilter<"Wallet"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Wallet"> | string | null
+  source?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
+  chain?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
+  address?: Prisma.StringNullableWithAggregatesFilter<"Wallet"> | string | null
+  lastSyncedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Wallet"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Wallet"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
@@ -298,6 +347,10 @@ export type WalletCreateInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -313,6 +366,10 @@ export type WalletUncheckedCreateInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -326,6 +383,10 @@ export type WalletUpdateInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -341,6 +402,10 @@ export type WalletUncheckedUpdateInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -355,6 +420,10 @@ export type WalletCreateManyInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -367,6 +436,10 @@ export type WalletUpdateManyMutationInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,6 +453,10 @@ export type WalletUncheckedUpdateManyInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -395,6 +472,11 @@ export type WalletOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type WalletUserIdAddressCompoundUniqueInput = {
+  userId: string
+  address: string
+}
+
 export type WalletCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -403,6 +485,10 @@ export type WalletCountOrderByAggregateInput = {
   asset?: Prisma.SortOrder
   network?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  chain?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  lastSyncedAt?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -416,6 +502,10 @@ export type WalletMaxOrderByAggregateInput = {
   asset?: Prisma.SortOrder
   network?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  chain?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  lastSyncedAt?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -429,6 +519,10 @@ export type WalletMinOrderByAggregateInput = {
   asset?: Prisma.SortOrder
   network?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  chain?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  lastSyncedAt?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -502,6 +596,10 @@ export type WalletCreateWithoutUserInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -515,6 +613,10 @@ export type WalletUncheckedCreateWithoutUserInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -558,6 +660,10 @@ export type WalletScalarWhereInput = {
   asset?: Prisma.StringFilter<"Wallet"> | string
   network?: Prisma.StringNullableFilter<"Wallet"> | string | null
   notes?: Prisma.StringNullableFilter<"Wallet"> | string | null
+  source?: Prisma.StringFilter<"Wallet"> | string
+  chain?: Prisma.StringFilter<"Wallet"> | string
+  address?: Prisma.StringNullableFilter<"Wallet"> | string | null
+  lastSyncedAt?: Prisma.DateTimeNullableFilter<"Wallet"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Wallet"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
@@ -570,6 +676,10 @@ export type WalletCreateWithoutTransactionsInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -584,6 +694,10 @@ export type WalletUncheckedCreateWithoutTransactionsInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -612,6 +726,10 @@ export type WalletUpdateWithoutTransactionsInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -626,6 +744,10 @@ export type WalletUncheckedUpdateWithoutTransactionsInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -638,6 +760,10 @@ export type WalletCreateManyUserInput = {
   asset?: string
   network?: string | null
   notes?: string | null
+  source?: string
+  chain?: string
+  address?: string | null
+  lastSyncedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -650,6 +776,10 @@ export type WalletUpdateWithoutUserInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -663,6 +793,10 @@ export type WalletUncheckedUpdateWithoutUserInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -676,6 +810,10 @@ export type WalletUncheckedUpdateManyWithoutUserInput = {
   asset?: Prisma.StringFieldUpdateOperationsInput | string
   network?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  chain?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -720,6 +858,10 @@ export type WalletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   asset?: boolean
   network?: boolean
   notes?: boolean
+  source?: boolean
+  chain?: boolean
+  address?: boolean
+  lastSyncedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -736,6 +878,10 @@ export type WalletSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   asset?: boolean
   network?: boolean
   notes?: boolean
+  source?: boolean
+  chain?: boolean
+  address?: boolean
+  lastSyncedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -750,6 +896,10 @@ export type WalletSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   asset?: boolean
   network?: boolean
   notes?: boolean
+  source?: boolean
+  chain?: boolean
+  address?: boolean
+  lastSyncedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -764,12 +914,16 @@ export type WalletSelectScalar = {
   asset?: boolean
   network?: boolean
   notes?: boolean
+  source?: boolean
+  chain?: boolean
+  address?: boolean
+  lastSyncedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "asset" | "network" | "notes" | "archivedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["wallet"]>
+export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "asset" | "network" | "notes" | "source" | "chain" | "address" | "lastSyncedAt" | "archivedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["wallet"]>
 export type WalletInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   transactions?: boolean | Prisma.Wallet$transactionsArgs<ExtArgs>
@@ -796,6 +950,10 @@ export type $WalletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     asset: string
     network: string | null
     notes: string | null
+    source: string
+    chain: string
+    address: string | null
+    lastSyncedAt: Date | null
     archivedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1231,6 +1389,10 @@ export interface WalletFieldRefs {
   readonly asset: Prisma.FieldRef<"Wallet", 'String'>
   readonly network: Prisma.FieldRef<"Wallet", 'String'>
   readonly notes: Prisma.FieldRef<"Wallet", 'String'>
+  readonly source: Prisma.FieldRef<"Wallet", 'String'>
+  readonly chain: Prisma.FieldRef<"Wallet", 'String'>
+  readonly address: Prisma.FieldRef<"Wallet", 'String'>
+  readonly lastSyncedAt: Prisma.FieldRef<"Wallet", 'DateTime'>
   readonly archivedAt: Prisma.FieldRef<"Wallet", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Wallet", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Wallet", 'DateTime'>

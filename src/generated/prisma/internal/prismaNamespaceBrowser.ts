@@ -255,6 +255,10 @@ export const WalletScalarFieldEnum = {
   asset: 'asset',
   network: 'network',
   notes: 'notes',
+  source: 'source',
+  chain: 'chain',
+  address: 'address',
+  lastSyncedAt: 'lastSyncedAt',
   archivedAt: 'archivedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -272,6 +276,11 @@ export const WalletTransactionScalarFieldEnum = {
   date: 'date',
   counterparty: 'counterparty',
   notes: 'notes',
+  source: 'source',
+  txHash: 'txHash',
+  fromAddress: 'fromAddress',
+  toAddress: 'toAddress',
+  blockTimestamp: 'blockTimestamp',
   createdAt: 'createdAt'
 } as const
 

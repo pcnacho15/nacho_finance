@@ -1,6 +1,9 @@
 export type WalletType = 'exchange' | 'hot' | 'cold' | 'other';
 export type WalletTransactionType = 'buy' | 'sell' | 'deposit' | 'withdrawal';
 
+export type WalletSource = 'manual' | 'onchain';
+export type WalletChain = 'tron' | 'ethereum';
+
 export interface WalletTransaction {
   id: string;
   walletId: string;
@@ -10,6 +13,11 @@ export interface WalletTransaction {
   date: string | Date;
   counterparty?: string | null;
   notes?: string | null;
+  source?: WalletSource;
+  txHash?: string | null;
+  fromAddress?: string | null;
+  toAddress?: string | null;
+  blockTimestamp?: string | Date | null;
   createdAt: string | Date;
 }
 
@@ -20,6 +28,10 @@ export interface Wallet {
   asset: string;
   network?: string | null;
   notes?: string | null;
+  source?: WalletSource;
+  chain?: WalletChain;
+  address?: string | null;
+  lastSyncedAt?: string | Date | null;
   archivedAt?: string | Date | null;
   createdAt: string | Date;
   updatedAt: string | Date;

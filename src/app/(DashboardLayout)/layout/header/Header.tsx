@@ -45,7 +45,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-20 ${
+        className={`sticky top-0 z-9999 ${
           isSticky ? "backdrop-blur-lg shadow-md fixed w-full" : "bg-background"
         }`}
       >

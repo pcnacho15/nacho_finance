@@ -19,7 +19,8 @@
       "Bash(curl -s -o /dev/null -w \"GET /: %{http_code}\\\\n\" http://localhost:3001/)",
       "Bash(curl -s -o /dev/null -w \"GET /: %{http_code}\\\\n\" http://localhost:3002/)",
       "Bash(curl -s -o /dev/null -w \"GET /finance: %{http_code}\\\\n\" --max-redirs 0 http://localhost:3002/finance)",
-      "Bash(curl -s -w \"GET /api/finance/categories body: \" http://localhost:3002/api/finance/categories)"
+      "Bash(curl -s -w \"GET /api/finance/categories body: \" http://localhost:3002/api/finance/categories)",
+      "Bash(echo \"total: $\\(pnpm exec tsc --noEmit 2>&1)"
     ]
   }
 }

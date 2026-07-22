@@ -4,7 +4,11 @@ import React, { useMemo, useState } from 'react';
 import useSWR, { mutate as globalMutate } from 'swr';
 import { toast } from 'sonner';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { useWallet } from '@tronweb3/tronwallet-adapter-react-hooks';
 import CardBox from '../shared/CardBox';
+import SendUsdtDialog from './SendUsdtDialog';
+import ReceiveUsdtDialog from './ReceiveUsdtDialog';
+import { useEvmAccount } from '@/hooks/use-evm-account';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -58,6 +62,8 @@ const todayLocal = () => {
 
 const WalletsModule: React.FC = () => {
   const { data: wallets = [], isLoading } = useSWR<Wallet[]>(WALLETS_KEY, fetcher);
+  const { address: tronAddress } = useWallet();
+  const evmAddress = useEvmAccount();
   const { data: live } = useSWR<{ price: number; fetchedAt: number }>(PRICE_KEY, fetcher, {
     refreshInterval: 30_000,
     revalidateOnFocus: false,
@@ -131,6 +137,8 @@ const WalletsModule: React.FC = () => {
               key={w.id}
               wallet={w}
               usdtPrice={usdtPrice}
+              tronAddress={tronAddress ?? null}
+              evmAddress={evmAddress}
               onEdit={() => setWalletDialog({ open: true, wallet: w })}
               onAddTx={() => setTxDialog({ open: true, wallet: w })}
             />
@@ -155,15 +163,52 @@ const WalletsModule: React.FC = () => {
 interface WalletCardProps {
   wallet: Wallet;
   usdtPrice: number;
+  tronAddress: string | null;
+  evmAddress: string | null;
   onEdit: () => void;
   onAddTx: () => void;
 }
 
-const WalletCard: React.FC<WalletCardProps> = ({ wallet, usdtPrice, onEdit, onAddTx }) => {
+const WalletCard: React.FC<WalletCardProps> = ({
+  wallet,
+  usdtPrice,
+  tronAddress,
+  evmAddress,
+  onEdit,
+  onAddTx,
+}) => {
   const [showTx, setShowTx] = useState(false);
+  const [syncing, setSyncing] = useState(false);
+  const [sendOpen, setSendOpen] = useState(false);
+  const [receiveOpen, setReceiveOpen] = useState(false);
+  const onchain = wallet.source === 'onchain';
+  const isEvm = wallet.chain === 'ethereum';
+  // The wallet can send only if its chain's provider is connected to this address.
+  const isConnectedWallet =
+    onchain &&
+    (isEvm
+      ? !!evmAddress && evmAddress === wallet.address
+      : !!tronAddress && tronAddress === wallet.address);
   const balance = walletBalance(wallet);
   const usdValue = balance * usdtPrice;
   const txs = wallet.transactions ?? [];
+
+  const handleSync = async () => {
+    setSyncing(true);
+    const res = await fetch('/api/crypto/wallets/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ walletId: wallet.id }),
+    });
+    setSyncing(false);
+    if (res.ok) {
+      const info = (await res.json()) as { synced: number };
+      toast.success(`Sincronizado · ${info.synced} movimiento(s) nuevo(s)`);
+      globalMutate(WALLETS_KEY);
+    } else {
+      toast.error('No se pudo sincronizar');
+    }
+  };
 
   const handleDelete = async () => {
     if (!confirm(`¿Eliminar la billetera "${wallet.name}" y sus movimientos?`)) return;
@@ -193,10 +238,28 @@ const WalletCard: React.FC<WalletCardProps> = ({ wallet, usdtPrice, onEdit, onAd
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="font-medium truncate">{wallet.name}</h3>
-            <Badge variant="secondary">{WALLET_TYPE_LABELS[wallet.type]}</Badge>
+            {onchain ? (
+              <Badge
+                className={
+                  isEvm
+                    ? 'bg-indigo-600 hover:bg-indigo-600'
+                    : 'bg-emerald-600 hover:bg-emerald-600'
+                }
+              >
+                <Icon icon="solar:link-bold" className="size-3 mr-1" />
+                {isEvm ? 'Ethereum' : 'TRON'}
+              </Badge>
+            ) : (
+              <Badge variant="secondary">{WALLET_TYPE_LABELS[wallet.type]}</Badge>
+            )}
             {wallet.network && <Badge variant="outline">{wallet.network}</Badge>}
             {wallet.archivedAt && <Badge variant="destructive">Archivada</Badge>}
           </div>
+          {onchain && wallet.address && (
+            <p className="text-xs text-muted-foreground mt-1 font-mono break-all">
+              {wallet.address}
+            </p>
+          )}
           {wallet.notes && (
             <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{wallet.notes}</p>
           )}
@@ -223,10 +286,20 @@ const WalletCard: React.FC<WalletCardProps> = ({ wallet, usdtPrice, onEdit, onAd
       </div>
 
       <div className="flex gap-2 mt-4">
-        <Button size="sm" onClick={onAddTx} className="flex-1">
-          <Icon icon="solar:add-circle-bold" className="size-4 mr-1" />
-          Movimiento
-        </Button>
+        {onchain ? (
+          <Button size="sm" onClick={handleSync} disabled={syncing} className="flex-1">
+            <Icon
+              icon="solar:refresh-bold"
+              className={`size-4 mr-1 ${syncing ? 'animate-spin' : ''}`}
+            />
+            {syncing ? 'Sincronizando…' : 'Sincronizar'}
+          </Button>
+        ) : (
+          <Button size="sm" onClick={onAddTx} className="flex-1">
+            <Icon icon="solar:add-circle-bold" className="size-4 mr-1" />
+            Movimiento
+          </Button>
+        )}
         <Button
           size="sm"
           variant="outline"
@@ -236,6 +309,54 @@ const WalletCard: React.FC<WalletCardProps> = ({ wallet, usdtPrice, onEdit, onAd
           {showTx ? 'Ocultar' : `Ver (${txs.length})`}
         </Button>
       </div>
+
+      {onchain && (
+        <div className="flex gap-2 mt-2">
+          <Button
+            size="sm"
+            variant="secondary"
+            className="flex-1"
+            disabled={!isConnectedWallet}
+            onClick={() => setSendOpen(true)}
+            title={isConnectedWallet ? '' : 'Conecta esta wallet en TronLink para enviar'}
+          >
+            <Icon icon="solar:arrow-up-bold" className="size-4 mr-1" />
+            Enviar
+          </Button>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="flex-1"
+            onClick={() => setReceiveOpen(true)}
+          >
+            <Icon icon="solar:arrow-down-bold" className="size-4 mr-1" />
+            Recibir
+          </Button>
+        </div>
+      )}
+
+      {onchain && wallet.lastSyncedAt && (
+        <p className="text-xs text-muted-foreground mt-2">
+          Última sincronización: {new Date(wallet.lastSyncedAt).toLocaleString()}
+        </p>
+      )}
+
+      {onchain && wallet.address && (
+        <>
+          <SendUsdtDialog
+            open={sendOpen}
+            wallet={wallet}
+            balance={balance}
+            onClose={() => setSendOpen(false)}
+          />
+          <ReceiveUsdtDialog
+            open={receiveOpen}
+            address={wallet.address}
+            network={wallet.network}
+            onClose={() => setReceiveOpen(false)}
+          />
+        </>
+      )}
 
       {showTx && txs.length > 0 && (
         <div className="mt-3 space-y-1 max-h-60 overflow-y-auto border-t border-border pt-2">

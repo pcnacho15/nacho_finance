@@ -45,6 +45,11 @@ export type WalletTransactionMinAggregateOutputType = {
   date: Date | null
   counterparty: string | null
   notes: string | null
+  source: string | null
+  txHash: string | null
+  fromAddress: string | null
+  toAddress: string | null
+  blockTimestamp: Date | null
   createdAt: Date | null
 }
 
@@ -57,6 +62,11 @@ export type WalletTransactionMaxAggregateOutputType = {
   date: Date | null
   counterparty: string | null
   notes: string | null
+  source: string | null
+  txHash: string | null
+  fromAddress: string | null
+  toAddress: string | null
+  blockTimestamp: Date | null
   createdAt: Date | null
 }
 
@@ -69,6 +79,11 @@ export type WalletTransactionCountAggregateOutputType = {
   date: number
   counterparty: number
   notes: number
+  source: number
+  txHash: number
+  fromAddress: number
+  toAddress: number
+  blockTimestamp: number
   createdAt: number
   _all: number
 }
@@ -93,6 +108,11 @@ export type WalletTransactionMinAggregateInputType = {
   date?: true
   counterparty?: true
   notes?: true
+  source?: true
+  txHash?: true
+  fromAddress?: true
+  toAddress?: true
+  blockTimestamp?: true
   createdAt?: true
 }
 
@@ -105,6 +125,11 @@ export type WalletTransactionMaxAggregateInputType = {
   date?: true
   counterparty?: true
   notes?: true
+  source?: true
+  txHash?: true
+  fromAddress?: true
+  toAddress?: true
+  blockTimestamp?: true
   createdAt?: true
 }
 
@@ -117,6 +142,11 @@ export type WalletTransactionCountAggregateInputType = {
   date?: true
   counterparty?: true
   notes?: true
+  source?: true
+  txHash?: true
+  fromAddress?: true
+  toAddress?: true
+  blockTimestamp?: true
   createdAt?: true
   _all?: true
 }
@@ -216,6 +246,11 @@ export type WalletTransactionGroupByOutputType = {
   date: Date
   counterparty: string | null
   notes: string | null
+  source: string
+  txHash: string | null
+  fromAddress: string | null
+  toAddress: string | null
+  blockTimestamp: Date | null
   createdAt: Date
   _count: WalletTransactionCountAggregateOutputType | null
   _avg: WalletTransactionAvgAggregateOutputType | null
@@ -251,6 +286,11 @@ export type WalletTransactionWhereInput = {
   date?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
   counterparty?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   notes?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  source?: Prisma.StringFilter<"WalletTransaction"> | string
+  txHash?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  fromAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  toAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  blockTimestamp?: Prisma.DateTimeNullableFilter<"WalletTransaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
   wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
 }
@@ -264,12 +304,18 @@ export type WalletTransactionOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   counterparty?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrder
+  txHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  fromAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  toAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockTimestamp?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   wallet?: Prisma.WalletOrderByWithRelationInput
 }
 
 export type WalletTransactionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  walletId_txHash?: Prisma.WalletTransactionWalletIdTxHashCompoundUniqueInput
   AND?: Prisma.WalletTransactionWhereInput | Prisma.WalletTransactionWhereInput[]
   OR?: Prisma.WalletTransactionWhereInput[]
   NOT?: Prisma.WalletTransactionWhereInput | Prisma.WalletTransactionWhereInput[]
@@ -280,9 +326,14 @@ export type WalletTransactionWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
   counterparty?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   notes?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  source?: Prisma.StringFilter<"WalletTransaction"> | string
+  txHash?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  fromAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  toAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  blockTimestamp?: Prisma.DateTimeNullableFilter<"WalletTransaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
   wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
-}, "id">
+}, "id" | "walletId_txHash">
 
 export type WalletTransactionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -293,6 +344,11 @@ export type WalletTransactionOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   counterparty?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrder
+  txHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  fromAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  toAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockTimestamp?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.WalletTransactionCountOrderByAggregateInput
   _avg?: Prisma.WalletTransactionAvgOrderByAggregateInput
@@ -313,6 +369,11 @@ export type WalletTransactionScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeWithAggregatesFilter<"WalletTransaction"> | Date | string
   counterparty?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
+  source?: Prisma.StringWithAggregatesFilter<"WalletTransaction"> | string
+  txHash?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
+  fromAddress?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
+  toAddress?: Prisma.StringNullableWithAggregatesFilter<"WalletTransaction"> | string | null
+  blockTimestamp?: Prisma.DateTimeNullableWithAggregatesFilter<"WalletTransaction"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"WalletTransaction"> | Date | string
 }
 
@@ -324,6 +385,11 @@ export type WalletTransactionCreateInput = {
   date: Date | string
   counterparty?: string | null
   notes?: string | null
+  source?: string
+  txHash?: string | null
+  fromAddress?: string | null
+  toAddress?: string | null
+  blockTimestamp?: Date | string | null
   createdAt?: Date | string
   wallet: Prisma.WalletCreateNestedOneWithoutTransactionsInput
 }
@@ -337,6 +403,11 @@ export type WalletTransactionUncheckedCreateInput = {
   date: Date | string
   counterparty?: string | null
   notes?: string | null
+  source?: string
+  txHash?: string | null
+  fromAddress?: string | null
+  toAddress?: string | null
+  blockTimestamp?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -348,6 +419,11 @@ export type WalletTransactionUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   counterparty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  txHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   wallet?: Prisma.WalletUpdateOneRequiredWithoutTransactionsNestedInput
 }
@@ -361,6 +437,11 @@ export type WalletTransactionUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   counterparty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  txHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -373,6 +454,11 @@ export type WalletTransactionCreateManyInput = {
   date: Date | string
   counterparty?: string | null
   notes?: string | null
+  source?: string
+  txHash?: string | null
+  fromAddress?: string | null
+  toAddress?: string | null
+  blockTimestamp?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -384,6 +470,11 @@ export type WalletTransactionUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   counterparty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  txHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -396,6 +487,11 @@ export type WalletTransactionUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   counterparty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  txHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -409,6 +505,11 @@ export type WalletTransactionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type WalletTransactionWalletIdTxHashCompoundUniqueInput = {
+  walletId: string
+  txHash: string
+}
+
 export type WalletTransactionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   walletId?: Prisma.SortOrder
@@ -418,6 +519,11 @@ export type WalletTransactionCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   counterparty?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  txHash?: Prisma.SortOrder
+  fromAddress?: Prisma.SortOrder
+  toAddress?: Prisma.SortOrder
+  blockTimestamp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -435,6 +541,11 @@ export type WalletTransactionMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   counterparty?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  txHash?: Prisma.SortOrder
+  fromAddress?: Prisma.SortOrder
+  toAddress?: Prisma.SortOrder
+  blockTimestamp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -447,6 +558,11 @@ export type WalletTransactionMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   counterparty?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  txHash?: Prisma.SortOrder
+  fromAddress?: Prisma.SortOrder
+  toAddress?: Prisma.SortOrder
+  blockTimestamp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -505,6 +621,11 @@ export type WalletTransactionCreateWithoutWalletInput = {
   date: Date | string
   counterparty?: string | null
   notes?: string | null
+  source?: string
+  txHash?: string | null
+  fromAddress?: string | null
+  toAddress?: string | null
+  blockTimestamp?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -516,6 +637,11 @@ export type WalletTransactionUncheckedCreateWithoutWalletInput = {
   date: Date | string
   counterparty?: string | null
   notes?: string | null
+  source?: string
+  txHash?: string | null
+  fromAddress?: string | null
+  toAddress?: string | null
+  blockTimestamp?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -557,6 +683,11 @@ export type WalletTransactionScalarWhereInput = {
   date?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
   counterparty?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
   notes?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  source?: Prisma.StringFilter<"WalletTransaction"> | string
+  txHash?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  fromAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  toAddress?: Prisma.StringNullableFilter<"WalletTransaction"> | string | null
+  blockTimestamp?: Prisma.DateTimeNullableFilter<"WalletTransaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"WalletTransaction"> | Date | string
 }
 
@@ -568,6 +699,11 @@ export type WalletTransactionCreateManyWalletInput = {
   date: Date | string
   counterparty?: string | null
   notes?: string | null
+  source?: string
+  txHash?: string | null
+  fromAddress?: string | null
+  toAddress?: string | null
+  blockTimestamp?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -579,6 +715,11 @@ export type WalletTransactionUpdateWithoutWalletInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   counterparty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  txHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -590,6 +731,11 @@ export type WalletTransactionUncheckedUpdateWithoutWalletInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   counterparty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  txHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -601,6 +747,11 @@ export type WalletTransactionUncheckedUpdateManyWithoutWalletInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   counterparty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  txHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockTimestamp?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -615,6 +766,11 @@ export type WalletTransactionSelect<ExtArgs extends runtime.Types.Extensions.Int
   date?: boolean
   counterparty?: boolean
   notes?: boolean
+  source?: boolean
+  txHash?: boolean
+  fromAddress?: boolean
+  toAddress?: boolean
+  blockTimestamp?: boolean
   createdAt?: boolean
   wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["walletTransaction"]>
@@ -628,6 +784,11 @@ export type WalletTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   date?: boolean
   counterparty?: boolean
   notes?: boolean
+  source?: boolean
+  txHash?: boolean
+  fromAddress?: boolean
+  toAddress?: boolean
+  blockTimestamp?: boolean
   createdAt?: boolean
   wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["walletTransaction"]>
@@ -641,6 +802,11 @@ export type WalletTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   date?: boolean
   counterparty?: boolean
   notes?: boolean
+  source?: boolean
+  txHash?: boolean
+  fromAddress?: boolean
+  toAddress?: boolean
+  blockTimestamp?: boolean
   createdAt?: boolean
   wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["walletTransaction"]>
@@ -654,10 +820,15 @@ export type WalletTransactionSelectScalar = {
   date?: boolean
   counterparty?: boolean
   notes?: boolean
+  source?: boolean
+  txHash?: boolean
+  fromAddress?: boolean
+  toAddress?: boolean
+  blockTimestamp?: boolean
   createdAt?: boolean
 }
 
-export type WalletTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "walletId" | "type" | "amount" | "pricePerUnit" | "date" | "counterparty" | "notes" | "createdAt", ExtArgs["result"]["walletTransaction"]>
+export type WalletTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "walletId" | "type" | "amount" | "pricePerUnit" | "date" | "counterparty" | "notes" | "source" | "txHash" | "fromAddress" | "toAddress" | "blockTimestamp" | "createdAt", ExtArgs["result"]["walletTransaction"]>
 export type WalletTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
 }
@@ -682,6 +853,11 @@ export type $WalletTransactionPayload<ExtArgs extends runtime.Types.Extensions.I
     date: Date
     counterparty: string | null
     notes: string | null
+    source: string
+    txHash: string | null
+    fromAddress: string | null
+    toAddress: string | null
+    blockTimestamp: Date | null
     createdAt: Date
   }, ExtArgs["result"]["walletTransaction"]>
   composites: {}
@@ -1115,6 +1291,11 @@ export interface WalletTransactionFieldRefs {
   readonly date: Prisma.FieldRef<"WalletTransaction", 'DateTime'>
   readonly counterparty: Prisma.FieldRef<"WalletTransaction", 'String'>
   readonly notes: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly source: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly txHash: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly fromAddress: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly toAddress: Prisma.FieldRef<"WalletTransaction", 'String'>
+  readonly blockTimestamp: Prisma.FieldRef<"WalletTransaction", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"WalletTransaction", 'DateTime'>
 }
     

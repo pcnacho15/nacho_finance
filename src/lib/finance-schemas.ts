@@ -106,6 +106,21 @@ export const walletUpdateSchema = walletCreateSchema.partial().extend({
   archivedAt: z.union([z.string(), z.date(), z.null()]).optional(),
 });
 
+// Address format is re-validated per chain in the route (TronWeb.isAddress / viem
+// isAddress) — the schema stays lightweight and free of chain-specific imports
+// (finance-schemas may be pulled into client bundles).
+export const onchainChainSchema = z.enum(['tron', 'ethereum']);
+
+export const walletConnectSchema = z.object({
+  address: z.string().trim().min(1),
+  chain: onchainChainSchema.optional().default('tron'),
+  name: z.string().trim().min(1).optional(),
+});
+
+export const walletSyncSchema = z.object({
+  walletId: cuid,
+});
+
 export const walletTransactionTypeSchema = z.enum([
   'buy',
   'sell',

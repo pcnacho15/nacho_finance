@@ -1,6 +1,9 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import WalletsModule from '@/app/components/finance/WalletsModule';
+import TronWalletProvider from '@/app/components/finance/TronWalletProvider';
+import TronConnectButton from '@/app/components/finance/TronConnectButton';
+import EvmConnectButton from '@/app/components/finance/EvmConnectButton';
 import BreadcrumbComp from '@/app/(DashboardLayout)/layout/shared/breadcrumb/BreadcrumbComp';
 
 const BCrumb = [
@@ -18,7 +21,13 @@ export default async function WalletsPage() {
   return (
     <div className="space-y-6">
       <BreadcrumbComp title="Mis Billeteras" items={BCrumb} />
-      <WalletsModule />
+      <TronWalletProvider>
+        <div className="grid gap-4 md:grid-cols-2">
+          <TronConnectButton />
+          <EvmConnectButton />
+        </div>
+        <WalletsModule />
+      </TronWalletProvider>
     </div>
   );
 }

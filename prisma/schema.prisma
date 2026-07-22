@@ -198,27 +198,41 @@ model Wallet {
   asset        String              @default("USDT")
   network      String?
   notes        String?
+  // On-chain: "manual" = registro contable; "onchain" = wallet conectada.
+  source       String              @default("manual")
+  // Cadena de la wallet on-chain: "tron" (TRC20) | "ethereum" (ERC20).
+  chain        String              @default("tron")
+  address      String?
+  lastSyncedAt DateTime?
   archivedAt   DateTime?
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
   user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   transactions WalletTransaction[]
 
+  @@unique([userId, address])
   @@index([userId])
 }
 
 model WalletTransaction {
-  id           String   @id @default(cuid())
-  walletId     String
-  type         String
-  amount       Decimal  @db.Decimal(20, 8)
-  pricePerUnit Decimal? @db.Decimal(20, 8)
-  date         DateTime
-  counterparty String?
-  notes        String?
-  createdAt    DateTime @default(now())
-  wallet       Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  id             String   @id @default(cuid())
+  walletId       String
+  type           String
+  amount         Decimal  @db.Decimal(20, 8)
+  pricePerUnit   Decimal? @db.Decimal(20, 8)
+  date           DateTime
+  counterparty   String?
+  notes          String?
+  // On-chain provenance: "manual" o "onchain". txHash deduplica el sync de TronGrid.
+  source         String   @default("manual")
+  txHash         String?
+  fromAddress    String?
+  toAddress      String?
+  blockTimestamp DateTime?
+  createdAt      DateTime @default(now())
+  wallet         Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
 
+  @@unique([walletId, txHash])
   @@index([walletId])
   @@index([date])
 }
