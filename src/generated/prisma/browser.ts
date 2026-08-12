@@ -53,6 +53,11 @@ export type Income = Prisma.IncomeModel
  */
 export type Expense = Prisma.ExpenseModel
 /**
+ * Model FixedExpense
+ * 
+ */
+export type FixedExpense = Prisma.FixedExpenseModel
+/**
  * Model Debt
  * 
  */

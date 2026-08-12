@@ -58,6 +58,7 @@ export const ModelName = {
   Category: 'Category',
   Income: 'Income',
   Expense: 'Expense',
+  FixedExpense: 'FixedExpense',
   Debt: 'Debt',
   DebtPayment: 'DebtPayment',
   SavingsGoal: 'SavingsGoal',
@@ -181,6 +182,26 @@ export const ExpenseScalarFieldEnum = {
 } as const
 
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const FixedExpenseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  amount: 'amount',
+  categoryId: 'categoryId',
+  frequency: 'frequency',
+  dayOfMonth: 'dayOfMonth',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive',
+  paymentMethod: 'paymentMethod',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type FixedExpenseScalarFieldEnum = (typeof FixedExpenseScalarFieldEnum)[keyof typeof FixedExpenseScalarFieldEnum]
 
 
 export const DebtScalarFieldEnum = {

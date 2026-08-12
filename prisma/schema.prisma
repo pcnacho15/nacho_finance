@@ -27,6 +27,7 @@ model User {
   chatMessages  ChatMessage[]      @relation("ChatSender")
   debts         Debt[]
   expenses      Expense[]
+  fixedExpenses FixedExpense[]
   incomes       Income[]
   savingsGoals  SavingsGoal[]
   sessions      Session[]
@@ -71,19 +72,20 @@ model VerificationToken {
 }
 
 model Category {
-  id          String    @id @default(cuid())
-  name        String
-  type        String    @default("expense")
-  color       String
-  icon        String
-  description String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  userId      String
-  budgets     Budget[]
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  expenses    Expense[]
-  incomes     Income[]
+  id            String         @id @default(cuid())
+  name          String
+  type          String         @default("expense")
+  color         String
+  icon          String
+  description   String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  userId        String
+  budgets       Budget[]
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expenses      Expense[]
+  fixedExpenses FixedExpense[]
+  incomes       Income[]
 
   @@index([userId])
 }
@@ -122,6 +124,33 @@ model Expense {
   @@index([userId])
   @@index([categoryId])
   @@index([date])
+}
+
+// Catálogo de gastos recurrentes ("gastos fijos"). NO genera registros en Expense:
+// es una plantilla que se declara una vez para conocer el compromiso mensual vigente.
+model FixedExpense {
+  id            String    @id @default(cuid())
+  name          String
+  amount        Decimal   @db.Decimal(20, 8)
+  categoryId    String
+  // semanal | quincenal | mensual | bimestral | trimestral | semestral | anual
+  frequency     String    @default("mensual")
+  // Día de cobro (1-31). Solo informativo, para saber cuándo cae el cargo.
+  dayOfMonth    Int?
+  startDate     DateTime
+  // null = vigente indefinidamente.
+  endDate       DateTime?
+  isActive      Boolean   @default(true)
+  paymentMethod String?
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  userId        String
+  category      Category  @relation(fields: [categoryId], references: [id])
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([categoryId])
 }
 
 model Debt {

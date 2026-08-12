@@ -66,6 +66,11 @@ const sidebarData: SidebarSection[] = [
         icon: "solar:card-send-bold",
       },
       {
+        title: "Gastos Fijos",
+        url: "/finance/fixed-expenses",
+        icon: "solar:calendar-mark-bold",
+      },
+      {
         title: "Deudas",
         url: "/finance/debts",
         icon: "solar:document-text-bold",

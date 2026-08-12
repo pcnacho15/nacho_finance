@@ -39,6 +39,53 @@ export const expenseCreateSchema = z.object({
 
 export const expenseUpdateSchema = expenseCreateSchema.partial().extend({ id: cuid });
 
+export const fixedExpenseFrequency = z.enum([
+  'semanal',
+  'quincenal',
+  'mensual',
+  'bimestral',
+  'trimestral',
+  'semestral',
+  'anual',
+]);
+
+export const fixedExpenseCreateSchema = z
+  .object({
+    name: z.string().trim().min(1, 'Nombre requerido'),
+    amount: positiveAmount,
+    categoryId: cuid,
+    frequency: fixedExpenseFrequency.optional().default('mensual'),
+    dayOfMonth: z.coerce.number().int().min(1).max(31).optional().nullable(),
+    startDate: isoDate,
+    endDate: isoDate.optional().nullable(),
+    isActive: z.boolean().optional().default(true),
+    paymentMethod: z.string().trim().optional().nullable(),
+    notes: z.string().optional().nullable(),
+  })
+  .refine((d) => (d.endDate ? d.endDate >= d.startDate : true), {
+    message: 'La fecha de fin no puede ser anterior al inicio',
+    path: ['endDate'],
+  });
+
+export const fixedExpenseUpdateSchema = z
+  .object({
+    id: cuid,
+    name: z.string().trim().min(1).optional(),
+    amount: positiveAmount.optional(),
+    categoryId: cuid.optional(),
+    frequency: fixedExpenseFrequency.optional(),
+    dayOfMonth: z.coerce.number().int().min(1).max(31).optional().nullable(),
+    startDate: isoDate.optional(),
+    endDate: isoDate.optional().nullable(),
+    isActive: z.boolean().optional(),
+    paymentMethod: z.string().trim().optional().nullable(),
+    notes: z.string().optional().nullable(),
+  })
+  .refine((d) => (d.endDate && d.startDate ? d.endDate >= d.startDate : true), {
+    message: 'La fecha de fin no puede ser anterior al inicio',
+    path: ['endDate'],
+  });
+
 export const debtCreateSchema = z.object({
   name: z.string().trim().min(1),
   type: z.enum(['loan', 'credit_card', 'mortgage', 'other']),

@@ -224,6 +224,7 @@ export type UserWhereInput = {
   chatMessages?: Prisma.ChatMessageListRelationFilter
   debts?: Prisma.DebtListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
+  fixedExpenses?: Prisma.FixedExpenseListRelationFilter
   incomes?: Prisma.IncomeListRelationFilter
   savingsGoals?: Prisma.SavingsGoalListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
@@ -250,6 +251,7 @@ export type UserOrderByWithRelationInput = {
   chatMessages?: Prisma.ChatMessageOrderByRelationAggregateInput
   debts?: Prisma.DebtOrderByRelationAggregateInput
   expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  fixedExpenses?: Prisma.FixedExpenseOrderByRelationAggregateInput
   incomes?: Prisma.IncomeOrderByRelationAggregateInput
   savingsGoals?: Prisma.SavingsGoalOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
@@ -279,6 +281,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   chatMessages?: Prisma.ChatMessageListRelationFilter
   debts?: Prisma.DebtListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
+  fixedExpenses?: Prisma.FixedExpenseListRelationFilter
   incomes?: Prisma.IncomeListRelationFilter
   savingsGoals?: Prisma.SavingsGoalListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
@@ -335,6 +338,7 @@ export type UserCreateInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -361,6 +365,7 @@ export type UserUncheckedCreateInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -387,6 +392,7 @@ export type UserUpdateInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -413,6 +419,7 @@ export type UserUncheckedUpdateInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -582,6 +589,20 @@ export type UserUpdateOneRequiredWithoutExpensesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutExpensesInput, Prisma.UserUpdateWithoutExpensesInput>, Prisma.UserUncheckedUpdateWithoutExpensesInput>
 }
 
+export type UserCreateNestedOneWithoutFixedExpensesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFixedExpensesInput, Prisma.UserUncheckedCreateWithoutFixedExpensesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFixedExpensesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFixedExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFixedExpensesInput, Prisma.UserUncheckedCreateWithoutFixedExpensesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFixedExpensesInput
+  upsert?: Prisma.UserUpsertWithoutFixedExpensesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFixedExpensesInput, Prisma.UserUpdateWithoutFixedExpensesInput>, Prisma.UserUncheckedUpdateWithoutFixedExpensesInput>
+}
+
 export type UserCreateNestedOneWithoutDebtsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutDebtsInput, Prisma.UserUncheckedCreateWithoutDebtsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutDebtsInput
@@ -727,6 +748,7 @@ export type UserCreateWithoutAccountsInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -752,6 +774,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -793,6 +816,7 @@ export type UserUpdateWithoutAccountsInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -818,6 +842,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -844,6 +869,7 @@ export type UserCreateWithoutSessionsInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
@@ -869,6 +895,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
@@ -910,6 +937,7 @@ export type UserUpdateWithoutSessionsInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
@@ -935,6 +963,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
@@ -959,6 +988,7 @@ export type UserCreateWithoutCategoriesInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -984,6 +1014,7 @@ export type UserUncheckedCreateWithoutCategoriesInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1025,6 +1056,7 @@ export type UserUpdateWithoutCategoriesInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1050,6 +1082,7 @@ export type UserUncheckedUpdateWithoutCategoriesInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1076,6 +1109,7 @@ export type UserCreateWithoutIncomesInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
@@ -1101,6 +1135,7 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
@@ -1142,6 +1177,7 @@ export type UserUpdateWithoutIncomesInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
@@ -1167,6 +1203,7 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
@@ -1191,6 +1228,7 @@ export type UserCreateWithoutExpensesInput = {
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1216,6 +1254,7 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1257,6 +1296,7 @@ export type UserUpdateWithoutExpensesInput = {
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1282,6 +1322,127 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFixedExpensesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  passwordHash?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockCreateNestedManyWithoutBlockerInput
+  chatsAsA?: Prisma.ChatConversationCreateNestedManyWithoutUserAInput
+  chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
+  debts?: Prisma.DebtCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFixedExpensesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  passwordHash?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUserInput
+  blocksGot?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockedInput
+  blocksMade?: Prisma.ChatBlockUncheckedCreateNestedManyWithoutBlockerInput
+  chatsAsA?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserAInput
+  chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFixedExpensesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFixedExpensesInput, Prisma.UserUncheckedCreateWithoutFixedExpensesInput>
+}
+
+export type UserUpsertWithoutFixedExpensesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFixedExpensesInput, Prisma.UserUncheckedUpdateWithoutFixedExpensesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFixedExpensesInput, Prisma.UserUncheckedCreateWithoutFixedExpensesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFixedExpensesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFixedExpensesInput, Prisma.UserUncheckedUpdateWithoutFixedExpensesInput>
+}
+
+export type UserUpdateWithoutFixedExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUpdateManyWithoutBlockerNestedInput
+  chatsAsA?: Prisma.ChatConversationUpdateManyWithoutUserANestedInput
+  chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFixedExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutUserNestedInput
+  blocksGot?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  blocksMade?: Prisma.ChatBlockUncheckedUpdateManyWithoutBlockerNestedInput
+  chatsAsA?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserANestedInput
+  chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1307,6 +1468,7 @@ export type UserCreateWithoutDebtsInput = {
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1332,6 +1494,7 @@ export type UserUncheckedCreateWithoutDebtsInput = {
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1373,6 +1536,7 @@ export type UserUpdateWithoutDebtsInput = {
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1398,6 +1562,7 @@ export type UserUncheckedUpdateWithoutDebtsInput = {
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1424,6 +1589,7 @@ export type UserCreateWithoutSavingsGoalsInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   wallets?: Prisma.WalletCreateNestedManyWithoutUserInput
@@ -1449,6 +1615,7 @@ export type UserUncheckedCreateWithoutSavingsGoalsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutUserInput
@@ -1490,6 +1657,7 @@ export type UserUpdateWithoutSavingsGoalsInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutUserNestedInput
@@ -1515,6 +1683,7 @@ export type UserUncheckedUpdateWithoutSavingsGoalsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutUserNestedInput
@@ -1540,6 +1709,7 @@ export type UserCreateWithoutWalletsInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1565,6 +1735,7 @@ export type UserUncheckedCreateWithoutWalletsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1606,6 +1777,7 @@ export type UserUpdateWithoutWalletsInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1631,6 +1803,7 @@ export type UserUncheckedUpdateWithoutWalletsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1655,6 +1828,7 @@ export type UserCreateWithoutChatsAsAInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1680,6 +1854,7 @@ export type UserUncheckedCreateWithoutChatsAsAInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1710,6 +1885,7 @@ export type UserCreateWithoutChatsAsBInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1735,6 +1911,7 @@ export type UserUncheckedCreateWithoutChatsAsBInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1776,6 +1953,7 @@ export type UserUpdateWithoutChatsAsAInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1801,6 +1979,7 @@ export type UserUncheckedUpdateWithoutChatsAsAInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1837,6 +2016,7 @@ export type UserUpdateWithoutChatsAsBInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1862,6 +2042,7 @@ export type UserUncheckedUpdateWithoutChatsAsBInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1887,6 +2068,7 @@ export type UserCreateWithoutChatMessagesInput = {
   chatsAsB?: Prisma.ChatConversationCreateNestedManyWithoutUserBInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1912,6 +2094,7 @@ export type UserUncheckedCreateWithoutChatMessagesInput = {
   chatsAsB?: Prisma.ChatConversationUncheckedCreateNestedManyWithoutUserBInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1953,6 +2136,7 @@ export type UserUpdateWithoutChatMessagesInput = {
   chatsAsB?: Prisma.ChatConversationUpdateManyWithoutUserBNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1978,6 +2162,7 @@ export type UserUncheckedUpdateWithoutChatMessagesInput = {
   chatsAsB?: Prisma.ChatConversationUncheckedUpdateManyWithoutUserBNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2003,6 +2188,7 @@ export type UserCreateWithoutBlocksGotInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -2028,6 +2214,7 @@ export type UserUncheckedCreateWithoutBlocksGotInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2058,6 +2245,7 @@ export type UserCreateWithoutBlocksMadeInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -2083,6 +2271,7 @@ export type UserUncheckedCreateWithoutBlocksMadeInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2124,6 +2313,7 @@ export type UserUpdateWithoutBlocksGotInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -2149,6 +2339,7 @@ export type UserUncheckedUpdateWithoutBlocksGotInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2185,6 +2376,7 @@ export type UserUpdateWithoutBlocksMadeInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -2210,6 +2402,7 @@ export type UserUncheckedUpdateWithoutBlocksMadeInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2235,6 +2428,7 @@ export type UserCreateWithoutBudgetsInput = {
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -2260,6 +2454,7 @@ export type UserUncheckedCreateWithoutBudgetsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutSenderInput
   debts?: Prisma.DebtUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2301,6 +2496,7 @@ export type UserUpdateWithoutBudgetsInput = {
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -2326,6 +2522,7 @@ export type UserUncheckedUpdateWithoutBudgetsInput = {
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  fixedExpenses?: Prisma.FixedExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2348,6 +2545,7 @@ export type UserCountOutputType = {
   chatMessages: number
   debts: number
   expenses: number
+  fixedExpenses: number
   incomes: number
   savingsGoals: number
   sessions: number
@@ -2365,6 +2563,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   chatMessages?: boolean | UserCountOutputTypeCountChatMessagesArgs
   debts?: boolean | UserCountOutputTypeCountDebtsArgs
   expenses?: boolean | UserCountOutputTypeCountExpensesArgs
+  fixedExpenses?: boolean | UserCountOutputTypeCountFixedExpensesArgs
   incomes?: boolean | UserCountOutputTypeCountIncomesArgs
   savingsGoals?: boolean | UserCountOutputTypeCountSavingsGoalsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
@@ -2454,6 +2653,13 @@ export type UserCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountFixedExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FixedExpenseWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountIncomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.IncomeWhereInput
 }
@@ -2500,6 +2706,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   debts?: boolean | Prisma.User$debtsArgs<ExtArgs>
   expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
+  fixedExpenses?: boolean | Prisma.User$fixedExpensesArgs<ExtArgs>
   incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
   savingsGoals?: boolean | Prisma.User$savingsGoalsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -2555,6 +2762,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   debts?: boolean | Prisma.User$debtsArgs<ExtArgs>
   expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
+  fixedExpenses?: boolean | Prisma.User$fixedExpensesArgs<ExtArgs>
   incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
   savingsGoals?: boolean | Prisma.User$savingsGoalsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -2577,6 +2785,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
     debts: Prisma.$DebtPayload<ExtArgs>[]
     expenses: Prisma.$ExpensePayload<ExtArgs>[]
+    fixedExpenses: Prisma.$FixedExpensePayload<ExtArgs>[]
     incomes: Prisma.$IncomePayload<ExtArgs>[]
     savingsGoals: Prisma.$SavingsGoalPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
@@ -2996,6 +3205,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   chatMessages<T extends Prisma.User$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   debts<T extends Prisma.User$debtsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$debtsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   expenses<T extends Prisma.User$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fixedExpenses<T extends Prisma.User$fixedExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fixedExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FixedExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   incomes<T extends Prisma.User$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savingsGoals<T extends Prisma.User$savingsGoalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savingsGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavingsGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3668,6 +3878,30 @@ export type User$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
+}
+
+/**
+ * User.fixedExpenses
+ */
+export type User$fixedExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FixedExpense
+   */
+  select?: Prisma.FixedExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FixedExpense
+   */
+  omit?: Prisma.FixedExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FixedExpenseInclude<ExtArgs> | null
+  where?: Prisma.FixedExpenseWhereInput
+  orderBy?: Prisma.FixedExpenseOrderByWithRelationInput | Prisma.FixedExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.FixedExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FixedExpenseScalarFieldEnum | Prisma.FixedExpenseScalarFieldEnum[]
 }
 
 /**

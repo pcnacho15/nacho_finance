@@ -13,16 +13,23 @@ import {
   DebtFormData,
   Expense,
   ExpenseFormData,
+  FixedExpense,
+  FixedExpenseFormData,
   Income,
   IncomeFormData,
   SavingsGoal,
   SavingsGoalFormData,
 } from '@/app/(DashboardLayout)/types/finance';
+import {
+  isCurrentlyActive,
+  monthlyEquivalent,
+} from '@/app/(DashboardLayout)/types/finance/fixed-expense';
 
 const ENDPOINTS = {
   categories: '/api/finance/categories',
   incomes: '/api/finance/incomes',
   expenses: '/api/finance/expenses',
+  fixedExpenses: '/api/finance/fixed-expenses',
   debts: '/api/finance/debts',
   savingsGoals: '/api/finance/savings-goals',
   budgets: '/api/finance/budgets',
@@ -57,6 +64,7 @@ interface FinanceContextType {
   categories: Category[];
   incomes: Income[];
   expenses: Expense[];
+  fixedExpenses: FixedExpense[];
   debts: Debt[];
   savingsGoals: SavingsGoal[];
   budgets: Budget[];
@@ -74,6 +82,10 @@ interface FinanceContextType {
   addExpense: (data: ExpenseFormData) => Promise<void>;
   updateExpense: (id: string, data: ExpenseFormData) => Promise<void>;
   deleteExpense: (id: string) => Promise<void>;
+
+  addFixedExpense: (data: FixedExpenseFormData) => Promise<void>;
+  updateFixedExpense: (id: string, data: Partial<FixedExpenseFormData>) => Promise<void>;
+  deleteFixedExpense: (id: string) => Promise<void>;
 
   addDebt: (data: DebtFormData) => Promise<void>;
   updateDebt: (id: string, data: DebtFormData) => Promise<void>;
@@ -94,6 +106,8 @@ interface FinanceContextType {
   getTotalExpenses: () => number;
   getBalance: () => number;
   getMonthlyData: () => { month: string; income: number; expenses: number }[];
+  /** Compromiso mensual normalizado de los gastos fijos vigentes. */
+  getMonthlyFixedExpenses: () => number;
 }
 
 const FinanceContext = createContext<FinanceContextType | undefined>(undefined);
@@ -104,6 +118,7 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const categoriesSwr = useSWR<Category[]>(ENDPOINTS.categories, fetcher);
   const incomesSwr = useSWR<Income[]>(ENDPOINTS.incomes, fetcher);
   const expensesSwr = useSWR<Expense[]>(ENDPOINTS.expenses, fetcher);
+  const fixedExpensesSwr = useSWR<FixedExpense[]>(ENDPOINTS.fixedExpenses, fetcher);
   const debtsSwr = useSWR<Debt[]>(ENDPOINTS.debts, fetcher);
   const savingsSwr = useSWR<SavingsGoal[]>(ENDPOINTS.savingsGoals, fetcher);
   const budgetsSwr = useSWR<Budget[]>(ENDPOINTS.budgets, fetcher);
@@ -111,6 +126,7 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const categories = useMemo(() => categoriesSwr.data ?? [], [categoriesSwr.data]);
   const incomes = useMemo(() => incomesSwr.data ?? [], [incomesSwr.data]);
   const expenses = useMemo(() => expensesSwr.data ?? [], [expensesSwr.data]);
+  const fixedExpenses = useMemo(() => fixedExpensesSwr.data ?? [], [fixedExpensesSwr.data]);
   const debts = useMemo(() => debtsSwr.data ?? [], [debtsSwr.data]);
   const savingsGoals = useMemo(() => savingsSwr.data ?? [], [savingsSwr.data]);
   const budgets = useMemo(() => budgetsSwr.data ?? [], [budgetsSwr.data]);
@@ -151,7 +167,13 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
       runMutation(
         () => send('PUT', ENDPOINTS.categories, { id, ...data }),
         'Categoría actualizada',
-        [ENDPOINTS.categories, ENDPOINTS.incomes, ENDPOINTS.expenses, ENDPOINTS.budgets],
+        [
+          ENDPOINTS.categories,
+          ENDPOINTS.incomes,
+          ENDPOINTS.expenses,
+          ENDPOINTS.fixedExpenses,
+          ENDPOINTS.budgets,
+        ],
       ),
     [runMutation],
   );
@@ -215,6 +237,34 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
       runMutation(() => send('DELETE', `${ENDPOINTS.expenses}?id=${id}`), 'Gasto eliminado', [
         ENDPOINTS.expenses,
       ]),
+    [runMutation],
+  );
+
+  const addFixedExpense = useCallback(
+    (data: FixedExpenseFormData) =>
+      runMutation(() => send('POST', ENDPOINTS.fixedExpenses, data), 'Gasto fijo registrado', [
+        ENDPOINTS.fixedExpenses,
+      ]),
+    [runMutation],
+  );
+
+  const updateFixedExpense = useCallback(
+    (id: string, data: Partial<FixedExpenseFormData>) =>
+      runMutation(
+        () => send('PUT', ENDPOINTS.fixedExpenses, { id, ...data }),
+        'Gasto fijo actualizado',
+        [ENDPOINTS.fixedExpenses],
+      ),
+    [runMutation],
+  );
+
+  const deleteFixedExpense = useCallback(
+    (id: string) =>
+      runMutation(
+        () => send('DELETE', `${ENDPOINTS.fixedExpenses}?id=${id}`),
+        'Gasto fijo eliminado',
+        [ENDPOINTS.fixedExpenses],
+      ),
     [runMutation],
   );
 
@@ -354,10 +404,19 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return Object.entries(data).map(([month, v]) => ({ month, ...v }));
   }, [incomes, expenses]);
 
+  const getMonthlyFixedExpenses = useCallback(
+    () =>
+      fixedExpenses
+        .filter((f) => isCurrentlyActive(f))
+        .reduce((sum, f) => sum + monthlyEquivalent(f), 0),
+    [fixedExpenses],
+  );
+
   const isLoading =
     categoriesSwr.isLoading ||
     incomesSwr.isLoading ||
     expensesSwr.isLoading ||
+    fixedExpensesSwr.isLoading ||
     debtsSwr.isLoading ||
     savingsSwr.isLoading ||
     budgetsSwr.isLoading;
@@ -366,6 +425,7 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     categories,
     incomes,
     expenses,
+    fixedExpenses,
     debts,
     savingsGoals,
     budgets,
@@ -379,6 +439,9 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     addExpense,
     updateExpense,
     deleteExpense,
+    addFixedExpense,
+    updateFixedExpense,
+    deleteFixedExpense,
     addDebt,
     updateDebt,
     deleteDebt,
@@ -395,6 +458,7 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     getTotalExpenses,
     getBalance,
     getMonthlyData,
+    getMonthlyFixedExpenses,
   };
 
   return <FinanceContext.Provider value={value}>{children}</FinanceContext.Provider>;
